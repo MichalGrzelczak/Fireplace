@@ -1,8 +1,9 @@
 "use client";
 
+import { StarFilledIcon, StarIcon } from "@radix-ui/react-icons";
 import { createColumnHelper } from "@tanstack/react-table";
-import { StarIcon, StarFilledIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export type Project = {
@@ -24,6 +25,7 @@ export const columns = [
       const isFav = info.getValue();
       return isFav ? <StarFilledIcon /> : <StarIcon />;
     },
+    size: 5,
   }),
   columnHelper.accessor("projectName", {
     header: () => <div className="uppercase">Project Name</div>,

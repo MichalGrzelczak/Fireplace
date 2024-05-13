@@ -40,7 +40,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <TableHead
                     key={header.id}
-                    style={{ maxWidth: "100px" }}
+                    style={{ maxWidth: header.getSize() + "px" }}
                     className="p-2 h-2 text-black text-[10px]"
                   >
                     {header.isPlaceholder
@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    style={{ maxWidth: "100px" }}
+                    style={{ maxWidth: cell.column.getSize() + "px" }}
                     className="truncate p-4"
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
