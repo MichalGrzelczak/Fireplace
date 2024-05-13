@@ -10,5 +10,5 @@ export default function FindTeamLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div></div>;
+  return <div>{children}</div>;
 }
