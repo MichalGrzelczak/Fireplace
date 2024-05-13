@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Logo from "@/app/components/logo/Logo";
+
 export default function Home() {
   return (
     <div className="h-screen w-screen grid grid-cols-2 overflow-hidden">
@@ -16,12 +18,7 @@ export default function Home() {
       </div>
 
       <div className="flex items-center justify-center flex-col">
-        <Image
-          alt="logo"
-          src="/fireplece-title-logo.svg"
-          width={333}
-          height={78}
-        />
+        <Logo width={333} height={78} />
         <h3>Links</h3>
         <ul>
           <li>
