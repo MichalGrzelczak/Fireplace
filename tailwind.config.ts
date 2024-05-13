@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+const fuego = require("./theme/tailwind.config");
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -9,6 +11,9 @@ const config = {
     "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
+  font: {
+    sans: fuego.theme.fontFamily["fontStack-body"],
+  },
   theme: {
     container: {
       center: true,
@@ -18,12 +23,17 @@ const config = {
       },
     },
     extend: {
+      spacing: fuego.theme.spacing,
+      font: {
+        ...fuego.theme.font,
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        ...fuego.theme.colors,
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -74,7 +84,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), ...fuego.plugins],
 } satisfies Config;
 
 export default config;

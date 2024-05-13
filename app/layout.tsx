@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import { Theme } from "@/app/theme";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Fireplace",
@@ -11,12 +11,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" data-color-mode="light">
+      <body>
+        <Theme>{children}</Theme>
+      </body>
     </html>
   );
 }
