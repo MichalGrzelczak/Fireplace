@@ -28,7 +28,7 @@ export default async function FindTeamLayout<FC>({
           <SearchBar />
         </Suspense>
       </div>
-      Content
+      {children}
     </div>
   );
 }
