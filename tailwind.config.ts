@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+const fuego = require("./theme/tailwind.config");
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -9,6 +11,9 @@ const config = {
     "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
+  font: {
+    sans: fuego.theme.fontFamily["fontStack-body"],
+  },
   theme: {
     container: {
       center: true,
@@ -18,39 +23,44 @@ const config = {
       },
     },
     extend: {
+      spacing: fuego.theme.spacing,
+      font: {
+        ...fuego.theme.font,
+      },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: "var(--border)",
+        input: "var(--border-input)",
+        ring: "var(--border-input)",
+        background: "var(--scale-neutral-100)",
+        foreground: "var(--background-information)",
+        ...fuego.theme.colors,
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--background-brand-bold)",
+          foreground: "var(--background-brand-subtlest)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "var(--scale-neutralAlpha-100)",
+          foreground: "var(--scale-neutralAlpha-900)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "(var(--background-danger-bold))",
+          foreground: "(var(--background-danger-pressed))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "(var(--scale-neutralAlpha-200))",
+          foreground: "(var(--scale-neutralAlpha-500)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "(var(--background-information-bold))",
+          foreground: "(var(--background-information))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "(var(--popover))",
+          foreground: "(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "(var(--card))",
+          foreground: "(var(--card-foreground))",
         },
       },
       borderRadius: {
@@ -74,7 +84,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), ...fuego.plugins],
 } satisfies Config;
 
 export default config;
