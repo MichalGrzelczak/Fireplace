@@ -5,8 +5,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
-import Logo from "@/components/logo/Logo";
 import { Button } from "@/components/ui/button";
+import Logo from "@/components/ui/logo";
 
 export default function Login() {
   const { status } = useSession();

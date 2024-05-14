@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { auth } from "@/app/api/auth/(config)/auth";
-import { MenuBar } from "@/components/menu-bar/MenuBar";
+import { MenuBar } from "@/components/ui/menuBar";
 import { SearchBar } from "@/components/ui/searchBar";
 
 export const metadata: Metadata = {
