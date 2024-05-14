@@ -1,5 +1,7 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+
+import Logo from "@/components/logo/Logo";
+import { Button } from "@/components/ui/button";
 
 export default function Login() {
   return (
@@ -10,7 +12,7 @@ export default function Login() {
       style={{ backgroundImage: "url('./bg-login.svg')" }}
     >
       <div className={"space-y-8 justify-center flex flex-col items-center"}>
-        <Image src={"./logo.svg"} alt={"Google"} width={332} height={78} />
+        <Logo width={332} height={78} />
         <h1 className={"text-4xl block font-light !mb-12"}>
           Are you looking for an Ignite project?
         </h1>

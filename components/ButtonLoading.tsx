@@ -1,4 +1,5 @@
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button, ButtonProps, buttonVariants } from "@/components/ui/button";
 
@@ -25,7 +26,13 @@ export default function ButtonLoading({
       disabled={isLoading}
       className={className}
     >
-      {isLoading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
+      {isLoading && (
+        <FontAwesomeIcon
+          width={18}
+          icon={faSpinner}
+          className="mr-2 h-4 w-4 animate-spin"
+        />
+      )}
       {children}
     </Button>
   );

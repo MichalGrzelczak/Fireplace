@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import Logo from "@/app/components/logo/Logo";
+import Logo from "@/components/logo/Logo";
 
 export default function MenuBar() {
   return (
