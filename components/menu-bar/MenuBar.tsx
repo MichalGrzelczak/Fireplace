@@ -2,7 +2,7 @@ import { DefaultSession } from "next-auth";
 import Image from "next/image";
 import { FC } from "react";
 
-import Logo from "@/app/components/logo/Logo";
+import Logo from "@/components/logo/Logo";
 
 type MenuBarProps = {
   session: DefaultSession | undefined;
