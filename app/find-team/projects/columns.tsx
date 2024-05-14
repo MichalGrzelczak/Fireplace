@@ -1,29 +1,40 @@
 "use client";
 
 import { StarFilledIcon, StarIcon } from "@radix-ui/react-icons";
-import { createColumnHelper } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export type Project = {
-  id: string;
+  uuid: string;
   projectName: string;
-  leader: string;
+  leaderName: string;
   isFav: boolean;
-  teamMembers: string;
-  technologies: string;
-  product: string;
+  teamMembers: string[];
+  technologies: string[];
+  teamName: string;
+  recruitmentStatus: number;
+  applicationStatus: number;
 };
 
 const columnHelper = createColumnHelper<Project>();
 
-export const columns = [
+const toggleFav = (id: string) => {
+  console.log(id);
+};
+
+export const columns: ColumnDef<Project, any>[] = [
   columnHelper.accessor("isFav", {
     header: () => <div className="uppercase">Fav</div>,
     cell: (info) => {
       const isFav = info.getValue();
-      return isFav ? <StarFilledIcon /> : <StarIcon />;
+      const id = info.row.id;
+      return (
+        <div onClick={() => toggleFav(id)}>
+          {isFav ? <StarFilledIcon /> : <StarIcon />}
+        </div>
+      );
     },
     size: 5,
   }),
@@ -37,12 +48,13 @@ export const columns = [
         </Link>
       );
     },
-    size: 150,
+    size: 250,
   }),
-  columnHelper.accessor("leader", {
+  columnHelper.accessor("leaderName", {
     header: () => <div className="uppercase">Leader</div>,
     cell: (info) => {
       const leaderName = info.getValue();
+      console.log(leaderName);
       return (
         <div className="truncate flex items-center gap-1">
           <Avatar className="h-4 w-4">
@@ -52,18 +64,26 @@ export const columns = [
         </div>
       );
     },
-    size: 50,
+    size: 150,
   }),
   columnHelper.accessor("teamMembers", {
     header: () => <div className="uppercase">Team Members</div>,
-    size: 100,
+    size: 200,
   }),
   columnHelper.accessor("technologies", {
     header: () => <div className="uppercase">Needed Skills</div>,
+    size: 200,
+  }),
+  columnHelper.accessor("teamName", {
+    header: () => <div className="uppercase">Team Name</div>,
     size: 100,
   }),
-  columnHelper.accessor("product", {
-    header: () => <div className="uppercase">Product</div>,
-    size: 30,
+  columnHelper.accessor("recruitmentStatus", {
+    header: () => <div className="uppercase">Recruitment Status</div>,
+    size: 100,
+  }),
+  columnHelper.accessor("applicationStatus", {
+    header: () => <div className="uppercase">Application Status</div>,
+    size: 100,
   }),
 ];

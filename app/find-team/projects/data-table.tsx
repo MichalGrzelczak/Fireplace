@@ -1,10 +1,12 @@
 "use client";
 
 import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { FC } from "react";
 
 import {
   Table,
@@ -15,21 +17,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-interface DataTableProps<TData, TValue> {
-  columns: any;
-  data: TData[];
+import { Project } from "./columns";
+
+interface ReactTableProps {
+  data: Project[];
+  columns: ColumnDef<Project>[];
 }
 
-export function DataTable<TData, TValue>({
-  columns,
+export const DataTable: FC<ReactTableProps> = ({
   data,
-}: DataTableProps<TData, TValue>) {
+  columns,
+}: ReactTableProps) => {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getRowId: (row) => row.uuid,
   });
-
   return (
     <div className="rounded-md w-100vw">
       <Table>
@@ -41,7 +45,7 @@ export function DataTable<TData, TValue>({
                   <TableHead
                     key={header.id}
                     style={{ maxWidth: header.getSize() + "px" }}
-                    className="p-2 h-2 text-black text-[10px]"
+                    className="px-4 py-2 h-1 text-black text-[10px]"
                   >
                     {header.isPlaceholder
                       ? null
@@ -85,4 +89,4 @@ export function DataTable<TData, TValue>({
       </Table>
     </div>
   );
-}
+};
