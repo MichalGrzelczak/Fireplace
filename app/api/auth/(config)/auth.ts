@@ -23,7 +23,7 @@ export const config = {
   pages: {
     error: "/",
     newUser: "/",
-    signIn: "/login",
+    signIn: "/",
     signOut: "/",
     verifyRequest: "/",
   },

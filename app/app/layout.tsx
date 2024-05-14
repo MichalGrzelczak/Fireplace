@@ -3,7 +3,6 @@ import {
   faDoorOpen,
   faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
-import { redirect } from "next/navigation";
 
 import { auth } from "@/app/api/auth/(config)/auth";
 import MainTabs from "@/components/MainTabs";
@@ -29,10 +28,6 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-
-  if (!session) {
-    redirect("/login");
-  }
 
   return (
     <main
