@@ -1,10 +1,22 @@
-import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+import { auth } from "@/app/api/auth/(config)/auth";
+
+export default async function Home() {
+  const session = await auth();
+
+  console.log("session: ", session);
+
   return (
     <div className="h-screen w-screen grid grid-cols-2 overflow-hidden">
-      <Link href="/login">Logowanie</Link>
+      <ul>
+        <li>
+          <Link href="/login">Logowanie</Link>
+        </li>
+        <li>
+          <Link href="/find-team">Find-team</Link>
+        </li>
+      </ul>
     </div>
   );
 }
