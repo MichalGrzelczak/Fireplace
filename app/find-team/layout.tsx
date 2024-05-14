@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import MenuBar from "@/app/components/menu-bar/MenuBar";
+import MenuBar from "@/components/ui/menuBar";
 import { SearchBar } from "@/components/ui/searchBar";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function FindTeamLayout({
 }>) {
   return (
     <div className="px-6 pb-6 bg-neutral-50">
-      <MenuBar />
+      <MenuBar userName="Andrzej" userIcon="/user-icon.svg" />
       <div className="max-w-[720px] w-full">
         <SearchBar />
       </div>
