@@ -3,10 +3,6 @@ import Link from "next/link";
 import { auth } from "@/app/api/auth/(config)/auth";
 
 export default async function Home() {
-  const session = await auth();
-
-  console.log("session: ", session);
-
   return (
     <div className="h-screen w-screen grid grid-cols-2 overflow-hidden">
       <ul>
