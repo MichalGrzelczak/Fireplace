@@ -22,7 +22,7 @@ export default function FindTeamLayout({
           <SearchBar />
         </Suspense>
       </div>
-      Content
+      {children}
     </div>
   );
 }
