@@ -54,7 +54,6 @@ export const columns: ColumnDef<Project, any>[] = [
     header: () => <div className="uppercase">Leader</div>,
     cell: (info) => {
       const leaderName = info.getValue();
-      console.log(leaderName);
       return (
         <div className="truncate flex items-center gap-1">
           <Avatar className="h-4 w-4">
