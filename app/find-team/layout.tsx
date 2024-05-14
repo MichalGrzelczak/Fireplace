@@ -25,7 +25,7 @@ export default function FindTeamLayout({
         </Suspense>
         <Filters />
       </div>
-      Content
+      {children}
     </div>
   );
 }
