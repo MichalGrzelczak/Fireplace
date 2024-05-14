@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import Logo from "@/components/logo/Logo";
 import { Button } from "@/components/ui/button";
+import Logo from "@/components/ui/logo";
 
 export default function Login() {
   return (
