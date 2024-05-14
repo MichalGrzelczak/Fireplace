@@ -6,6 +6,8 @@ import { auth } from "@/app/api/auth/(config)/auth";
 import { MenuBar } from "@/components/ui/menuBar";
 import { SearchBar } from "@/components/ui/searchBar";
 
+import Filters from "./Filters";
+
 export const metadata: Metadata = {
   title: "Fireplace",
   description: "Find team for Appfire Ignite",
@@ -23,10 +25,11 @@ export default async function FindTeamLayout<FC>({
   return (
     <div className="px-6 pb-6 bg-neutral-50">
       <MenuBar session={session} />
-      <div className="max-w-[720px] w-full">
+      <div className="flex">
         <Suspense>
           <SearchBar />
         </Suspense>
+        <Filters />
       </div>
       {children}
     </div>
