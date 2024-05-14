@@ -11,10 +11,8 @@ const MainTabs = ({
   links: { title: string; href: string; icon?: IconDefinition }[];
 }) => {
   return (
-    <main
-      className={"h-screen flex flex-col bg-background-neutral pb-10 px-10"}
-    >
-      <div className={" px-5"}>
+    <main className={"h-screen flex flex-col bg-background pb-10 px-10"}>
+      <div className={"px-5"}>
         <div
           className={"h-10 w-full border-b border-b-border flex items-center"}
         >
