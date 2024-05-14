@@ -35,7 +35,7 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
   }, [queryParam]);
 
   return (
-    <div className="relative">
+    <div className="relative max-w-[720px] w-full">
       <Input
         placeholder="Search..."
         className="pr-8"
