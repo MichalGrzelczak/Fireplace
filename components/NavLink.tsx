@@ -24,7 +24,10 @@ const NavLink = ({
     <Link
       href={href}
       title={title}
-      className={cn(className, "/" + segment === href ? activeClassName : "")}
+      className={cn(
+        className,
+        "/app/" + segment === href ? activeClassName : "",
+      )}
     >
       {children}
     </Link>

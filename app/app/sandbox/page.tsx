@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { SearchBar } from "@/components/ui/searchBar";
+import { SearchBar } from "@/components/searchBar";
 
 export default function Sandbox() {
   return (

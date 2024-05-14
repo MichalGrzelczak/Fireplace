@@ -5,7 +5,7 @@ import { FC } from "react";
 import Logo from "@/components/ui/logo";
 
 type MenuBarProps = {
-  session: DefaultSession | undefined;
+  session: DefaultSession | undefined | null;
 };
 
 export const MenuBar: FC<MenuBarProps> = ({ session }) => {
