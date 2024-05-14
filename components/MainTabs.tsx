@@ -34,7 +34,7 @@ const MainTabs = ({
           ))}
         </div>
       </div>
-      <div className={"h-full bg-white p-5 overflow-hidden"}>{children}</div>
+      <div className={"h-full bg-white p-5"}>{children}</div>
     </main>
   );
 };

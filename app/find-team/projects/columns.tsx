@@ -1,6 +1,7 @@
 "use client";
 
-import { StarFilledIcon, StarIcon } from "@radix-ui/react-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 
@@ -32,7 +33,11 @@ export const columns: ColumnDef<Project, any>[] = [
       const id = info.row.id;
       return (
         <div onClick={() => toggleFav(id)}>
-          {isFav ? <StarFilledIcon /> : <StarIcon />}
+          {isFav ? (
+            <FontAwesomeIcon icon={faStar} />
+          ) : (
+            <FontAwesomeIcon icon={faStar} />
+          )}
         </div>
       );
     },
