@@ -11,7 +11,7 @@ const MainTabs = ({
   links: { title: string; href: string; icon?: IconDefinition }[];
 }) => {
   return (
-    <main className={"h-screen flex flex-col bg-background pb-10 px-10"}>
+    <div className={"flex flex-col h-full overflow-hidden"}>
       <div className={"px-5"}>
         <div
           className={"h-10 w-full border-b border-b-border flex items-center"}
@@ -32,8 +32,10 @@ const MainTabs = ({
           ))}
         </div>
       </div>
-      <div className={"h-full bg-white p-5"}>{children}</div>
-    </main>
+      <div className={"h-full flex flex-col bg-white p-5 overflow-hidden"}>
+        {children}
+      </div>
+    </div>
   );
 };
 

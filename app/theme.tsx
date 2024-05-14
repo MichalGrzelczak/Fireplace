@@ -1,5 +1,6 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
 import { useLayoutEffect } from "react";
 
 import AtlassianLight from "@/theme/Atlasian/AtlassianLight";
@@ -10,5 +11,5 @@ export const Theme = ({ children }: { children: React.ReactNode }) => {
     Fuego.loadTheme(AtlassianLight);
   });
 
-  return <>{children}</>;
+  return <SessionProvider>{children}</SessionProvider>;
 };

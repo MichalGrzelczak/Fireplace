@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { auth } from "@/app/api/auth/(config)/auth";
 
@@ -8,9 +9,7 @@ export default async function Home() {
       <ul>
         <li>
           <Link href="/login">Logowanie</Link>
-        </li>
-        <li>
-          <Link href="/find-team">Find-team</Link>
+          <Link href="/app/projects">App</Link>
         </li>
       </ul>
     </div>
