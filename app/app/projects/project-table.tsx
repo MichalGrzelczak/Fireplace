@@ -2,11 +2,14 @@
 
 import {
   ColumnDef,
+  SortingState,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { FC } from "react";
+import { useState } from "react";
 
 import {
   Table,
@@ -24,16 +27,24 @@ interface ReactTableProps {
   columns: ColumnDef<Project, any>[];
 }
 
-export const DataTable: FC<ReactTableProps> = ({
+export const ProjectTable: FC<ReactTableProps> = ({
   data,
   columns,
 }: ReactTableProps) => {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getRowId: (row) => row.uuid,
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
+
   return (
     <Table>
       <TableHeader className="border-b-2">

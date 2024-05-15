@@ -1,12 +1,18 @@
 "use client";
 
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
+import {
+  faArrowsUpDown,
+  faStar as faStarFilled,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 import Link from "next/link";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 import {
   APPLICATION_STATUS_PROPERTIES,
@@ -41,9 +47,9 @@ export const columns = [
       return (
         <div onClick={() => toggleFav(id)}>
           {isFav ? (
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faStarFilled} />
           ) : (
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faStarEmpty} />
           )}
         </div>
       );
@@ -51,7 +57,19 @@ export const columns = [
     size: 5,
   }),
   columnHelper.accessor("projectName", {
-    header: () => <div className="uppercase">Project Name</div>,
+    header: ({ column }) => {
+      return (
+        <div className="flex items-center">
+          <span className="uppercase">Project Name</span>
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            <FontAwesomeIcon icon={faArrowsUpDown} />
+          </Button>
+        </div>
+      );
+    },
     cell: (info) => {
       const projectName = info.getValue();
       return (

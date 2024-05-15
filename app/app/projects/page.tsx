@@ -2,8 +2,8 @@ import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
-import { DataTable } from "./data-table";
 import data from "./mockData.json";
+import { ProjectTable } from "./project-table";
 
 async function getData(): Promise<Project[]> {
   return data;
@@ -18,7 +18,8 @@ export default async function DemoPage() {
         <SearchBar />
         <Filters />
       </div>
-      <DataTable columns={columns} data={data} />
+      <ProjectTable columns={columns} data={data} />
+
       {/*TODO open on project click*/}
       {/*<ProjectDetails></ProjectDetails>*/}
     </>
