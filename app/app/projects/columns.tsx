@@ -6,6 +6,13 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+
+import {
+  APPLICATION_STATUS_PROPERTIES,
+  RECRUITMENT_STATUS_PROPERTIES,
+} from "./consts";
+import { ApplicationStatus, RecruitmentStatus } from "./types";
 
 export type Project = {
   uuid: string;
@@ -15,8 +22,8 @@ export type Project = {
   teamMembers: string[];
   technologies: string[];
   teamName: string;
-  recruitmentStatus: number;
-  applicationStatus: number;
+  recruitmentStatus: RecruitmentStatus;
+  applicationStatus: ApplicationStatus;
 };
 
 const columnHelper = createColumnHelper<Project>();
@@ -25,7 +32,7 @@ const toggleFav = (id: string) => {
   console.log(id);
 };
 
-export const columns: ColumnDef<Project, any>[] = [
+export const columns = [
   columnHelper.accessor("isFav", {
     header: () => <div className="uppercase">Fav</div>,
     cell: (info) => {
@@ -70,24 +77,56 @@ export const columns: ColumnDef<Project, any>[] = [
     },
     size: 150,
   }),
-  columnHelper.accessor("teamMembers", {
-    header: () => <div className="uppercase">Team Members</div>,
-    size: 200,
-  }),
-  columnHelper.accessor("technologies", {
-    header: () => <div className="uppercase">Needed Skills</div>,
-    size: 200,
-  }),
   columnHelper.accessor("teamName", {
     header: () => <div className="uppercase">Team Name</div>,
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {
     header: () => <div className="uppercase">Recruitment Status</div>,
-    size: 100,
+    cell: (info) => {
+      const status = info.getValue();
+      const classNames = `${RECRUITMENT_STATUS_PROPERTIES[status].bgColor} ${RECRUITMENT_STATUS_PROPERTIES[status].fontColor} uppercase`;
+      return (
+        <Badge className={classNames}>
+          {RECRUITMENT_STATUS_PROPERTIES[status].text}
+        </Badge>
+      );
+    },
+    size: 150,
+  }),
+  columnHelper.accessor("teamMembers", {
+    header: () => <div className="uppercase">Team Members</div>,
+    cell: (info) => {
+      const teamMembersFormatted = info.getValue().join(", ");
+
+      return <span>{teamMembersFormatted}</span>;
+    },
+    size: 200,
+  }),
+  columnHelper.accessor("technologies", {
+    header: () => <div className="uppercase">Needed Skills</div>,
+    cell: (info) => {
+      const technologies = info.getValue().map((technology) => (
+        <Badge key={technology} variant="basic">
+          {technology}
+        </Badge>
+      ));
+
+      return <span>{technologies}</span>;
+    },
+    size: 200,
   }),
   columnHelper.accessor("applicationStatus", {
     header: () => <div className="uppercase">Application Status</div>,
-    size: 100,
+    cell: (info) => {
+      const status = info.getValue();
+      const classNames = `${APPLICATION_STATUS_PROPERTIES[status].bgColor} ${APPLICATION_STATUS_PROPERTIES[status].fontColor} uppercase`;
+      return (
+        <Badge className={classNames}>
+          {APPLICATION_STATUS_PROPERTIES[status].text}
+        </Badge>
+      );
+    },
+    size: 200,
   }),
 ];
