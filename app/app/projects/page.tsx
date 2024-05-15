@@ -1,3 +1,4 @@
+import { fetchJiraIssues } from "@/app/app/projects/jiraApi";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
@@ -32,6 +33,7 @@ export default async function DemoPage({
   searchParams?: { query?: string };
 }) {
   const data = await getData();
+  const issues = await fetchJiraIssues();
   let filteredProjects = data;
 
   if (searchParams?.query) {
@@ -42,8 +44,6 @@ export default async function DemoPage({
         .includes(searchParams?.query?.toLowerCase().trim() ?? "");
     });
   }
-
-  console.log("query", searchParams);
 
   return (
     <>
