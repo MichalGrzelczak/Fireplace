@@ -1,3 +1,4 @@
+import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
@@ -13,8 +14,9 @@ export default async function DemoPage() {
 
   return (
     <>
-      <div className={"mb-5"}>
+      <div className="mb-5 flex items-center justify-start">
         <SearchBar />
+        <Filters />
       </div>
       <DataTable columns={columns} data={data} />
     </>

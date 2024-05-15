@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const SelectComponent = ({
+const FiltersSelect = ({
   items,
   placeholder,
   label,
@@ -26,7 +26,7 @@ const SelectComponent = ({
   return (
     <div className="pr-3">
       <Select onValueChange={onClickCallback}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -44,4 +44,4 @@ const SelectComponent = ({
   );
 };
 
-export default SelectComponent;
+export default FiltersSelect;

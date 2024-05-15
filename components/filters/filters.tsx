@@ -4,7 +4,7 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 
-import SelectComponent from "./SelectComponent";
+import FiltersSelect from "./filtersSelect";
 
 const Filters = () => {
   const products = [
@@ -35,31 +35,35 @@ const Filters = () => {
 
   return (
     <div className="flex items-center pl-6">
-      <SelectComponent
+      <FiltersSelect
         items={products}
         placeholder="Select a product"
         label="Product"
         onClickCallback={handleOnSelectProductClick}
-      ></SelectComponent>
-      <SelectComponent
+      ></FiltersSelect>
+      <FiltersSelect
         items={technologies}
         placeholder="Select a techonology"
         label="Technology"
         onClickCallback={handleOnSelectTechnologyClick}
-      ></SelectComponent>
-      <SelectComponent
+      ></FiltersSelect>
+      <FiltersSelect
         items={skills}
         placeholder="Select a skill"
         label="Needed skills"
         onClickCallback={handleOnSelectSkillClick}
-      ></SelectComponent>
-      <SelectComponent
+      ></FiltersSelect>
+      <FiltersSelect
         items={projectStatus}
         placeholder="Select a status"
         label="Project status"
         onClickCallback={handleOnSelectStatusClick}
-      ></SelectComponent>
-      <Button variant="outline" onClick={handleShowRequested}>
+      ></FiltersSelect>
+      <Button
+        variant="outline"
+        className="h-full"
+        onClick={handleShowRequested}
+      >
         Show requested
       </Button>
     </div>
