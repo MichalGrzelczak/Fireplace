@@ -21,7 +21,7 @@ import { Project } from "./columns";
 
 interface ReactTableProps {
   data: Project[];
-  columns: ColumnDef<Project>[];
+  columns: ColumnDef<Project, any>[];
 }
 
 export const DataTable: FC<ReactTableProps> = ({
@@ -44,7 +44,7 @@ export const DataTable: FC<ReactTableProps> = ({
                 <TableHead
                   key={header.id}
                   style={{ maxWidth: header.getSize() + "px" }}
-                  className="px-4 py-2 h-1 text-black text-[10px]"
+                  className="px-4 py-2 h-1 text-black text-[10px] whitespace-nowrap"
                 >
                   {header.isPlaceholder
                     ? null
