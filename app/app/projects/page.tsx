@@ -1,6 +1,9 @@
+import { fetchJiraIssues } from "@/app/app/projects/jiraApi";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
+// import { db } from "@/db";
+// import { users } from "@/db/schema";
 import { Project, columns } from "./columns";
 import data from "./mockData.json";
 import { ProjectTable } from "./project-table";
@@ -9,8 +12,38 @@ async function getData(): Promise<Project[]> {
   return data;
 }
 
-export default async function DemoPage() {
+// export async function test() {
+//   let usersResult = db.select().from(users).get();
+//   console.log(usersResult);
+//   if (!usersResult) {
+//     db.insert(users)
+//       .values({
+//         id: "test",
+//         firstName: "test",
+//         lastName: "test",
+//         email: "test",
+//       })
+//       .run();
+//   }
+// }
+
+export default async function DemoPage({
+  searchParams,
+}: {
+  searchParams?: { query?: string };
+}) {
   const data = await getData();
+  const issues = await fetchJiraIssues();
+  let filteredProjects = data;
+
+  if (searchParams?.query) {
+    filteredProjects = data.filter((project) => {
+      return project.projectName
+        .toLowerCase()
+        .trim()
+        .includes(searchParams?.query?.toLowerCase().trim() ?? "");
+    });
+  }
 
   return (
     <>
@@ -18,7 +51,7 @@ export default async function DemoPage() {
         <SearchBar />
         <Filters />
       </div>
-      <ProjectTable columns={columns} data={data} />
+      <ProjectTable columns={columns} data={filteredProjects} />
 
       {/*TODO open on project click*/}
       {/*<ProjectDetails></ProjectDetails>*/}

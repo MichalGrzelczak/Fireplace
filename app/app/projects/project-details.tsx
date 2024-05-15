@@ -1,7 +1,24 @@
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tag } from "@/components/ui/tag";
+import { Textarea } from "@/components/ui/textarea";
 
 export type ProjectDetailsProps = {
   id: string;
@@ -20,9 +37,45 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
     <div className="p-4">
       <div className="flex items-center justify-between py-2 overflow-y-auto">
         <h2>Project details</h2>
-        <Button size={"default"} variant="default">
-          Send a request
-        </Button>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button size="default" variant="default">
+              Send a request
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Send a request to join the team</DialogTitle>
+            </DialogHeader>
+
+            <Textarea placeholder="Enter message..." className="mt-2" />
+            <div className="mt-2">
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="light">Light</SelectItem>
+                  <SelectItem value="dark">Dark</SelectItem>
+                  <SelectItem value="system">System</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <DialogFooter className="sm:justify-end">
+              <DialogClose asChild>
+                <Button type="button" size="default" variant="secondary">
+                  Cancel
+                </Button>
+              </DialogClose>
+
+              <Button type="submit" size="default" className="px-3">
+                Send
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="flex">
@@ -69,7 +122,7 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
         <div className="w-1/4 pr-3">
           <span className="font-bold">PRODUCT</span>
           <div className="mt-2">
-            <Tag className="mr-2">BigPicture</Tag>
+            <Tag className="mr-2">{props.product}</Tag>
           </div>
         </div>
 
