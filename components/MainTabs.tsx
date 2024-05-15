@@ -32,7 +32,7 @@ const MainTabs = ({
           ))}
         </div>
       </div>
-      <div className={"h-full flex flex-col bg-white p-5 overflow-hidden"}>
+      <div className={"h-full flex flex-col bg-surface p-5 overflow-hidden"}>
         {children}
       </div>
     </div>

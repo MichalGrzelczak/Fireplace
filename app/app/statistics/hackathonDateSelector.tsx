@@ -23,7 +23,7 @@ export function HackathonDateSelector(props: {
 
   return (
     <Select value={currentSelectedDate}>
-      <SelectTrigger className="border-none bg-transparent justify-start pl-0 h-8 w-fit">
+      <SelectTrigger>
         <SelectValue placeholder="Select hackathon year" />
       </SelectTrigger>
       <SelectContent className="w-fit">

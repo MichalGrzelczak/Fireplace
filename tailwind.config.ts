@@ -27,6 +27,12 @@ const config = {
       font: {
         ...fuego.theme.font,
       },
+      fontSize: {
+        ...fuego.theme.fontSize,
+      },
+      fontWeight: {
+        ...fuego.theme.fontWeight,
+      },
       colors: {
         border: "var(--border)",
         input: "var(--border-input)",
@@ -43,30 +49,30 @@ const config = {
           foreground: "var(--scale-neutralAlpha-900)",
         },
         destructive: {
-          DEFAULT: "(var(--background-danger-bold))",
-          foreground: "(var(--background-danger-pressed))",
+          DEFAULT: "var(--background-danger-bold)",
+          foreground: "var(--background-danger-pressed)",
         },
         muted: {
-          DEFAULT: "(var(--scale-neutralAlpha-200))",
-          foreground: "(var(--scale-neutralAlpha-500)",
+          DEFAULT: "var(--scale-neutralAlpha-200)",
+          foreground: "var(--scale-neutralAlpha-500)",
         },
         accent: {
-          DEFAULT: "(var(--background-information-bold))",
-          foreground: "(var(--background-information))",
+          DEFAULT: "var(--background-information-bold)",
+          foreground: "var(--background-information)",
         },
         popover: {
-          DEFAULT: "(var(--popover))",
-          foreground: "(var(--popover-foreground))",
+          DEFAULT: "var(--background-input)",
+          foreground: "var(--text-text)",
         },
         card: {
-          DEFAULT: "(var(--card))",
-          foreground: "(var(--card-foreground))",
+          DEFAULT: "var(--background-input)",
+          foreground: "var(--text-textde)",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calcvar(--radius) - 2px)",
+        sm: "calcvar(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {

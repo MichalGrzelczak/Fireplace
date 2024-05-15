@@ -16,14 +16,16 @@ export function HackathonResults(props: { hackathon: Hackathon }) {
   const { categories } = props.hackathon;
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex gap-2">
+    <div className="flex flex-col gap-3 pt-4">
+      <div className="flex gap-2 mb-2">
         <h1 className="font-medium my-auto">Winners</h1>
         <Separator className="h-auto" orientation="vertical" />
-        <HackathonDateSelector
-          dates={["may-2024", "october-2023"]}
-          selectedDate={"may-2024"}
-        />
+        <div>
+          <HackathonDateSelector
+            dates={["may-2024", "october-2023"]}
+            selectedDate={"may-2024"}
+          />
+        </div>
       </div>
       <div className="flex flex-col gap-4">
         {categories.map((category) => (

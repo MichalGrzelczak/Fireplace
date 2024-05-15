@@ -34,7 +34,7 @@ const Filters = () => {
   const handleShowRequested = () => {};
 
   return (
-    <div className="flex items-center pl-6">
+    <div className="flex gap-4 items-center pl-6">
       <FiltersSelect
         items={products}
         placeholder="Select a product"
@@ -59,11 +59,7 @@ const Filters = () => {
         label="Project status"
         onClickCallback={handleOnSelectStatusClick}
       ></FiltersSelect>
-      <Button
-        variant="outline"
-        className="h-full"
-        onClick={handleShowRequested}
-      >
+      <Button variant="secondary" onClick={handleShowRequested}>
         Show requested
       </Button>
     </div>
