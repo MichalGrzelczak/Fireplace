@@ -19,7 +19,8 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "target": "es6"
   },
   "include": [
     "next-env.d.ts",
