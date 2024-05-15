@@ -1,35 +1,65 @@
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
-import { faRocket } from "@fortawesome/free-solid-svg-icons";
-import { faAward } from "@fortawesome/free-solid-svg-icons";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarDay,
+  faRocket,
+  faTrophy,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { HackathonCard } from "@/app/app/statistics/hackathonCard";
+import { HackathonResults } from "@/app/app/statistics/hackathonResults";
+import { hackathonData } from "@/app/app/statistics/types";
 
 import Counter from "./counter";
 
-export default function Statistics() {
+export interface StatisticsData {
+  projects: number;
+  teamMembers: number;
+  awards: number;
+  days: number;
+}
+
+function loadStatistics(): Promise<StatisticsData> {
+  return Promise.resolve({
+    projects: 51,
+    teamMembers: 200,
+    awards: 9,
+    days: 5,
+  });
+}
+
+const loadStatisticsData = async () => {
+  const statistics = await loadStatistics();
+  const hackathon = hackathonData;
+  return { statistics, hackathon };
+};
+
+export default async function Statistics() {
+  const data = await loadStatisticsData();
+
   return (
     <div>
-      <div>
+      <div className={"grid gap-4 -mt-10 -mx-10 pt-10 bg-scale-neutral-100"}>
         <Counter />
+        <div className="flex text-2xl justify-between gap-10 mb-4 mx-5">
+          <HackathonCard
+            icon={faRocket}
+            title={`${data.statistics.projects} awesome projects`}
+          />
+          <HackathonCard
+            icon={faUsers}
+            title={`${data.statistics.teamMembers} team members`}
+          />
+          <HackathonCard
+            icon={faTrophy}
+            title={`${data.statistics.awards} awards to win`}
+          />
+          <HackathonCard
+            icon={faCalendarDay}
+            title={`${data.statistics.days} days full of fun and hard work`}
+          />
+        </div>
       </div>
-      <div className="flex mt-8 text-2xl justify-between gap-4">
-        <div className="flex justify-center py-5 px-16 bg-neutral-50 items-center w-full">
-          <FontAwesomeIcon icon={faRocket} width={25} className="mr-3" />
-          51 awesome projects
-        </div>
-        <div className="flex justify-center py-5 px-16 bg-neutral-50 items-center w-full">
-          <FontAwesomeIcon icon={faUsers} width={25} className="mr-3" />
-          200 team members
-        </div>
-        <div className="flex justify-center py-5 px-16 bg-neutral-50 items-center w-full">
-          <FontAwesomeIcon icon={faAward} width={25} className="mr-3" />9 awards
-          to win
-        </div>
-        <div className="flex justify-center py-5 px-16 bg-neutral-50 items-center w-full">
-          <FontAwesomeIcon icon={faCalendar} width={25} className="mr-3" />5
-          days full of fun and hard work
-        </div>
-      </div>
+      <HackathonResults hackathon={data.hackathon} />
     </div>
   );
 }

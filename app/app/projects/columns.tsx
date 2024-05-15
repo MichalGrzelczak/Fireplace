@@ -34,16 +34,22 @@ const toggleFav = (id: string) => {
 
 export const columns = [
   columnHelper.accessor("isFav", {
-    header: () => <div className="uppercase">Fav</div>,
+    header: () => <div className="table__header">Fav</div>,
     cell: (info) => {
       const isFav = info.getValue();
       const id = info.row.id;
       return (
         <div onClick={() => toggleFav(id)}>
           {isFav ? (
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon
+              className={"text-scale-yellow-200"}
+              icon={faStar}
+            />
           ) : (
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon
+              className={"text-scale-neutral-400"}
+              icon={faStar}
+            />
           )}
         </div>
       );
@@ -51,7 +57,7 @@ export const columns = [
     size: 5,
   }),
   columnHelper.accessor("projectName", {
-    header: () => <div className="uppercase">Project Name</div>,
+    header: () => <div className="table__header">Project Name</div>,
     cell: (info) => {
       const projectName = info.getValue();
       return (
@@ -63,7 +69,7 @@ export const columns = [
     size: 250,
   }),
   columnHelper.accessor("leaderName", {
-    header: () => <div className="uppercase">Leader</div>,
+    header: () => <div className="table__header">Leader</div>,
     cell: (info) => {
       const leaderName = info.getValue();
       return (
@@ -78,14 +84,14 @@ export const columns = [
     size: 150,
   }),
   columnHelper.accessor("teamName", {
-    header: () => <div className="uppercase">Team Name</div>,
+    header: () => <div className="table__header">Team Name</div>,
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {
-    header: () => <div className="uppercase">Recruitment Status</div>,
+    header: () => <div className="table__header">Recruitment Status</div>,
     cell: (info) => {
       const status = info.getValue();
-      const classNames = `${RECRUITMENT_STATUS_PROPERTIES[status].bgColor} ${RECRUITMENT_STATUS_PROPERTIES[status].fontColor} uppercase`;
+      const classNames = `${RECRUITMENT_STATUS_PROPERTIES[status].bgColor} ${RECRUITMENT_STATUS_PROPERTIES[status].fontColor} uppercase typography--font-heading-xxsmall`;
       return (
         <Badge className={classNames}>
           {RECRUITMENT_STATUS_PROPERTIES[status].text}
@@ -95,7 +101,7 @@ export const columns = [
     size: 150,
   }),
   columnHelper.accessor("teamMembers", {
-    header: () => <div className="uppercase">Team Members</div>,
+    header: () => <div className="table__header">Team Members</div>,
     cell: (info) => {
       const teamMembersFormatted = info.getValue().join(", ");
 
@@ -104,7 +110,7 @@ export const columns = [
     size: 200,
   }),
   columnHelper.accessor("technologies", {
-    header: () => <div className="uppercase">Needed Skills</div>,
+    header: () => <div className="table__header">Needed Skills</div>,
     cell: (info) => {
       const technologies = info.getValue().map((technology) => (
         <Badge key={technology} variant="basic">
@@ -117,10 +123,10 @@ export const columns = [
     size: 200,
   }),
   columnHelper.accessor("applicationStatus", {
-    header: () => <div className="uppercase">Application Status</div>,
+    header: () => <div className="table__header">Application Status</div>,
     cell: (info) => {
       const status = info.getValue();
-      const classNames = `${APPLICATION_STATUS_PROPERTIES[status].bgColor} ${APPLICATION_STATUS_PROPERTIES[status].fontColor} uppercase`;
+      const classNames = `${APPLICATION_STATUS_PROPERTIES[status].bgColor} ${APPLICATION_STATUS_PROPERTIES[status].fontColor} uppercase typography--font-heading-xxsmall`;
       return (
         <Badge className={classNames}>
           {APPLICATION_STATUS_PROPERTIES[status].text}
