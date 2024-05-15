@@ -2,7 +2,7 @@ import {
   CUSTOM_FIELDS,
   Issue,
   createFieldsFromIssueFields,
-} from "@/app/find-team/jiraApiTypes";
+} from "@/app/app/projects/jiraApiTypes";
 
 const TOKEN: string = process.env.JIRA_API_TOKEN ?? "";
 const HEADERS = {

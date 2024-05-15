@@ -1,5 +1,7 @@
 "use client";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -35,22 +37,19 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
   }, [queryParam]);
 
   return (
-    <div className="relative">
+    <div className="relative max-w-[720px] w-full">
       <Input
         placeholder="Search..."
-        className="pr-8"
+        className="pr-6"
         value={queryInternalValue}
         onChange={(e) => {
           setQueryInternalValue(e.target.value);
           handleQuery(e.target.value);
         }}
       />
-      <Image
-        className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground"
-        src="/magnifing-glass.svg"
-        alt="search"
-        width={20}
-        height={20}
+      <FontAwesomeIcon
+        icon={faSearch}
+        className={"absolute top-2.5 right-2.5"}
       />
     </div>
   );
