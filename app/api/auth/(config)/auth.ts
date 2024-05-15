@@ -20,6 +20,9 @@ export const config = {
       checks: ["none"],
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   pages: {
     error: "/",
     newUser: "/",
