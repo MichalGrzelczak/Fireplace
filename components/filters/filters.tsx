@@ -1,69 +1,114 @@
 "use client";
 
-import React from "react";
+import { ReadonlyURLSearchParams } from "next/dist/client/components/navigation.react-server";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useMemo } from "react";
+import { FaAngular, FaDoorClosed, FaDoorOpen, FaReact } from "react-icons/fa";
 
-import { Button } from "@/components/ui/button";
+import { FiltersSelect } from "@/components/filters/filtersSelect";
+import { MultiSelectOptions } from "@/components/ui/multi-select";
 
-import FiltersSelect from "./filtersSelect";
+const technologies: MultiSelectOptions = [
+  {
+    label: "Angular",
+    value: "angular",
+    icon: FaAngular,
+  },
+  {
+    label: "React",
+    value: "react",
+    icon: FaReact,
+  },
+  {
+    label: "Euphoria",
+    value: "Euphoria",
+    icon: FaReact,
+  },
+];
+
+const status = [
+  {
+    label: "Open",
+    value: "1",
+    icon: FaDoorOpen,
+  },
+  {
+    label: "Closed",
+    value: "0",
+    icon: FaDoorClosed,
+  },
+];
+
+export enum FiltersEnum {
+  technologies = "technologies",
+  status = "status",
+}
 
 const Filters = () => {
-  const products = [
-    { name: "BigPicture", id: "bigpicture" },
-    { name: "7pace", id: "7pace" },
-  ];
-  const technologies = [
-    { name: "Angular", id: "angular" },
-    { name: "Java", id: "java" },
-    { name: "React", id: "react" },
-    { name: "Python", id: "python" },
-  ];
-  const skills = [
-    { name: "frontend", id: "frontend" },
-    { name: "backned", id: "backned" },
-  ];
-  const projectStatus = [
-    { name: "open", id: "open" },
-    { name: "closed", id: "closed" },
-  ];
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathname = usePathname();
 
-  const handleOnSelectProductClick = (id: string) => {};
-  const handleOnSelectTechnologyClick = (id: string) => {};
-  const handleOnSelectSkillClick = (id: string) => {};
-  const handleOnSelectStatusClick = (id: string) => {};
+  const selectedTechnologies = useMemo(() => {
+    return getArrayFromParams(searchParams, FiltersEnum.technologies);
+  }, [searchParams]);
 
-  const handleShowRequested = () => {};
+  const selectedStatus = useMemo(() => {
+    return getArrayFromParams(searchParams, FiltersEnum.status);
+  }, [searchParams]);
+
+  const addSearchParam = (key: FiltersEnum, options: Array<string>) => {
+    const urlSearchParams = new URLSearchParams(searchParams);
+
+    if (!options?.length) {
+      urlSearchParams.delete(key);
+    } else {
+      urlSearchParams.set(key, JSON.stringify(options));
+    }
+
+    replace(`${pathname}?${urlSearchParams.toString()}`);
+  };
+
+  const handleOnSelectTechnologyClick = (options: string[]) => {
+    addSearchParam(FiltersEnum.technologies, options);
+  };
+
+  const handleOnSelectStatusClick = (options: string[]) => {
+    addSearchParam(FiltersEnum.status, options);
+  };
 
   return (
     <div className="flex gap-4 items-center pl-6">
       <FiltersSelect
-        items={products}
-        placeholder="Select a product"
-        label="Product"
-        onClickCallback={handleOnSelectProductClick}
-      ></FiltersSelect>
-      <FiltersSelect
-        items={technologies}
-        placeholder="Select a techonology"
-        label="Technology"
+        selectedOptions={selectedTechnologies}
+        options={technologies}
+        placeholder="Technology"
         onClickCallback={handleOnSelectTechnologyClick}
       ></FiltersSelect>
+
       <FiltersSelect
-        items={skills}
-        placeholder="Select a skill"
-        label="Needed skills"
-        onClickCallback={handleOnSelectSkillClick}
-      ></FiltersSelect>
-      <FiltersSelect
-        items={projectStatus}
-        placeholder="Select a status"
-        label="Project status"
+        selectedOptions={selectedStatus}
+        options={status}
+        placeholder="Status"
         onClickCallback={handleOnSelectStatusClick}
       ></FiltersSelect>
-      <Button variant="secondary" onClick={handleShowRequested}>
-        Show requested
-      </Button>
     </div>
   );
 };
+
+function getArrayFromParams(
+  searchParams: ReadonlyURLSearchParams,
+  key: FiltersEnum,
+) {
+  const urlSearchParams = new URLSearchParams(searchParams);
+  const valueString = urlSearchParams.get(key) ?? "";
+  try {
+    const parsedData = JSON.parse(valueString);
+
+    return parsedData?.length ? parsedData : [];
+  } catch (e) {
+    return [];
+  }
+}
 
 export default Filters;

@@ -30,20 +30,36 @@ async function getData(): Promise<Project[]> {
 export default async function DemoPage({
   searchParams,
 }: {
-  searchParams?: { query?: string };
+  searchParams?: { query?: string; technologies?: string; status?: string };
 }) {
   const data = await getData();
   const issues = await fetchJiraIssues();
-  let filteredProjects = data;
+  const selectedTechnologies: Array<string> = safeParse(
+    searchParams?.technologies || "",
+  );
+  const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
-  if (searchParams?.query) {
-    filteredProjects = data.filter((project) => {
-      return project.projectName
-        .toLowerCase()
-        .trim()
-        .includes(searchParams?.query?.toLowerCase().trim() ?? "");
-    });
-  }
+  const filteredProjects = data
+    .filter(
+      (p) =>
+        !searchParams?.query?.length ||
+        p.projectName
+          .toLowerCase()
+          .trim()
+          .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
+    )
+    .filter(
+      (p) =>
+        !selectedTechnologies ||
+        p.technologies.some((technology) =>
+          selectedTechnologies?.includes(technology),
+        ),
+    )
+    .filter(
+      (p) =>
+        !selectedStatus?.length ||
+        selectedStatus.includes(p.applicationStatus.toString()),
+    );
 
   return (
     <>
@@ -56,4 +72,12 @@ export default async function DemoPage({
       {/*<ProjectDetails></ProjectDetails>*/}
     </>
   );
+}
+
+function safeParse(valueToParse: string) {
+  try {
+    return JSON.parse(valueToParse);
+  } catch {
+    return null;
+  }
 }
