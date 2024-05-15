@@ -1,4 +1,7 @@
+"use client";
+
 import { DefaultSession } from "next-auth";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { FC } from "react";
 
@@ -9,6 +12,10 @@ type MenuBarProps = {
 };
 
 export const MenuBar: FC<MenuBarProps> = ({ session }) => {
+  const onLogoutClick = () => {
+    signOut();
+  };
+
   return (
     <div className="flex justify-between py-3 px-4 items-center">
       <Logo width={128} height={30} />
@@ -24,7 +31,9 @@ export const MenuBar: FC<MenuBarProps> = ({ session }) => {
             height="16"
           />
         </span>
-        <span className="text-sm">{session?.user?.name ?? ""}</span>
+        <span onClick={onLogoutClick} className="text-sm cursor-pointer">
+          {session?.user?.name ?? ""}
+        </span>
       </div>
     </div>
   );
