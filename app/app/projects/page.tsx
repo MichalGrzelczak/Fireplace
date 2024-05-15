@@ -19,6 +19,8 @@ export default async function DemoPage() {
         <Filters />
       </div>
       <DataTable columns={columns} data={data} />
+      {/*TODO open on project click*/}
+      {/*<ProjectDetails></ProjectDetails>*/}
     </>
   );
 }
