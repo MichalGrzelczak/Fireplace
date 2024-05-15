@@ -45,9 +45,6 @@ export default async function DemoPage({
     });
   }
 
-  console.log("query", searchParams);
-  console.log(issues.map((i) => i.fields.members));
-
   return (
     <>
       <div className="mb-5 flex items-center justify-start">
