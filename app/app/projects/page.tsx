@@ -9,6 +9,20 @@ async function getData(): Promise<Project[]> {
   return data;
 }
 
+// export async function test() {
+//   let usersResult = db.select().from(users).get();
+//   if (!usersResult) {
+//     db.insert(users)
+//       .values({
+//         id: "test",
+//         firstName: "test",
+//         lastName: "test",
+//         email: "test",
+//       })
+//       .run();
+//   }
+// }
+
 export default async function DemoPage({
   searchParams,
 }: {
