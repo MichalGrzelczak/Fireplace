@@ -24,7 +24,7 @@ const FiltersSelect = ({
   onClickCallback: (name: string) => void;
 }) => {
   return (
-    <div className="pr-3">
+    <div>
       <Select onValueChange={onClickCallback}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />

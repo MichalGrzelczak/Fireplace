@@ -37,29 +37,29 @@ export default async function Statistics() {
   const data = await loadStatisticsData();
 
   return (
-    <div className="flex flex-col gap-8">
-      <Counter />
-      <div className="flex text-2xl justify-between gap-4">
-        <HackathonCard
-          icon={faRocket}
-          title={`${data.statistics.projects} awesome projects`}
-        />
-        <HackathonCard
-          icon={faUsers}
-          title={`${data.statistics.teamMembers} team members`}
-        />
-        <HackathonCard
-          icon={faTrophy}
-          title={`${data.statistics.awards} awards to win`}
-        />
-        <HackathonCard
-          icon={faCalendarDay}
-          title={`${data.statistics.days} days full of fun and hard work`}
-        />
+    <div>
+      <div className={"grid gap-4 -mt-10 -mx-10 pt-10 bg-scale-neutral-100"}>
+        <Counter />
+        <div className="flex text-2xl justify-between gap-10 mb-4 mx-5">
+          <HackathonCard
+            icon={faRocket}
+            title={`${data.statistics.projects} awesome projects`}
+          />
+          <HackathonCard
+            icon={faUsers}
+            title={`${data.statistics.teamMembers} team members`}
+          />
+          <HackathonCard
+            icon={faTrophy}
+            title={`${data.statistics.awards} awards to win`}
+          />
+          <HackathonCard
+            icon={faCalendarDay}
+            title={`${data.statistics.days} days full of fun and hard work`}
+          />
+        </div>
       </div>
-      <div className="p-3 bg-neutral-50">
-        <HackathonResults hackathon={data.hackathon} />
-      </div>
+      <HackathonResults hackathon={data.hackathon} />
     </div>
   );
 }

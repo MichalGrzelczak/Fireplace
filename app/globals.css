@@ -636,14 +636,20 @@ body {
   @apply text-text-brand after:absolute after:-bottom-px after:h-0.5 after:w-full after:bg-background-brand-bold;
 }
 
+.accordion__title[data-state="open"] {
+  @apply border-b;
+}
+
+.select__button[aria-expanded="true"] {
+  @apply bg-primary-foreground text-primary;
+}
+
+.table__header {
+  @apply text-fontSize-0 font-fontWeight-bold uppercase;
+}
+
 @layer base {
   :root {
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
     --radius: 5px;
   }
 }

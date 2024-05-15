@@ -6,8 +6,8 @@ import { Card } from "@/components/ui/card";
 
 export function HackathonCard(props: { icon: IconDefinition; title: string }) {
   return (
-    <div className="flex justify-center py-5 px-16 bg-neutral-50 items-center w-full">
-      <FontAwesomeIcon icon={props.icon} width={25} className="mr-3" />
+    <div className="flex justify-center h-16 px-8 text-fontSize-5 font-fontWeight-medium bg-surface border items-center rounded w-full">
+      <FontAwesomeIcon icon={props.icon} width={30} className="mr-3" />
       {props.title}
     </div>
   );
