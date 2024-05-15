@@ -1,7 +1,5 @@
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
-import { db } from "@/db";
-import { users } from "@/db/schema";
 
 import { Project, columns } from "./columns";
 import { DataTable } from "./data-table";
@@ -25,8 +23,24 @@ async function getData(): Promise<Project[]> {
 //   }
 // }
 
-export default async function DemoPage() {
+export default async function DemoPage({
+  searchParams,
+}: {
+  searchParams?: { query?: string };
+}) {
   const data = await getData();
+  let filteredProjects = data;
+
+  if (searchParams?.query) {
+    filteredProjects = data.filter((project) => {
+      return project.projectName
+        .toLowerCase()
+        .trim()
+        .includes(searchParams?.query?.toLowerCase().trim() ?? "");
+    });
+  }
+
+  console.log("query", searchParams);
 
   return (
     <>
@@ -34,7 +48,7 @@ export default async function DemoPage() {
         <SearchBar />
         <Filters />
       </div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={filteredProjects} />
       {/*TODO open on project click*/}
       {/*<ProjectDetails></ProjectDetails>*/}
     </>
