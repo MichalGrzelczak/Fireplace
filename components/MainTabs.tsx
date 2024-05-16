@@ -11,9 +11,11 @@ const MainTabs = ({
 }) => {
   return (
     <div className={"flex flex-col h-full overflow-hidden"}>
-      <div className={"px-5"}>
+      <div className={"px-space-3"}>
         <div
-          className={"h-10 w-full border-b border-b-border flex items-center"}
+          className={
+            "h-size-40 w-full border-b border-b-border flex items-center"
+          }
         >
           {links.map((item, key) => (
             <NavLink
@@ -21,7 +23,7 @@ const MainTabs = ({
               href={item.href}
               title={item.title}
               className={
-                "px-4 inline-flex items-center gap-2 place-content-center relative h-full"
+                "px-space-3 inline-flex items-center gap-space-2 place-content-center relative h-full"
               }
               activeClassName={`nav__active`}
             >
@@ -31,7 +33,9 @@ const MainTabs = ({
           ))}
         </div>
       </div>
-      <div className={"h-full flex flex-col bg-surface p-5 overflow-hidden"}>
+      <div
+        className={"h-full flex flex-col bg-surface p-space-3 overflow-hidden"}
+      >
         {children}
       </div>
     </div>

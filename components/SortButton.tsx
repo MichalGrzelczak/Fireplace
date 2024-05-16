@@ -10,11 +10,16 @@ export interface SortButtonProps {
 }
 
 export const SortButton: FC<SortButtonProps> = ({ onClick, isSortedAsc }) => (
-  <Button size={"smIcon"} variant="ghost" onClick={onClick}>
+  <Button
+    variant="link"
+    type={"button"}
+    aria-label={"Sort column"}
+    onClick={onClick}
+  >
     {isSortedAsc ? (
-      <FaArrowUpAZ className="fa-2xs" />
+      <FaArrowUpAZ className="text-fontSize-3" />
     ) : (
-      <FaArrowDownZA className="fa-2xs" />
+      <FaArrowDownZA className="text-fontSize-3" />
     )}
   </Button>
 );

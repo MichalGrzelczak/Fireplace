@@ -63,7 +63,7 @@ export default async function DemoPage({
 
   return (
     <>
-      <div className="mb-5 flex items-center justify-start">
+      <div className="mb-space-4 flex items-center justify-start">
         <SearchBar />
         <Filters />
       </div>

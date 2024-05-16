@@ -16,8 +16,8 @@ export function HackathonResults(props: { hackathon: Hackathon }) {
   const { categories } = props.hackathon;
 
   return (
-    <div className="flex flex-col gap-3 pt-4">
-      <div className="flex gap-2 mb-2">
+    <div className="flex flex-col gap-space-2 pt-space-3">
+      <div className="flex gap-space-2 mb-space-2">
         <h1 className="font-medium my-auto">Winners</h1>
         <Separator className="h-auto" orientation="vertical" />
         <div>
@@ -27,7 +27,7 @@ export function HackathonResults(props: { hackathon: Hackathon }) {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-space-3">
         {categories.map((category) => (
           <HackathonCategoryAccordion key={category.id} category={category} />
         ))}
@@ -54,16 +54,16 @@ export function HackathonCategoryAccordion({
           {category.stages.map((stage, index) => (
             <div className="flex-1 flex" key={stage.id}>
               {index > 0 && (
-                <Separator className="mr-4" orientation="vertical" />
+                <Separator className="mr-space-3" orientation="vertical" />
               )}
-              <div className="flex flex-col gap-2 pl-8">
+              <div className="flex flex-col gap-space-2 pl-space-4">
                 <div className="flex gap-2">
                   <h3 className="font-medium">{stage.name}</h3>
                   <Badge className="bg-scale-neutral-800">
                     {stage.teams.length}
                   </Badge>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-space-2">
                   {stage.teams.map((team) => (
                     <HackathonTeam
                       key={team.id}

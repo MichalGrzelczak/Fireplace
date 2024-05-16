@@ -66,7 +66,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
                 <TableHead
                   key={header.id}
                   style={{ maxWidth: header.getSize() + "px" }}
-                  className="px-4 py-2 h-1 text-black text-[10px] whitespace-nowrap"
+                  className="px-space-3 py-space-2 h-size-4 text-black text-fontSize-0 whitespace-nowrap"
                 >
                   {header.isPlaceholder
                     ? null
@@ -86,7 +86,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
             <TableRow
               key={row.id}
               data-state={row.getIsSelected() && "selected"}
-              className="h-1"
+              className="h-size-1"
               onClick={() => {
                 onRowClick(getProjectById(row.id));
               }}
@@ -95,7 +95,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
                 <TableCell
                   key={cell.id}
                   style={{ maxWidth: cell.column.getSize() + "px" }}
-                  className="truncate p-4"
+                  className="truncate p-space-3"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
@@ -104,7 +104,10 @@ export const ProjectTable: FC<ReactTableProps> = ({
           ))
         ) : (
           <TableRow>
-            <TableCell colSpan={columns.length} className="h-24 text-center">
+            <TableCell
+              colSpan={columns.length}
+              className="h-size-64 text-center"
+            >
               No results.
             </TableCell>
           </TableRow>

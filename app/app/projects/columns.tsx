@@ -55,7 +55,7 @@ export const columns = [
       const isSortedAsc = column.getIsSorted() === "asc";
       const onClick = () => column.toggleSorting(isSortedAsc);
       return (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-space-1">
           <span className="table__header">Project Name</span>
           <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
         </div>
@@ -64,7 +64,7 @@ export const columns = [
     cell: (info) => {
       const projectName = info.getValue();
       return (
-        <Link href="#" className="text-blue-600">
+        <Link href="#" className="text-text-brand">
           {projectName}
         </Link>
       );
@@ -76,7 +76,7 @@ export const columns = [
       const isSortedAsc = column.getIsSorted() === "asc";
       const onClick = () => column.toggleSorting(isSortedAsc);
       return (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-space-1">
           <span className="table__header">Leader</span>
           <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
         </div>
@@ -85,8 +85,8 @@ export const columns = [
     cell: (info) => {
       const leaderName = info.getValue();
       return (
-        <div className="truncate flex items-center gap-1">
-          <Avatar className="h-4 w-4">
+        <div className="truncate flex items-center gap-space-1">
+          <Avatar className="h-size-16 w-size-16">
             <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
           </Avatar>
           <div className="truncate">{leaderName}</div>
@@ -100,7 +100,7 @@ export const columns = [
       const isSortedAsc = column.getIsSorted() === "asc";
       const onClick = () => column.toggleSorting(isSortedAsc);
       return (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-space-1">
           <span className="table__header">Team Name</span>
           <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
         </div>

@@ -8,30 +8,30 @@ import {
 export const RECRUITMENT_STATUS_PROPERTIES: RecruitmentStatusProperties = {
   [RecruitmentStatus.Closed]: {
     text: "Closed",
-    bgColor: "bg-slate-600",
+    bgColor: "bg-background-accent-gray-bolder",
     fontColor: "text-white",
   },
   [RecruitmentStatus.Open]: {
     text: "Open",
-    bgColor: "bg-green-100",
-    fontColor: "text-green-700",
+    bgColor: "bg-background-accent-green-subtlest",
+    fontColor: "text-text-accent-green",
   },
 };
 
 export const APPLICATION_STATUS_PROPERTIES: ApplicationStatusProperties = {
   [ApplicationStatus.NotApplied]: {
     text: "Not applied",
-    bgColor: "bg-gray-200",
-    fontColor: "text-gray-600",
+    bgColor: "bg-background-accent-gray-subtlest",
+    fontColor: "text-text-accent-gray",
   },
   [ApplicationStatus.Confirmed]: {
     text: "Confirmed",
-    bgColor: "bg-green-200",
-    fontColor: "text-green-900",
+    bgColor: "bg-background-accent-blue-subtlest",
+    fontColor: "text-text-accent-green",
   },
   [ApplicationStatus.WaitingForApproval]: {
     text: "Waiting for approval",
-    bgColor: "bg-blue-100",
-    fontColor: "text-blue-800",
+    bgColor: "bg-background-accent-blue-subtlest",
+    fontColor: "text-text-accent-blue",
   },
 };

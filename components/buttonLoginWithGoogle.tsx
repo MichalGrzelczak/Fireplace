@@ -18,7 +18,7 @@ export const ButtonLoginWithGoogle = () => {
   return (
     <Button
       size={"lg"}
-      className={"w-full gap-4"}
+      className={"w-full gap-space-4"}
       variant="outline"
       onClick={onLoginWithGoogleClick}
     >
