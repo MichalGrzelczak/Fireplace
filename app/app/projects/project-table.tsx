@@ -38,8 +38,6 @@ export const ProjectTable: FC<ReactTableProps> = ({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const searchText = useSearchParams().get("query");
-
   const table = useReactTable({
     data: project,
     columns,
@@ -54,10 +52,6 @@ export const ProjectTable: FC<ReactTableProps> = ({
       columnFilters,
     },
   });
-
-  useEffect(() => {
-    table.getColumn("projectName")?.setFilterValue(searchText);
-  }, [searchText, table]);
 
   return (
     <Table>

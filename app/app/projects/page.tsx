@@ -42,6 +42,14 @@ export default async function DemoPage({
   const filteredProjects = data
     .filter(
       (p) =>
+        !searchParams?.query?.length ||
+        p.projectName
+          .toLowerCase()
+          .trim()
+          .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
+    )
+    .filter(
+      (p) =>
         !selectedTechnologies ||
         p.technologies.some((technology) =>
           selectedTechnologies?.includes(technology),
