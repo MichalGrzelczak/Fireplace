@@ -1,5 +1,4 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconType } from "react-icons";
 
 import NavLink from "@/components/NavLink";
 
@@ -8,7 +7,7 @@ const MainTabs = ({
   links,
 }: {
   children: React.ReactNode;
-  links: { title: string; href: string; icon?: IconDefinition }[];
+  links: { title: string; href: string; icon?: IconType }[];
 }) => {
   return (
     <div className={"flex flex-col h-full overflow-hidden"}>
@@ -26,7 +25,7 @@ const MainTabs = ({
               }
               activeClassName={`nav__active`}
             >
-              {item.icon && <FontAwesomeIcon width={18} icon={item.icon} />}
+              {!!item?.icon && item.icon({ width: 18 })}
               {item.title}
             </NavLink>
           ))}

@@ -1,11 +1,6 @@
-import { faArrowDownZA, faArrowUpAZ } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Slot } from "@radix-ui/react-slot";
-import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
 import { FC } from "react";
-
-import { cn } from "@/lib/utils";
+import { FaArrowDownZA, FaArrowUpAZ } from "react-icons/fa6";
 
 import { Button } from "./ui/button";
 
@@ -17,9 +12,9 @@ export interface SortButtonProps {
 export const SortButton: FC<SortButtonProps> = ({ onClick, isSortedAsc }) => (
   <Button size={"smIcon"} variant="ghost" onClick={onClick}>
     {isSortedAsc ? (
-      <FontAwesomeIcon className="fa-2xs" icon={faArrowUpAZ} />
+      <FaArrowUpAZ className="fa-2xs" />
     ) : (
-      <FontAwesomeIcon className="fa-2xs" icon={faArrowDownZA} />
+      <FaArrowDownZA className="fa-2xs" />
     )}
   </Button>
 );

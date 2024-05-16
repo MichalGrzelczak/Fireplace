@@ -1,8 +1,4 @@
-import {
-  faBook,
-  faDoorOpen,
-  faTrophy,
-} from "@fortawesome/free-solid-svg-icons";
+import { FaBook, FaDoorOpen, FaTrophy } from "react-icons/fa";
 
 import { auth } from "@/app/api/auth/(config)/auth";
 import MainTabs from "@/components/MainTabs";
@@ -12,14 +8,14 @@ const navLinks = [
   {
     title: "Projects",
     href: "/app/projects",
-    icon: faDoorOpen,
+    icon: FaDoorOpen,
   },
   {
     title: "Statistics",
     href: "/app/statistics",
-    icon: faTrophy,
+    icon: FaTrophy,
   },
-  { title: "Knowledge base", href: "/app/knowledge", icon: faBook },
+  { title: "Knowledge base", href: "/app/knowledge", icon: FaBook },
 ];
 
 export default async function Layout({
