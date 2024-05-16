@@ -1,10 +1,10 @@
 import { fetchProjects } from "@/app/app/projects/jira-api";
 import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
+import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
-import { ProjectTable } from "./project-table";
 
 // export async function test() {
 
@@ -64,14 +64,11 @@ export default async function DemoPage({
 
   return (
     <>
-      <div className="mb-5 flex items-center justify-start">
+      <div className="mb-space-4 flex items-center justify-start">
         <SearchBar />
         <Filters technologies={technolgies} />
       </div>
-      <ProjectTable columns={columns} project={filteredProjects} />
-
-      {/*TODO open on project click*/}
-      {/*<ProjectDetails></ProjectDetails>*/}
+      <PageContent columns={columns} projects={filteredProjects} />
     </>
   );
 }

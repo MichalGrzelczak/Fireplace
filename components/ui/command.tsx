@@ -2,7 +2,6 @@
 
 import { type DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
-import { Search } from "lucide-react";
 import * as React from "react";
 import { FaSearch } from "react-icons/fa";
 
@@ -16,7 +15,7 @@ const Command = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
+      "flex h-full w-full flex-col overflow-hidden rounded-radii-1 bg-popover text-popover-foreground",
       className,
     )}
     {...props}
@@ -29,8 +28,8 @@ interface CommandDialogProps extends DialogProps {}
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0 shadow-lg">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+      <DialogContent className="overflow-hidden p-space-0 shadow-lg">
+        <Command className="[&_[cmdk-group-heading]]:px-space-2 [&_[cmdk-group-heading]]:font-fontWeight-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-space-0 [&_[cmdk-group]]:px-space-2 [&_[cmdk-input-wrapper]_svg]:h-size-20 [&_[cmdk-input-wrapper]_svg]:w-size-20 [&_[cmdk-input]]:h-size-48 [&_[cmdk-item]]:px-space-2 [&_[cmdk-item]]:py-space-3 [&_[cmdk-item]_svg]:h-size-20 [&_[cmdk-item]_svg]:w-size-20">
           {children}
         </Command>
       </DialogContent>
@@ -43,11 +42,13 @@ const CommandInput = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
   <div className="p-1 relative">
-    <FaSearch className={"absolute right-4 top-3 text-scale-neutral-400"} />
+    <FaSearch
+      className={"absolute right-space-3 top-space-2 text-scale-neutral-400"}
+    />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "flex h-8 w-full border-2 rounded bg-transparent p-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-size-24 w-full border-2 rounded bg-transparent p-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       {...props}
@@ -76,7 +77,7 @@ const CommandEmpty = React.forwardRef<
 >((props, ref) => (
   <CommandPrimitive.Empty
     ref={ref}
-    className="py-6 text-center text-sm"
+    className="py-space-4 text-center "
     {...props}
   />
 ));
@@ -90,7 +91,7 @@ const CommandGroup = React.forwardRef<
   <CommandPrimitive.Group
     ref={ref}
     className={cn(
-      "overflow-hidden [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
+      "overflow-hidden [&_[cmdk-group-heading]]:px-space-2 [&_[cmdk-group-heading]]:py-space-1 [&_[cmdk-group-heading]]:text-fontSize-2 [&_[cmdk-group-heading]]:font-fontWeight-medium [&_[cmdk-group-heading]]:text-muted-foreground",
       className,
     )}
     {...props}
@@ -105,7 +106,7 @@ const CommandSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Separator
     ref={ref}
-    className={cn("-mx-1 h-px bg-border", className)}
+    className={cn("-mx-space-1 h-px bg-border", className)}
     {...props}
   />
 ));
@@ -118,7 +119,7 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-background-neutral data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+      "relative flex h-size-32 cursor-default select-none items-center px-space-2 py-space-1 outline-none aria-selected:bg-background-neutral data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       className,
     )}
     {...props}
@@ -134,7 +135,7 @@ const CommandShortcut = ({
   return (
     <span
       className={cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground",
+        "ml-auto text-fontSize-2 tracking-widest text-muted-foreground",
         className,
       )}
       {...props}

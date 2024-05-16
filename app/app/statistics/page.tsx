@@ -32,10 +32,14 @@ export default async function Statistics() {
   const data = await loadStatisticsData();
 
   return (
-    <div>
-      <div className={"grid gap-4 -mt-10 -mx-10 pt-10 bg-scale-neutral-100"}>
+    <>
+      <div
+        className={
+          "grid gap-space-3 -mt-space-3 -mx-space-3 py-space-3 bg-scale-neutral-100"
+        }
+      >
         <Counter />
-        <div className="flex text-2xl justify-between gap-10 mb-4 mx-5">
+        <div className="flex text-fontSize-3 justify-between gap-space-4 mb-space-1 mx-space-3">
           <HackathonCard
             icon={<FaRocket width={30} />}
             title={`${data.statistics.projects} awesome projects`}
@@ -55,6 +59,6 @@ export default async function Statistics() {
         </div>
       </div>
       <HackathonResults hackathon={data.hackathon} />
-    </div>
+    </>
   );
 }

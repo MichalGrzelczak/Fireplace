@@ -26,7 +26,10 @@ export default function ButtonLoading({
       className={className}
     >
       {isLoading && (
-        <FaSpinner width={18} className="mr-2 h-4 w-4 animate-spin" />
+        <FaSpinner
+          width={18}
+          className="mr-space-2 h-size-16 w-size-16 animate-spin"
+        />
       )}
       {children}
     </Button>

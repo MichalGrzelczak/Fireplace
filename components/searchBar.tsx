@@ -35,17 +35,23 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
   }, [queryParam]);
 
   return (
-    <div className="relative max-w-[720px] w-full">
+    <form
+      role="search"
+      aria-label="Search project"
+      className="relative max-w-[720px] w-full"
+    >
       <Input
         placeholder="Search..."
-        className="pr-6"
+        aria-label={"Type for search project"}
+        className="pr-space-4"
         value={queryInternalValue}
+        type={"search"}
         onChange={(e) => {
           setQueryInternalValue(e.target.value);
           handleQuery(e.target.value);
         }}
       />
-      <FaSearch className="absolute top-2 right-3 w-[14px] h-[14px] text-scale-neutral-400" />
-    </div>
+      <FaSearch className="absolute top-space-2 right-space-2 text-icon" />
+    </form>
   );
 }

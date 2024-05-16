@@ -66,7 +66,7 @@ const Filters: FC<FilterProps> = ({ technologies }) => {
   const technologiesToDisplay = prepareTechnologiesFilters(technologies);
 
   return (
-    <div className="flex gap-4 items-center pl-6">
+    <div className="flex gap-space-3 items-center pl-space-4">
       <FiltersSelect
         selectedOptions={selectedTechnologies}
         options={technologiesToDisplay}

@@ -26,7 +26,9 @@ export default async function Layout({
   const session = await auth();
 
   return (
-    <main className={"h-screen flex flex-col pb-10 px-10 overflow-hidden"}>
+    <main
+      className={"h-screen flex flex-col pb-space-4 px-space-4 overflow-hidden"}
+    >
       <MenuBar session={session} />
       <MainTabs links={navLinks}>{children}</MainTabs>
     </main>
