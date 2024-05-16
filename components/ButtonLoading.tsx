@@ -1,7 +1,6 @@
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaSpinner } from "react-icons/fa";
 
-import { Button, ButtonProps, buttonVariants } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 
 export default function ButtonLoading({
   children,
@@ -27,11 +26,7 @@ export default function ButtonLoading({
       className={className}
     >
       {isLoading && (
-        <FontAwesomeIcon
-          width={18}
-          icon={faSpinner}
-          className="mr-2 h-4 w-4 animate-spin"
-        />
+        <FaSpinner width={18} className="mr-2 h-4 w-4 animate-spin" />
       )}
       {children}
     </Button>

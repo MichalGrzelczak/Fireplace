@@ -1,9 +1,4 @@
-import {
-  faCalendarDay,
-  faRocket,
-  faTrophy,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { FaCalendarDay, FaRocket, FaTrophy, FaUsers } from "react-icons/fa";
 
 import { HackathonCard } from "@/app/app/statistics/hackathonCard";
 import { HackathonResults } from "@/app/app/statistics/hackathonResults";
@@ -42,19 +37,19 @@ export default async function Statistics() {
         <Counter />
         <div className="flex text-2xl justify-between gap-10 mb-4 mx-5">
           <HackathonCard
-            icon={faRocket}
+            icon={FaRocket}
             title={`${data.statistics.projects} awesome projects`}
           />
           <HackathonCard
-            icon={faUsers}
+            icon={FaUsers}
             title={`${data.statistics.teamMembers} team members`}
           />
           <HackathonCard
-            icon={faTrophy}
+            icon={FaTrophy}
             title={`${data.statistics.awards} awards to win`}
           />
           <HackathonCard
-            icon={faCalendarDay}
+            icon={FaCalendarDay}
             title={`${data.statistics.days} days full of fun and hard work`}
           />
         </div>

@@ -1,9 +1,8 @@
 "use client";
 
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
+import { FaStar } from "react-icons/fa";
 
 import { SortButton } from "@/components/SortButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -42,15 +41,9 @@ export const columns = [
       return (
         <div onClick={() => toggleFav(id)}>
           {isFav ? (
-            <FontAwesomeIcon
-              className={"text-scale-yellow-200"}
-              icon={faStar}
-            />
+            <FaStar className={"text-scale-yellow-200"} />
           ) : (
-            <FontAwesomeIcon
-              className={"text-scale-neutral-400"}
-              icon={faStar}
-            />
+            <FaStar className={"text-scale-neutral-400"} />
           )}
         </div>
       );
