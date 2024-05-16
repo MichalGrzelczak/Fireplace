@@ -49,13 +49,13 @@ export default async function DemoPage({
           .trim()
           .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
     )
-    // .filter(
-    //   (p) =>
-    //     !selectedTechnologies ||
-    //     p.technologies.some((technology) =>
-    //       selectedTechnologies?.includes(technology),
-    //     ),
-    // )
+    .filter(
+      (p) =>
+        !selectedTechnologies ||
+        p.technologies.some((technology) =>
+          selectedTechnologies?.includes(technology),
+        ),
+    )
     .filter(
       (p) =>
         !selectedStatus?.length ||
