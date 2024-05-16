@@ -1,11 +1,10 @@
 "use client";
 
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DefaultSession } from "next-auth";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { FC } from "react";
+import { FaBell } from "react-icons/fa";
 
 import Logo from "@/components/ui/logo";
 
@@ -22,7 +21,7 @@ export const MenuBar: FC<MenuBarProps> = ({ session }) => {
     <div className="flex justify-between py-3 px-4 items-center">
       <Logo width={128} height={30} />
       <div className="flex gap-4 items-center">
-        <FontAwesomeIcon icon={faBell} width={16} />
+        <FaBell width={16} />
         <div className={"w-px h-6 bg-border"}></div>
         <div className={"flex gap-1"}>
           <Image

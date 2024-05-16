@@ -3,26 +3,43 @@
 import { ReadonlyURLSearchParams } from "next/dist/client/components/navigation.react-server";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useMemo } from "react";
-import { FaAngular, FaDoorClosed, FaDoorOpen, FaReact } from "react-icons/fa";
+import * as Icons from "react-icons/fa";
 
 import { FiltersSelect } from "@/components/filters/filtersSelect";
 import { MultiSelectOptions } from "@/components/ui/multi-select";
+
+function prepareSelectOptions(): MultiSelectOptions {
+  const technologies = ["Dupa"];
+  return technologies.map((tech) => {
+    let icon = Icons.FaAngry;
+
+    if (`Fa${tech}` in Icons) {
+      icon = Icons[`Fa${tech}` as keyof typeof Icons];
+    }
+
+    return {
+      label: tech,
+      value: tech,
+      icon,
+    };
+  });
+}
 
 const technologies: MultiSelectOptions = [
   {
     label: "Angular",
     value: "angular",
-    icon: FaAngular,
+    icon: Icons.FaReact,
   },
   {
     label: "React",
     value: "react",
-    icon: FaReact,
+    icon: Icons.FaReact,
   },
   {
     label: "Euphoria",
     value: "Euphoria",
-    icon: FaReact,
+    icon: Icons.FaReact,
   },
 ];
 
@@ -30,12 +47,12 @@ const status = [
   {
     label: "Open",
     value: "1",
-    icon: FaDoorOpen,
+    icon: Icons.FaDoorOpen,
   },
   {
     label: "Closed",
     value: "0",
-    icon: FaDoorClosed,
+    icon: Icons.FaDoorClosed,
   },
 ];
 

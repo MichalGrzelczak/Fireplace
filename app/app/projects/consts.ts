@@ -38,7 +38,7 @@ export const APPLICATION_STATUS_PROPERTIES: ApplicationStatusProperties = {
 };
 
 export const EMPTY_USER: ProjectUser = {
-  email: "",
-  displayName: "",
+  email: "noleader@noleader.com",
+  displayName: "No Leader Yet",
   iconUrl: "",
 };

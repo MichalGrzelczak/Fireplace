@@ -22,7 +22,6 @@ export async function fetchProjects(
     `${URL}/api/3/search?jql=project=HACK&startAt=${startAt}${fields}`,
 
     {
-      cache: "default",
       method: "GET",
       headers: HEADERS,
     },

@@ -80,7 +80,7 @@ export function createFieldsFromIssueFields(issueFields: any): Fields {
     summary: issueFields["summary"],
     technologies: issueFields["customfield_11084"],
     reporter: createJiraUserFromIssueField(issueFields["reporter"]),
-    leader: createJiraUserFromIssueField(issueFields["customfield_10922"]),
+    leader: createMembersFromIssueFields(issueFields["customfield_10922"])[0],
     typeOfProject: createTypeOfProjectFromIssueField(
       issueFields["customfield_10791"],
     ),

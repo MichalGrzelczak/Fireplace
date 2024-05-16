@@ -1,6 +1,6 @@
 export enum RecruitmentStatus {
-  "Open",
   "Closed",
+  "Open",
 }
 
 export enum ApplicationStatus {

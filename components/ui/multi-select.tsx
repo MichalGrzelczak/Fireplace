@@ -1,14 +1,8 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import {
-  CheckIcon,
-  ChevronDown,
-  WandSparkles,
-  XCircle,
-  XIcon,
-} from "lucide-react";
 import * as React from "react";
+import { FaCheck, FaChevronDown } from "react-icons/fa";
+import { FaWandSparkles } from "react-icons/fa6";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -24,7 +18,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 const multiSelectVariants = cva(
@@ -125,66 +118,37 @@ const MultiSelectFormField = React.forwardRef<
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>
           <Button
+            variant={"ghost"}
             ref={ref}
             {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
+            className="min-h-8 h-auto items-center justify-between"
           >
             {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center">
+                <div className="flex flex-wrap items-center gap-4">
                   {selectedValues.map((value) => {
                     const option = options.find((o) => o.value === value);
                     const IconComponent = option?.icon;
                     return (
-                      <Badge
+                      <span
                         key={value}
-                        className={cn(
-                          isAnimating ? "animate-bounce" : "",
-                          multiSelectVariants({ variant, className }),
-                        )}
-                        style={{
-                          animationDuration: `${animation}s`,
-                        }}
+                        className={cn("flex items-center gap-1")}
                       >
-                        {IconComponent && (
-                          <IconComponent className="h-4 w-4 mr-2" />
-                        )}
+                        {IconComponent && <IconComponent className="h-4 w-4" />}
                         {option?.label}
-                        <XCircle
-                          className="ml-2 h-4 w-4 cursor-pointer"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            toggleOption(value);
-                          }}
-                        />
-                      </Badge>
+                      </span>
                     );
                   })}
                 </div>
                 <div className="flex items-center justify-between">
-                  <XIcon
-                    className="h-4 mx-2 cursor-pointer text-muted-foreground"
-                    onClick={(event) => {
-                      setSelectedValues([]);
-                      selectedValuesSet.current.clear();
-                      onValueChange([]);
-                      event.stopPropagation();
-                    }}
-                  />
-                  <Separator
-                    orientation="vertical"
-                    className="flex min-h-6 h-full"
-                  />
-                  <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground" />
+                  <FaChevronDown className="h-4 cursor-pointer ml-2 text-fontSize-1" />
                 </div>
               </div>
             ) : (
               <div className="flex items-center justify-between w-full mx-auto">
-                <span className="text-sm text-muted-foreground mx-3">
-                  {placeholder}
-                </span>
-                <ChevronDown className="h-4 cursor-pointer text-muted-foreground mx-2" />
+                <span className="mx-2">{placeholder}</span>
+                <FaChevronDown className="h-4 cursor-pointer ml-2 text-fontSize-1" />
               </div>
             )}
           </Button>
@@ -218,68 +182,29 @@ const MultiSelectFormField = React.forwardRef<
                     >
                       <div
                         className={cn(
-                          "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                          "mr-2 flex h-3.5 w-3.5 items-center justify-center border-2 rounded-sm",
                           isSelected
                             ? "bg-primary text-primary-foreground"
                             : "opacity-50 [&_svg]:invisible",
                         )}
                       >
-                        <CheckIcon className="h-4 w-4" />
+                        <FaCheck className="h-4 w-4 text-fontSize-1" />
                       </div>
-                      {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-                      )}
+                      {option.icon && <option.icon className="mr-1 h-4 w-4" />}
                       <span>{option.label}</span>
                     </CommandItem>
                   );
                 })}
               </CommandGroup>
               <CommandSeparator />
-              <CommandGroup>
-                <div className="flex items-center justify-between">
-                  {selectedValues.length > 0 && (
-                    <>
-                      <CommandItem
-                        onSelect={() => {
-                          setSelectedValues([]);
-                          selectedValuesSet.current.clear();
-                          onValueChange([]);
-                        }}
-                        style={{
-                          pointerEvents: "auto",
-                          opacity: 1,
-                        }}
-                        className="flex-1 justify-center cursor-pointer"
-                      >
-                        Clear
-                      </CommandItem>
-                      <Separator
-                        orientation="vertical"
-                        className="flex min-h-6 h-full"
-                      />
-                    </>
-                  )}
-                  <CommandSeparator />
-                  <CommandItem
-                    onSelect={() => setIsPopoverOpen(false)}
-                    style={{
-                      pointerEvents: "auto",
-                      opacity: 1,
-                    }}
-                    className="flex-1 justify-center cursor-pointer"
-                  >
-                    Close
-                  </CommandItem>
-                </div>
-              </CommandGroup>
             </CommandList>
           </Command>
         </PopoverContent>
         {animation > 0 && selectedValues.length > 0 && (
-          <WandSparkles
+          <FaWandSparkles
             className={cn(
               "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
-              isAnimating ? "" : "text-muted-foreground",
+              isAnimating ? "" : "",
             )}
             onClick={() => setIsAnimating(!isAnimating)}
           />

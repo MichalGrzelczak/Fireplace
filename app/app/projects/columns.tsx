@@ -1,10 +1,10 @@
 "use client";
 
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
+import { FaStar } from "react-icons/fa";
 
+import { SortButton } from "@/components/SortButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
@@ -42,15 +42,9 @@ export const columns = [
       return (
         <div onClick={() => toggleFav(id)}>
           {isFav ? (
-            <FontAwesomeIcon
-              className={"text-scale-yellow-200"}
-              icon={faStar}
-            />
+            <FaStar className={"text-scale-yellow-200"} />
           ) : (
-            <FontAwesomeIcon
-              className={"text-scale-neutral-400"}
-              icon={faStar}
-            />
+            <FaStar className={"text-scale-neutral-400"} />
           )}
         </div>
       );
@@ -58,7 +52,16 @@ export const columns = [
     size: 5,
   }),
   columnHelper.accessor("projectName", {
-    header: () => <div className="table__header">Project Name</div>,
+    header: ({ column }) => {
+      const isSortedAsc = column.getIsSorted() === "asc";
+      const onClick = () => column.toggleSorting(isSortedAsc);
+      return (
+        <div className="flex items-center gap-1">
+          <span className="table__header">Project Name</span>
+          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
+        </div>
+      );
+    },
     cell: (info) => {
       const projectName = info.getValue();
       return (
@@ -70,13 +73,25 @@ export const columns = [
     size: 250,
   }),
   columnHelper.accessor("leader", {
-    header: () => <div className="table__header">Leader</div>,
+    header: ({ column }) => {
+      const isSortedAsc = column.getIsSorted() === "asc";
+      const onClick = () => column.toggleSorting(isSortedAsc);
+      return (
+        <div className="flex items-center gap-1">
+          <span className="table__header">Leader</span>
+          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
+        </div>
+      );
+    },
     cell: (info) => {
       const leader = info.getValue();
+      const src = leader.iconUrl
+        ? leader.iconUrl
+        : "https://github.com/shadcn.png";
       return (
         <div className="truncate flex items-center gap-1">
           <Avatar className="h-4 w-4">
-            <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
+            <AvatarImage src={src}></AvatarImage>
           </Avatar>
           <div className="truncate">{leader.displayName}</div>
         </div>

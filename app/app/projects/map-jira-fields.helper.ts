@@ -1,3 +1,14 @@
+// mapa technologi, i sprawdzamy, czy dana technologia istnieje, jesli nie, to dodajemy nowa;
+// w filtrze technologies wyswietlamy wszystkie dostepne technologie,
+import { Project } from "@/app/app/projects/columns";
+import { EMPTY_USER } from "@/app/app/projects/consts";
+import { HackProject, JiraUser } from "@/app/app/projects/jiraApiTypes";
+import {
+  ApplicationStatus,
+  ProjectUser,
+  RecruitmentStatus,
+} from "@/app/app/projects/types";
+
 // key -> TeamName and replace to Hack Key + wyswietlic typ projektu
 // summary -> Project Name
 // jesli nie ma lidera -> available position;
@@ -21,14 +32,8 @@
 //     [ 'React', 'jira' ],
 //     [ 'AWS', 'NodeJS' ],
 //     [ 'AWS', 'java', 'jira' ],
-import { Project } from "@/app/app/projects/columns";
-import { EMPTY_USER } from "@/app/app/projects/consts";
-import { HackProject, JiraUser } from "@/app/app/projects/jiraApiTypes";
-import {
-  ApplicationStatus,
-  ProjectUser,
-  RecruitmentStatus,
-} from "@/app/app/projects/types";
+
+const sampleTechnologies = ["aws", "nodejs", "jira"];
 
 export function mapHackProjectToProject(hackProject: HackProject): Project {
   const fields = hackProject.fields;
@@ -55,7 +60,7 @@ export function mapJiraUserToProjectUser(
   return {
     email: jiraUser.emailAddress,
     displayName: jiraUser.displayName,
-    iconUrl: "",
+    iconUrl: jiraUser.avatarUrls["16x16"],
   };
 }
 

@@ -1,3 +1,5 @@
+import "@fuegokit/tokens/dist/css/atlassian/colors/dark.css";
+import "@fuegokit/tokens/dist/css/atlassian/colors/light.css";
 import type { Metadata } from "next";
 
 import { Theme } from "@/app/theme";

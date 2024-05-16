@@ -4,7 +4,7 @@ import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
-import { DataTable } from "./data-table";
+import { ProjectTable } from "./project-table";
 
 // export async function test() {
 
@@ -36,26 +36,27 @@ export default async function DemoPage({
   );
   const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
-  const filteredProjects = projects.filter(
-    (p) =>
-      !searchParams?.query?.length ||
-      p.projectName
-        .toLowerCase()
-        .trim()
-        .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
-  );
-  // .filter(
-  //   (p) =>
-  //     !selectedTechnologies ||
-  //     p.technologies.some((technology) =>
-  //       selectedTechnologies?.includes(technology),
-  //     ),
-  // )
-  // .filter(
-  //   (p) =>
-  //     !selectedStatus?.length ||
-  //     selectedStatus.includes(p.applicationStatus.toString()),
-  // );
+  const filteredProjects = projects
+    .filter(
+      (p) =>
+        !searchParams?.query?.length ||
+        p.projectName
+          .toLowerCase()
+          .trim()
+          .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
+    )
+    // .filter(
+    //   (p) =>
+    //     !selectedTechnologies ||
+    //     p.technologies.some((technology) =>
+    //       selectedTechnologies?.includes(technology),
+    //     ),
+    // )
+    .filter(
+      (p) =>
+        !selectedStatus?.length ||
+        selectedStatus.includes(p.recruitmentStatus.toString()),
+    );
 
   return (
     <>
@@ -63,7 +64,8 @@ export default async function DemoPage({
         <SearchBar />
         <Filters />
       </div>
-      <DataTable columns={columns} data={filteredProjects} />
+      <ProjectTable columns={columns} project={filteredProjects} />
+
       {/*TODO open on project click*/}
       {/*<ProjectDetails></ProjectDetails>*/}
     </>
