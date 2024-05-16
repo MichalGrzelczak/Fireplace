@@ -1,4 +1,5 @@
 import { fetchJiraIssues } from "@/app/app/projects/jiraApi";
+import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
@@ -6,7 +7,6 @@ import { SearchBar } from "@/components/searchBar";
 // import { users } from "@/db/schema";
 import { Project, columns } from "./columns";
 import data from "./mockData.json";
-import { ProjectTable } from "./project-table";
 
 async function getData(): Promise<Project[]> {
   return data;
@@ -67,10 +67,7 @@ export default async function DemoPage({
         <SearchBar />
         <Filters />
       </div>
-      <ProjectTable columns={columns} project={filteredProjects} />
-
-      {/*TODO open on project click*/}
-      {/*<ProjectDetails></ProjectDetails>*/}
+      <PageContent columns={columns} projects={filteredProjects} />
     </>
   );
 }

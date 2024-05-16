@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FaTimes } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,53 +30,59 @@ export type ProjectDetailsProps = {
   product: string;
   rolesNeeded: string[];
   description: string;
+  onCloseDetails: () => void;
 };
 
 export default function ProjectDetails(props: ProjectDetailsProps) {
   return (
-    //   TODO change span title to h3??
-    <div className="p-4">
+    <div className="pl-4">
       <div className="flex items-center justify-between py-2 overflow-y-auto">
-        <h2>Project details</h2>
+        <h2 className="text-xl font-bold">Project details</h2>
 
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="default" variant="default">
-              Send a request
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Send a request to join the team</DialogTitle>
-            </DialogHeader>
-
-            <Textarea placeholder="Enter message..." className="mt-2" />
-            <div className="mt-2">
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <DialogFooter className="sm:justify-end">
-              <DialogClose asChild>
-                <Button type="button" size="default" variant="secondary">
-                  Cancel
-                </Button>
-              </DialogClose>
-
-              <Button type="submit" size="default" className="px-3">
-                Send
+        <div className="flex text-xl cursor-pointer items-center">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="default" variant="default">
+                Send a request
               </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Send a request to join the team</DialogTitle>
+              </DialogHeader>
+
+              <Textarea placeholder="Enter message..." className="mt-2" />
+              <div className="mt-2">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {props.rolesNeeded.map((role, index) => (
+                      <SelectItem key={index} value={role}>
+                        {role}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <DialogFooter className="sm:justify-end">
+                <DialogClose asChild>
+                  <Button type="button" size="default" variant="secondary">
+                    Cancel
+                  </Button>
+                </DialogClose>
+
+                <Button type="submit" size="default" className="px-3">
+                  Send
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <FaTimes className="ml-4" onClick={props.onCloseDetails} />
+        </div>
       </div>
 
       <div className="flex">
