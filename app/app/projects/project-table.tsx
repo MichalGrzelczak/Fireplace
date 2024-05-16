@@ -57,7 +57,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
 
   return (
     <Table>
-      <TableHeader className="border-b-2">
+      <TableHeader className="sticky bg-background-information top-0 border-b-2 z-50">
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => {

@@ -13,7 +13,7 @@ export function PageContent({ columns, projects }) {
   >();
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <div className={`${!!selectedProject ? "w-3/5" : "w-full"}`}>
         <ProjectTable
           columns={columns}
