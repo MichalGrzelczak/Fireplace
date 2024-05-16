@@ -7,7 +7,7 @@ const MainTabs = ({
   links,
 }: {
   children: React.ReactNode;
-  links: { title: string; href: string; icon?: IconType }[];
+  links: { title: string; href: string; icon?: React.ReactNode }[];
 }) => {
   return (
     <div className={"flex flex-col h-full overflow-hidden"}>
@@ -25,7 +25,7 @@ const MainTabs = ({
               }
               activeClassName={`nav__active`}
             >
-              {!!item?.icon && item.icon({ width: 18 })}
+              {item.icon}
               {item.title}
             </NavLink>
           ))}
