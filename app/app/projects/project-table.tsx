@@ -2,14 +2,18 @@
 
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useSearchParams } from "next/navigation";
 import { FC } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 
 import {
   Table,
@@ -32,6 +36,9 @@ export const ProjectTable: FC<ReactTableProps> = ({
   columns,
 }: ReactTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
+  const searchText = useSearchParams().get("query");
 
   const table = useReactTable({
     data,
@@ -40,10 +47,17 @@ export const ProjectTable: FC<ReactTableProps> = ({
     getRowId: (row) => row.uuid,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
+      columnFilters,
     },
   });
+
+  useEffect(() => {
+    table.getColumn("projectName")?.setFilterValue(searchText);
+  }, [searchText, table]);
 
   return (
     <Table>

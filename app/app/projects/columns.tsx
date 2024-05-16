@@ -1,18 +1,13 @@
 "use client";
 
-import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
-import {
-  faArrowsUpDown,
-  faStar as faStarFilled,
-} from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarFilled } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
 import Link from "next/link";
 
+import { SortButton } from "@/components/SortButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 import {
   APPLICATION_STATUS_PROPERTIES,
@@ -47,14 +42,11 @@ export const columns = [
       return (
         <div onClick={() => toggleFav(id)}>
           {isFav ? (
-            <FontAwesomeIcon
-              className={"text-scale-neutral-200"}
-              icon={faStarFilled}
-            />
+            <FontAwesomeIcon icon={faStarFilled} />
           ) : (
             <FontAwesomeIcon
               className={"text-scale-neutral-400"}
-              icon={faStarEmpty}
+              icon={faStarFilled}
             />
           )}
         </div>
@@ -64,15 +56,12 @@ export const columns = [
   }),
   columnHelper.accessor("projectName", {
     header: ({ column }) => {
+      const isSortedAsc = column.getIsSorted() === "asc";
+      const onClick = () => column.toggleSorting(isSortedAsc);
       return (
-        <div className="flex items-center">
-          <span className="uppercase table__header">Project Name</span>
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            <FontAwesomeIcon icon={faArrowsUpDown} />
-          </Button>
+        <div className="flex items-center gap-1">
+          <span className="table__header">Project Name</span>
+          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
         </div>
       );
     },
@@ -87,7 +76,16 @@ export const columns = [
     size: 250,
   }),
   columnHelper.accessor("leaderName", {
-    header: () => <div className="table__header">Leader</div>,
+    header: ({ column }) => {
+      const isSortedAsc = column.getIsSorted() === "asc";
+      const onClick = () => column.toggleSorting(isSortedAsc);
+      return (
+        <div className="flex items-center gap-1">
+          <span className="table__header">Leader</span>
+          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
+        </div>
+      );
+    },
     cell: (info) => {
       const leaderName = info.getValue();
       return (
@@ -102,7 +100,16 @@ export const columns = [
     size: 150,
   }),
   columnHelper.accessor("teamName", {
-    header: () => <div className="table__header">Team Name</div>,
+    header: ({ column }) => {
+      const isSortedAsc = column.getIsSorted() === "asc";
+      const onClick = () => column.toggleSorting(isSortedAsc);
+      return (
+        <div className="flex items-center gap-1">
+          <span className="table__header">Team Name</span>
+          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
+        </div>
+      );
+    },
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {

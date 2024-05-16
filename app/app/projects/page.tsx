@@ -27,23 +27,9 @@ async function getData(): Promise<Project[]> {
 //   }
 // }
 
-export default async function DemoPage({
-  searchParams,
-}: {
-  searchParams?: { query?: string };
-}) {
+export default async function DemoPage() {
   const data = await getData();
   const issues = await fetchJiraIssues();
-  let filteredProjects = data;
-
-  if (searchParams?.query) {
-    filteredProjects = data.filter((project) => {
-      return project.projectName
-        .toLowerCase()
-        .trim()
-        .includes(searchParams?.query?.toLowerCase().trim() ?? "");
-    });
-  }
 
   return (
     <>
@@ -51,7 +37,7 @@ export default async function DemoPage({
         <SearchBar />
         <Filters />
       </div>
-      <ProjectTable columns={columns} data={filteredProjects} />
+      <ProjectTable columns={columns} data={data} />
 
       {/*TODO open on project click*/}
       {/*<ProjectDetails></ProjectDetails>*/}
