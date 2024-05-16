@@ -61,7 +61,7 @@ export const columns = [
     cell: (info) => {
       const projectName = info.getValue();
       return (
-        <Link href="#" className="text-blue-600">
+        <Link href="#" className="text-blue-600" title={projectName}>
           {projectName}
         </Link>
       );
@@ -73,7 +73,7 @@ export const columns = [
     cell: (info) => {
       const leaderName = info.getValue();
       return (
-        <div className="truncate flex items-center gap-1">
+        <div className="truncate flex items-center gap-1" title={leaderName}>
           <Avatar className="h-4 w-4">
             <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
           </Avatar>
@@ -85,6 +85,11 @@ export const columns = [
   }),
   columnHelper.accessor("teamName", {
     header: () => <div className="table__header">Team Name</div>,
+    cell: (info) => {
+      const teamName = info.getValue();
+
+      return <span title={teamName}>{teamName}</span>;
+    },
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {
@@ -105,7 +110,7 @@ export const columns = [
     cell: (info) => {
       const teamMembersFormatted = info.getValue().join(", ");
 
-      return <span>{teamMembersFormatted}</span>;
+      return <span title={teamMembersFormatted}>{teamMembersFormatted}</span>;
     },
     size: 200,
   }),
@@ -117,8 +122,9 @@ export const columns = [
           {technology}
         </Badge>
       ));
+      const technologiesFormatted = info.getValue().join(", ");
 
-      return <span>{technologies}</span>;
+      return <span title={technologiesFormatted}>{technologies}</span>;
     },
     size: 200,
   }),
