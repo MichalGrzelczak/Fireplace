@@ -1,47 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { FC } from "react";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import MultiSelectFormField, {
+  MultiSelectOptions,
+} from "@/components/ui/multi-select";
 
-const FiltersSelect = ({
-  items,
-  placeholder,
-  label,
-  onClickCallback,
-}: {
-  items: any[];
+type FiltersSelectProps = {
+  options: MultiSelectOptions;
+  selectedOptions: Array<string>;
   placeholder: string;
-  label: string;
-  onClickCallback: (name: string) => void;
-}) => {
-  return (
-    <div>
-      <Select onValueChange={onClickCallback}>
-        <SelectTrigger>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>{label}</SelectLabel>
-            {items.map((item) => (
-              <SelectItem key={item.id} value={item.id}>
-                {item.name}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    </div>
-  );
+  onClickCallback: (value: string[]) => void;
 };
 
-export default FiltersSelect;
+export const FiltersSelect: FC<FiltersSelectProps> = ({
+  options,
+  selectedOptions,
+  placeholder,
+  onClickCallback,
+}) => {
+  return (
+    <MultiSelectFormField
+      defaultValue={selectedOptions}
+      options={options}
+      onValueChange={onClickCallback}
+      placeholder={placeholder}
+      variant="secondary"
+    />
+  );
+};

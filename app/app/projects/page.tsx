@@ -27,9 +27,31 @@ async function getData(): Promise<Project[]> {
 //   }
 // }
 
-export default async function DemoPage() {
+export default async function DemoPage({
+  searchParams,
+}: {
+  searchParams?: { query?: string; technologies?: string; status?: string };
+}) {
   const data = await getData();
   const issues = await fetchJiraIssues();
+  const selectedTechnologies: Array<string> = safeParse(
+    searchParams?.technologies || "",
+  );
+  const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
+
+  const filteredProjects = data
+    .filter(
+      (p) =>
+        !selectedTechnologies ||
+        p.technologies.some((technology) =>
+          selectedTechnologies?.includes(technology),
+        ),
+    )
+    .filter(
+      (p) =>
+        !selectedStatus?.length ||
+        selectedStatus.includes(p.applicationStatus.toString()),
+    );
 
   return (
     <>
@@ -37,10 +59,18 @@ export default async function DemoPage() {
         <SearchBar />
         <Filters />
       </div>
-      <ProjectTable columns={columns} data={data} />
+      <ProjectTable columns={columns} project={filteredProjects} />
 
       {/*TODO open on project click*/}
       {/*<ProjectDetails></ProjectDetails>*/}
     </>
   );
+}
+
+function safeParse(valueToParse: string) {
+  try {
+    return JSON.parse(valueToParse);
+  } catch {
+    return null;
+  }
 }

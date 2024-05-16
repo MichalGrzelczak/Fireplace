@@ -27,12 +27,12 @@ import {
 import { Project } from "./columns";
 
 interface ReactTableProps {
-  data: Project[];
+  project: Project[];
   columns: ColumnDef<Project, any>[];
 }
 
 export const ProjectTable: FC<ReactTableProps> = ({
-  data,
+  project,
   columns,
 }: ReactTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -41,7 +41,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
   const searchText = useSearchParams().get("query");
 
   const table = useReactTable({
-    data,
+    data: project,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getRowId: (row) => row.uuid,
