@@ -36,6 +36,10 @@ export default async function DemoPage({
   );
   const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
+  const technolgies: string[] = [
+    ...new Set(projects.map((tech) => tech.technologies).flat()),
+  ];
+
   const filteredProjects = projects
     .filter(
       (p) =>
@@ -62,7 +66,7 @@ export default async function DemoPage({
     <>
       <div className="mb-5 flex items-center justify-start">
         <SearchBar />
-        <Filters />
+        <Filters technologies={technolgies} />
       </div>
       <ProjectTable columns={columns} project={filteredProjects} />
 

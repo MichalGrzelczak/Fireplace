@@ -2,46 +2,11 @@
 
 import { ReadonlyURLSearchParams } from "next/dist/client/components/navigation.react-server";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import * as Icons from "react-icons/fa";
 
 import { FiltersSelect } from "@/components/filters/filtersSelect";
 import { MultiSelectOptions } from "@/components/ui/multi-select";
-
-function prepareSelectOptions(): MultiSelectOptions {
-  const technologies = ["Dupa"];
-  return technologies.map((tech) => {
-    let icon = Icons.FaAngry;
-
-    if (`Fa${tech}` in Icons) {
-      icon = Icons[`Fa${tech}` as keyof typeof Icons];
-    }
-
-    return {
-      label: tech,
-      value: tech,
-      icon,
-    };
-  });
-}
-
-const technologies: MultiSelectOptions = [
-  {
-    label: "Angular",
-    value: "angular",
-    icon: Icons.FaReact,
-  },
-  {
-    label: "React",
-    value: "react",
-    icon: Icons.FaReact,
-  },
-  {
-    label: "Euphoria",
-    value: "Euphoria",
-    icon: Icons.FaReact,
-  },
-];
 
 const status = [
   {
@@ -61,7 +26,11 @@ export enum FiltersEnum {
   status = "status",
 }
 
-const Filters = () => {
+type FilterProps = {
+  technologies: string[];
+};
+
+const Filters: FC<FilterProps> = ({ technologies }) => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -94,11 +63,13 @@ const Filters = () => {
     addSearchParam(FiltersEnum.status, options);
   };
 
+  const technologiesToDisplay = prepareTechnologiesFilters(technologies);
+
   return (
     <div className="flex gap-4 items-center pl-6">
       <FiltersSelect
         selectedOptions={selectedTechnologies}
-        options={technologies}
+        options={technologiesToDisplay}
         placeholder="Technology"
         onClickCallback={handleOnSelectTechnologyClick}
       ></FiltersSelect>
@@ -126,6 +97,33 @@ function getArrayFromParams(
   } catch (e) {
     return [];
   }
+}
+
+function prepareTechnologiesFilters(
+  technologies: string[],
+): MultiSelectOptions {
+  return technologies
+    .map((tech) => {
+      let icon = Icons.FaFire;
+
+      if (`Fa${tech}` in Icons) {
+        icon = Icons[`Fa${tech}` as keyof typeof Icons];
+      }
+
+      return {
+        label: tech,
+        value: tech,
+        icon,
+      };
+    })
+    .sort((a, b) => {
+      const nameA = a.label.toLowerCase();
+      const nameB = b.label.toLowerCase();
+
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
 }
 
 export default Filters;

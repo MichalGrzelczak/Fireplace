@@ -18,7 +18,7 @@ export enum JiraClosedRecruitmentLabels {
 }
 
 export type Fields = {
-  [CUSTOM_FIELDS.customfield_11084]: string | null;
+  [CUSTOM_FIELDS.customfield_11084]: string[];
   [CUSTOM_FIELDS.customfield_10922]: JiraUser | null;
   [CUSTOM_FIELDS.customfield_10791]: TypeOfProject | null;
   [CUSTOM_FIELDS.customfield_10788]: JiraUser[] | null;
@@ -78,7 +78,9 @@ export function createFieldsFromIssueFields(issueFields: any): Fields {
     created: issueFields["created"],
     labels: issueFields["labels"],
     summary: issueFields["summary"],
-    technologies: issueFields["customfield_11084"],
+    technologies: createTechnologiesFromIssueFields(
+      issueFields["customfield_11084"],
+    ),
     reporter: createJiraUserFromIssueField(issueFields["reporter"]),
     leader: createMembersFromIssueFields(issueFields["customfield_10922"])[0],
     typeOfProject: createTypeOfProjectFromIssueField(
@@ -91,6 +93,12 @@ export function createFieldsFromIssueFields(issueFields: any): Fields {
     ),
     parentProject: createParentProjectFromIssueField(issueFields["project"]),
   };
+}
+
+function createTechnologiesFromIssueFields(issueField?: any[]): string[] {
+  if (!issueField || !issueField.length) return [];
+
+  return [...issueField].map((tech) => capitalizeFirstLetter(tech));
 }
 
 function createMembersFromIssueFields(issueFields: any[]): JiraUser[] {
@@ -166,4 +174,8 @@ function createDescriptionStringFromIssueField(issueField: any): string {
   issueField["content"].forEach((node: any) => traverseContent(node));
 
   return result.trim();
+}
+
+function capitalizeFirstLetter(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 }

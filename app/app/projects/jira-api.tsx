@@ -31,7 +31,6 @@ export async function fetchProjects(
     const data = await response.json();
     return [...data["issues"]].map((issue) => {
       const fields = createFieldsFromIssueFields(issue["fields"]);
-
       return {
         id: issue["id"],
         key: issue["key"],
