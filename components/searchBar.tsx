@@ -49,7 +49,7 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
       />
       <FontAwesomeIcon
         icon={faSearch}
-        className={"absolute top-2.5 right-2.5"}
+        className="absolute top-2.5 right-2.5 w-[14px] h-[14px]"
       />
     </div>
   );
