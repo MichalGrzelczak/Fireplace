@@ -14,11 +14,13 @@ export default async function Home() {
   return (
     <section
       className={
-        "h-screen w-screen grid gap-4 place-items-center bg-no-repeat bg-cover space-y-8"
+        "h-screen w-screen grid gap-space-3 place-items-center bg-no-repeat bg-cover space-y-space-4"
       }
       style={{ backgroundImage: "url('./bg-login.svg')" }}
     >
-      <div className={"space-y-8 justify-center flex flex-col items-center"}>
+      <div
+        className={"space-y-space-4 justify-center flex flex-col items-center"}
+      >
         <Logo width={332} height={78} />
         <h1 className={"text-4xl block font-light !mb-12"}>
           Are you looking for an Ignite project?

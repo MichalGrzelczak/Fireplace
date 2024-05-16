@@ -21,7 +21,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const multiSelectVariants = cva(
-  "m-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
+  "m-1 transition ease-in-out delay-150 hover:-translate-y-space-1 hover:scale-110 duration-300",
   {
     variants: {
       variant: {
@@ -122,39 +122,41 @@ const MultiSelectFormField = React.forwardRef<
             ref={ref}
             {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="min-h-8 h-auto items-center justify-between"
+            className="min-h-size-24 h-auto items-center justify-between"
           >
             {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-space-3">
                   {selectedValues.map((value) => {
                     const option = options.find((o) => o.value === value);
                     const IconComponent = option?.icon;
                     return (
                       <span
                         key={value}
-                        className={cn("flex items-center gap-1")}
+                        className={cn("flex items-center gap-space-1")}
                       >
-                        {IconComponent && <IconComponent className="h-4 w-4" />}
+                        {IconComponent && (
+                          <IconComponent className="h-size-16 w-size-16" />
+                        )}
                         {option?.label}
                       </span>
                     );
                   })}
                 </div>
                 <div className="flex items-center justify-between">
-                  <FaChevronDown className="h-4 cursor-pointer ml-2 text-fontSize-1" />
+                  <FaChevronDown className="h-size-16 cursor-pointer ml-space-2 text-fontSize-1" />
                 </div>
               </div>
             ) : (
               <div className="flex items-center justify-between w-full mx-auto">
                 <span className="mx-2">{placeholder}</span>
-                <FaChevronDown className="h-4 cursor-pointer ml-2 text-fontSize-1" />
+                <FaChevronDown className="h-size-16 cursor-pointer ml-space-2 text-fontSize-1" />
               </div>
             )}
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[200px] p-0 drop-shadow-sm"
+          className="p-space-0 drop-shadow-sm"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
@@ -182,15 +184,17 @@ const MultiSelectFormField = React.forwardRef<
                     >
                       <div
                         className={cn(
-                          "mr-2 flex h-3.5 w-3.5 items-center justify-center border-2 rounded-sm",
+                          "mr-space-2 flex h-size-12 w-size-12 items-center justify-center border-2 rounded-sm",
                           isSelected
                             ? "bg-primary text-primary-foreground"
                             : "opacity-50 [&_svg]:invisible",
                         )}
                       >
-                        <FaCheck className="h-4 w-4 text-fontSize-1" />
+                        <FaCheck className="h-size-16 w-size-16 text-fontSize-1" />
                       </div>
-                      {option.icon && <option.icon className="mr-1 h-4 w-4" />}
+                      {option.icon && (
+                        <option.icon className="mr-space-1 h-size-16 w-size-16" />
+                      )}
                       <span>{option.label}</span>
                     </CommandItem>
                   );
@@ -203,7 +207,7 @@ const MultiSelectFormField = React.forwardRef<
         {animation > 0 && selectedValues.length > 0 && (
           <FaWandSparkles
             className={cn(
-              "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
+              "cursor-pointer my-space-2 text-foreground bg-background w-size-12 h-size-12",
               isAnimating ? "" : "",
             )}
             onClick={() => setIsAnimating(!isAnimating)}

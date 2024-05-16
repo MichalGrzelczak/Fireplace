@@ -6,6 +6,7 @@ import { Project } from "@/app/app/projects/columns";
 import ProjectDetails from "@/app/app/projects/project-details";
 import { ProjectTable } from "@/app/app/projects/project-table";
 
+// @ts-ignore
 export function PageContent({ columns, projects }) {
   const [selectedProject, setSelectedProjects] = useState<
     Project | undefined

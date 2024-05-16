@@ -6,7 +6,7 @@ const Tag = React.forwardRef<HTMLDivElement, any>(
       <div
         {...props}
         ref={ref}
-        className={`p-1 text-sm overflow-hidden select-none inline-flex items-center rounded max-h-size-16 shrink-0 bg-background-neutral font-bold ${className}`}
+        className={`p-space-1 uppercase text-fontSize-2 text-text-subtle overflow-hidden select-none inline-flex items-center rounded max-h-size-16 shrink-0 bg-background-neutral font-fontWeight-bold ${className}`}
       ></div>
     );
   },

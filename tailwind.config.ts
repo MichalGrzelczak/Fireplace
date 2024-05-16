@@ -24,6 +24,8 @@ const config = {
     },
     extend: {
       spacing: fuegoKit.theme.spacing,
+      height: { ...fuegoKit.theme.spacing },
+      width: { ...fuegoKit.theme.spacing, popover: "18rem" },
       font: {
         ...fuegoKit.theme.font,
       },

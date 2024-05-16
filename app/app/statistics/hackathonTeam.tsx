@@ -9,7 +9,7 @@ export function HackathonTeam(props: {
   category: Category;
 }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-space-2">
       {props.team.id === props.stage.winner?.id && (
         <FaMedal width={18} className={"text-scale-yellow-300"} />
       )}

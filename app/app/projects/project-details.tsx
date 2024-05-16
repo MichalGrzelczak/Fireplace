@@ -35,11 +35,11 @@ export type ProjectDetailsProps = {
 
 export default function ProjectDetails(props: ProjectDetailsProps) {
   return (
-    <div className="pl-4">
-      <div className="flex items-center justify-between py-2 overflow-y-auto">
-        <h2 className="text-xl font-bold">Project details</h2>
+    <div className="pl-space-3 border-l ml-space-3">
+      <div className="flex items-center justify-between py-space-2 overflow-y-auto">
+        <h2 className="typography--font-heading-large">Project details</h2>
 
-        <div className="flex text-xl cursor-pointer items-center">
+        <div className="flex typography--font-heading-large cursor-pointer items-center">
           <Dialog>
             <DialogTrigger asChild>
               <Button size="default" variant="default">
@@ -51,8 +51,8 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
                 <DialogTitle>Send a request to join the team</DialogTitle>
               </DialogHeader>
 
-              <Textarea placeholder="Enter message..." className="mt-2" />
-              <div className="mt-2">
+              <Textarea placeholder="Enter message..." className="mt-space-2" />
+              <div className="mt-space-2">
                 <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Select your role" />
@@ -74,19 +74,22 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
                   </Button>
                 </DialogClose>
 
-                <Button type="submit" size="default" className="px-3">
+                <Button type="submit" size="default" className="px-space-2">
                   Send
                 </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
 
-          <FaTimes className="ml-4" onClick={props.onCloseDetails} />
+          <FaTimes
+            className="ml-space-3 text-fontSize-4"
+            onClick={props.onCloseDetails}
+          />
         </div>
       </div>
 
       <div className="flex">
-        <div className="w-[180px] h-[180px] bg-scale-blue-000 flex items-center justify-center shrink-0">
+        <div className="w-[180px] h-[180px] bg-primary-foreground flex items-center justify-center shrink-0">
           <Image
             alt="Project logo"
             src="/project-icon.svg"
@@ -95,17 +98,17 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
           />
         </div>
 
-        <div className="ml-6">
+        <div className="ml-space-4">
           <section>
-            <span className="font-bold">NAME</span>
+            <span className="font-fontWeight-bold">NAME</span>
             <p>{props.projectName}</p>
           </section>
 
-          <section className="mt-6">
-            <span className="font-bold">TEAM MEMBERS</span>
+          <section className="mt-space-4">
+            <span className="font-fontWeight-bold">TEAM MEMBERS</span>
             <p>
               {props.teamMembers.map((member: string, index: number) => (
-                <Tag key={index} className="mr-2">
+                <Tag key={index} className="mr-space-2">
                   {member}
                 </Tag>
               ))}
@@ -114,30 +117,30 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
         </div>
       </div>
 
-      <section className="mt-6">
-        <span className="font-bold">TECHNOLOGY STACK</span>
-        <div className="mt-2">
+      <section className="mt-space-4">
+        <span className="font-fontWeight-bold">TECHNOLOGY STACK</span>
+        <div className="mt-space-2">
           {props.technologyStack.map((technology: string, index: number) => (
-            <Tag key={index} className="mr-2">
+            <Tag key={index} className="mr-space-2">
               {technology}
             </Tag>
           ))}
         </div>
       </section>
 
-      <section className="mt-4 flex">
-        <div className="w-1/4 pr-3">
-          <span className="font-bold">PRODUCT</span>
-          <div className="mt-2">
-            <Tag className="mr-2">{props.product}</Tag>
+      <section className="mt-space-3 flex">
+        <div className="w-1/4 pr-space-2">
+          <span className="font-fontWeight-bold">PRODUCT</span>
+          <div className="mt-space-2">
+            <Tag className="mr-space-2">{props.product}</Tag>
           </div>
         </div>
 
         <div className="w-3/4">
-          <span className="font-bold">ROLES NEEDED</span>
-          <div className="mt-2">
+          <span className="font-fontWeight-bold">ROLES NEEDED</span>
+          <div className="mt-space-2">
             {props.rolesNeeded.map((role: string, index: number) => (
-              <Tag key={index} className="mr-2">
+              <Tag key={index} className="mr-space-2">
                 {role}
               </Tag>
             ))}
@@ -145,9 +148,9 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
         </div>
       </section>
 
-      <section className="mt-6">
-        <span className="font-bold">DESCRIPTION</span>
-        <p className="mt-2">{props.description}</p>
+      <section className="mt-space-4">
+        <span className="font-fontWeight-bold">DESCRIPTION</span>
+        <p className="mt-space-2">{props.description}</p>
       </section>
     </div>
   );
