@@ -12,16 +12,17 @@ import {
   APPLICATION_STATUS_PROPERTIES,
   RECRUITMENT_STATUS_PROPERTIES,
 } from "./consts";
-import { ApplicationStatus, RecruitmentStatus } from "./types";
+import { ApplicationStatus, ProjectUser, RecruitmentStatus } from "./types";
 
 export type Project = {
   uuid: string;
   projectName: string;
-  leaderName: string;
+  leader: ProjectUser;
   isFav: boolean;
   teamMembers: string[];
   technologies: string[];
-  teamName: string;
+  projectType: string; // change to enum;
+  hackKey: string;
   recruitmentStatus: RecruitmentStatus;
   applicationStatus: ApplicationStatus;
 };
@@ -68,23 +69,23 @@ export const columns = [
     },
     size: 250,
   }),
-  columnHelper.accessor("leaderName", {
+  columnHelper.accessor("leader", {
     header: () => <div className="table__header">Leader</div>,
     cell: (info) => {
-      const leaderName = info.getValue();
+      const leader = info.getValue();
       return (
         <div className="truncate flex items-center gap-1">
           <Avatar className="h-4 w-4">
             <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
           </Avatar>
-          <div className="truncate">{leaderName}</div>
+          <div className="truncate">{leader.displayName}</div>
         </div>
       );
     },
     size: 150,
   }),
-  columnHelper.accessor("teamName", {
-    header: () => <div className="table__header">Team Name</div>,
+  columnHelper.accessor("hackKey", {
+    header: () => <div className="table__header">Hack Key</div>,
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {

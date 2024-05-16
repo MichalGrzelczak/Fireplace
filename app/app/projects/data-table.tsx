@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { FC } from "react";
 
+import { Project } from "@/app/app/projects/columns";
 import {
   Table,
   TableBody,
@@ -16,8 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import { Project } from "./columns";
 
 interface ReactTableProps {
   data: Project[];

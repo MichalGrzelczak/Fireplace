@@ -1,16 +1,12 @@
-import { fetchJiraIssues } from "@/app/app/projects/jiraApi";
+import { fetchProjects } from "@/app/app/projects/jira-api";
+import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
-// import { db } from "@/db";
-// import { users } from "@/db/schema";
 import { Project, columns } from "./columns";
 import { DataTable } from "./data-table";
-import data from "./mockData.json";
 
-async function getData(): Promise<Project[]> {
-  return data;
-}
+// export async function test() {
 
 // export async function test() {
 //   let usersResult = db.select().from(users).get();
@@ -32,34 +28,34 @@ export default async function DemoPage({
 }: {
   searchParams?: { query?: string; technologies?: string; status?: string };
 }) {
-  const data = await getData();
-  const issues = await fetchJiraIssues();
+  const projects: Project[] = await fetchProjects().then((hackProjects) =>
+    hackProjects.map((hackProject) => mapHackProjectToProject(hackProject)),
+  );
   const selectedTechnologies: Array<string> = safeParse(
     searchParams?.technologies || "",
   );
   const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
-  const filteredProjects = data
-    .filter(
-      (p) =>
-        !searchParams?.query?.length ||
-        p.projectName
-          .toLowerCase()
-          .trim()
-          .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
-    )
-    .filter(
-      (p) =>
-        !selectedTechnologies ||
-        p.technologies.some((technology) =>
-          selectedTechnologies?.includes(technology),
-        ),
-    )
-    .filter(
-      (p) =>
-        !selectedStatus?.length ||
-        selectedStatus.includes(p.applicationStatus.toString()),
-    );
+  const filteredProjects = projects.filter(
+    (p) =>
+      !searchParams?.query?.length ||
+      p.projectName
+        .toLowerCase()
+        .trim()
+        .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
+  );
+  // .filter(
+  //   (p) =>
+  //     !selectedTechnologies ||
+  //     p.technologies.some((technology) =>
+  //       selectedTechnologies?.includes(technology),
+  //     ),
+  // )
+  // .filter(
+  //   (p) =>
+  //     !selectedStatus?.length ||
+  //     selectedStatus.includes(p.applicationStatus.toString()),
+  // );
 
   return (
     <>

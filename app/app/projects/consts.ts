@@ -1,6 +1,7 @@
 import {
   ApplicationStatus,
   ApplicationStatusProperties,
+  ProjectUser,
   RecruitmentStatus,
   RecruitmentStatusProperties,
 } from "./types";
@@ -34,4 +35,10 @@ export const APPLICATION_STATUS_PROPERTIES: ApplicationStatusProperties = {
     bgColor: "bg-blue-100",
     fontColor: "text-blue-800",
   },
+};
+
+export const EMPTY_USER: ProjectUser = {
+  email: "",
+  displayName: "",
+  iconUrl: "",
 };

@@ -5,11 +5,17 @@ export enum CUSTOM_FIELDS {
   customfield_10788 = "members",
 }
 
-export type Issue = {
+export type HackProject = {
   id: string;
   key: string;
   fields: Fields;
+  isOpen: boolean;
 };
+
+export enum JiraClosedRecruitmentLabels {
+  "team-is-complete",
+  "team-fully-registered",
+}
 
 export type Fields = {
   [CUSTOM_FIELDS.customfield_11084]: string | null;
