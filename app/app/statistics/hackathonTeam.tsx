@@ -1,6 +1,5 @@
-import { faMedal } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { FaMedal } from "react-icons/fa";
 
 import { Category, Stage, Team } from "@/app/app/statistics/types";
 
@@ -12,21 +11,13 @@ export function HackathonTeam(props: {
   return (
     <div className="flex gap-2">
       {props.team.id === props.stage.winner?.id && (
-        <FontAwesomeIcon
-          width={18}
-          className="text-yellow-300"
-          icon={faMedal}
-        />
+        <FaMedal width={18} className="text-yellow-300" />
       )}
       {props.team.id === props.stage.secondPlace?.id && (
-        <FontAwesomeIcon width={18} className="text-gray-500" icon={faMedal} />
+        <FaMedal width={18} className="text-gray-500" />
       )}
       {props.team.id === props.stage.thirdPlace?.id && (
-        <FontAwesomeIcon
-          width={18}
-          className="text-yellow-900"
-          icon={faMedal}
-        />
+        <FaMedal width={18} className="text-yellow-900" />
       )}
       <div>
         <h2>{props.team.name}</h2>
