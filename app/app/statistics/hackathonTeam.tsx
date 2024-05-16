@@ -11,13 +11,13 @@ export function HackathonTeam(props: {
   return (
     <div className="flex gap-2">
       {props.team.id === props.stage.winner?.id && (
-        <FaMedal width={18} className="text-yellow-300" />
+        <FaMedal width={18} className={"text-scale-yellow-300"} />
       )}
       {props.team.id === props.stage.secondPlace?.id && (
-        <FaMedal width={18} className="text-gray-500" />
+        <FaMedal width={18} className={"text-neutral-400"} />
       )}
       {props.team.id === props.stage.thirdPlace?.id && (
-        <FaMedal width={18} className="text-yellow-900" />
+        <FaMedal width={18} className={"text-scale-yellow-900"} />
       )}
       <div>
         <h2>{props.team.name}</h2>

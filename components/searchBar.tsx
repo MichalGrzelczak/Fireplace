@@ -45,7 +45,7 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
           handleQuery(e.target.value);
         }}
       />
-      <FaSearch className="absolute top-2.5 right-2.5 w-[14px] h-[14px]" />
+      <FaSearch className="absolute top-2 right-3 w-[14px] h-[14px] text-scale-neutral-400" />
     </div>
   );
 }

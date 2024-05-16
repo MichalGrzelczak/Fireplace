@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const fuego = require("./theme/tailwind.config");
+const fuegoKit = require("@fuegokit/tokens/tokens-next-gen-private/sdk/tailwind/tailwind.config");
 
 const config = {
   darkMode: ["class"],
@@ -12,7 +12,7 @@ const config = {
   ],
   prefix: "",
   font: {
-    sans: fuego.theme.fontFamily["fontStack-body"],
+    sans: fuegoKit.theme.fontFamily["fontStack-body"],
   },
   theme: {
     container: {
@@ -23,15 +23,15 @@ const config = {
       },
     },
     extend: {
-      spacing: fuego.theme.spacing,
+      spacing: fuegoKit.theme.spacing,
       font: {
-        ...fuego.theme.font,
+        ...fuegoKit.theme.font,
       },
       fontSize: {
-        ...fuego.theme.fontSize,
+        ...fuegoKit.theme.fontSize,
       },
       fontWeight: {
-        ...fuego.theme.fontWeight,
+        ...fuegoKit.theme.fontWeight,
       },
       colors: {
         border: "var(--border)",
@@ -39,7 +39,7 @@ const config = {
         ring: "var(--border-input)",
         background: "var(--scale-neutral-100)",
         foreground: "var(--background-information)",
-        ...fuego.theme.colors,
+        ...fuegoKit.theme.colors,
         primary: {
           DEFAULT: "var(--background-brand-bold)",
           foreground: "var(--background-brand-subtlest)",
@@ -70,9 +70,8 @@ const config = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calcvar(--radius) - 2px)",
-        sm: "calcvar(--radius) - 4px)",
+        ...fuegoKit.theme.borderRadius,
+        DEFAULT: "var(--radii-1)",
       },
       keyframes: {
         "accordion-down": {
@@ -90,7 +89,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), ...fuego.plugins],
+  plugins: [require("tailwindcss-animate"), ...fuegoKit.plugins],
 } satisfies Config;
 
 export default config;
