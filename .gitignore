@@ -7,6 +7,7 @@
 .yarn/install-state.gz
 .package-lock.json
 package-lock.json
+.npmrc
 
 # testing
 /coverage
