@@ -1,6 +1,6 @@
 "use client";
 
-import { faStar as faStarFilled } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
@@ -42,11 +42,14 @@ export const columns = [
       return (
         <div onClick={() => toggleFav(id)}>
           {isFav ? (
-            <FontAwesomeIcon icon={faStarFilled} />
+            <FontAwesomeIcon
+              className={"text-scale-yellow-200"}
+              icon={faStar}
+            />
           ) : (
             <FontAwesomeIcon
               className={"text-scale-neutral-400"}
-              icon={faStarFilled}
+              icon={faStar}
             />
           )}
         </div>
