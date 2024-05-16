@@ -1,3 +1,4 @@
+import { IconType } from "react-icons";
 import { FaBook, FaDoorOpen, FaTrophy } from "react-icons/fa";
 
 import { auth } from "@/app/api/auth/(config)/auth";
@@ -8,14 +9,14 @@ const navLinks = [
   {
     title: "Projects",
     href: "/app/projects",
-    icon: FaDoorOpen,
+    icon: <FaDoorOpen />,
   },
   {
     title: "Statistics",
     href: "/app/statistics",
-    icon: FaTrophy,
+    icon: <FaTrophy />,
   },
-  { title: "Knowledge base", href: "/app/knowledge", icon: FaBook },
+  { title: "Knowledge base", href: "/app/knowledge", icon: <FaBook /> },
 ];
 
 export default async function Layout({

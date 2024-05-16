@@ -37,19 +37,19 @@ export default async function Statistics() {
         <Counter />
         <div className="flex text-2xl justify-between gap-10 mb-4 mx-5">
           <HackathonCard
-            icon={FaRocket}
+            icon={<FaRocket width={30} />}
             title={`${data.statistics.projects} awesome projects`}
           />
           <HackathonCard
-            icon={FaUsers}
+            icon={<FaUsers width={30} />}
             title={`${data.statistics.teamMembers} team members`}
           />
           <HackathonCard
-            icon={FaTrophy}
+            icon={<FaTrophy width={30} />}
             title={`${data.statistics.awards} awards to win`}
           />
           <HackathonCard
-            icon={FaCalendarDay}
+            icon={<FaCalendarDay width={30} />}
             title={`${data.statistics.days} days full of fun and hard work`}
           />
         </div>
