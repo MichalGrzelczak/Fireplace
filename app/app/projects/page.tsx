@@ -1,16 +1,12 @@
-import { fetchJiraIssues } from "@/app/app/projects/jiraApi";
+import { fetchProjects } from "@/app/app/projects/jira-api";
+import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
-// import { db } from "@/db";
-// import { users } from "@/db/schema";
 import { Project, columns } from "./columns";
-import data from "./mockData.json";
 
-async function getData(): Promise<Project[]> {
-  return data;
-}
+// export async function test() {
 
 // export async function test() {
 //   let usersResult = db.select().from(users).get();
@@ -32,14 +28,19 @@ export default async function DemoPage({
 }: {
   searchParams?: { query?: string; technologies?: string; status?: string };
 }) {
-  const data = await getData();
-  const issues = await fetchJiraIssues();
+  const projects: Project[] = await fetchProjects().then((hackProjects) =>
+    hackProjects.map((hackProject) => mapHackProjectToProject(hackProject)),
+  );
   const selectedTechnologies: Array<string> = safeParse(
     searchParams?.technologies || "",
   );
   const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
-  const filteredProjects = data
+  const technolgies: string[] = [
+    ...new Set(projects.map((tech) => tech.technologies).flat()),
+  ];
+
+  const filteredProjects = projects
     .filter(
       (p) =>
         !searchParams?.query?.length ||
@@ -48,24 +49,24 @@ export default async function DemoPage({
           .trim()
           .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
     )
-    .filter(
-      (p) =>
-        !selectedTechnologies ||
-        p.technologies.some((technology) =>
-          selectedTechnologies?.includes(technology),
-        ),
-    )
+    // .filter(
+    //   (p) =>
+    //     !selectedTechnologies ||
+    //     p.technologies.some((technology) =>
+    //       selectedTechnologies?.includes(technology),
+    //     ),
+    // )
     .filter(
       (p) =>
         !selectedStatus?.length ||
-        selectedStatus.includes(p.applicationStatus.toString()),
+        selectedStatus.includes(p.recruitmentStatus.toString()),
     );
 
   return (
     <>
       <div className="mb-space-4 flex items-center justify-start">
         <SearchBar />
-        <Filters />
+        <Filters technologies={technolgies} />
       </div>
       <PageContent columns={columns} projects={filteredProjects} />
     </>

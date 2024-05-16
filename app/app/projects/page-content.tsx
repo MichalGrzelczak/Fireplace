@@ -28,7 +28,6 @@ export function PageContent({ columns, projects }) {
             id={selectedProject.uuid}
             projectName={selectedProject.projectName}
             technologyStack={selectedProject.technologies}
-            teamName={selectedProject.teamName}
             teamMembers={selectedProject.teamMembers}
             product="Unknown"
             rolesNeeded={["FRONTEND", "BACKEND", "QA"]}

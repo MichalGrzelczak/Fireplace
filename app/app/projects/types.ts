@@ -1,6 +1,6 @@
 export enum RecruitmentStatus {
-  "Open",
   "Closed",
+  "Open",
 }
 
 export enum ApplicationStatus {
@@ -21,4 +21,10 @@ export type RecruitmentStatusProperties = {
 
 export type ApplicationStatusProperties = {
   [value in ApplicationStatus]: StatusProperties;
+};
+
+export type ProjectUser = {
+  email: string;
+  iconUrl: string;
+  displayName: string;
 };

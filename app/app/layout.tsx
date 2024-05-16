@@ -1,4 +1,3 @@
-import { IconType } from "react-icons";
 import { FaBook, FaDoorOpen, FaTrophy } from "react-icons/fa";
 
 import { auth } from "@/app/api/auth/(config)/auth";

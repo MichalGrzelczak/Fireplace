@@ -12,16 +12,17 @@ import {
   APPLICATION_STATUS_PROPERTIES,
   RECRUITMENT_STATUS_PROPERTIES,
 } from "./consts";
-import { ApplicationStatus, RecruitmentStatus } from "./types";
+import { ApplicationStatus, ProjectUser, RecruitmentStatus } from "./types";
 
 export type Project = {
   uuid: string;
   projectName: string;
-  leaderName: string;
+  leader: ProjectUser;
   isFav: boolean;
   teamMembers: string[];
   technologies: string[];
-  teamName: string;
+  projectType: string; // change to enum;
+  hackKey: string;
   recruitmentStatus: RecruitmentStatus;
   applicationStatus: ApplicationStatus;
 };
@@ -71,7 +72,7 @@ export const columns = [
     },
     size: 250,
   }),
-  columnHelper.accessor("leaderName", {
+  columnHelper.accessor("leader", {
     header: ({ column }) => {
       const isSortedAsc = column.getIsSorted() === "asc";
       const onClick = () => column.toggleSorting(isSortedAsc);
@@ -83,29 +84,23 @@ export const columns = [
       );
     },
     cell: (info) => {
-      const leaderName = info.getValue();
+      const leader = info.getValue();
+      const src = leader.iconUrl
+        ? leader.iconUrl
+        : "https://github.com/shadcn.png";
       return (
         <div className="truncate flex items-center gap-space-1">
           <Avatar className="h-size-16 w-size-16">
-            <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
+            <AvatarImage src={src}></AvatarImage>
           </Avatar>
-          <div className="truncate">{leaderName}</div>
+          <div className="truncate">{leader.displayName}</div>
         </div>
       );
     },
     size: 150,
   }),
-  columnHelper.accessor("teamName", {
-    header: ({ column }) => {
-      const isSortedAsc = column.getIsSorted() === "asc";
-      const onClick = () => column.toggleSorting(isSortedAsc);
-      return (
-        <div className="flex items-center gap-space-1">
-          <span className="table__header">Team Name</span>
-          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
-        </div>
-      );
-    },
+  columnHelper.accessor("hackKey", {
+    header: () => <div className="table__header">Hack Key</div>,
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {

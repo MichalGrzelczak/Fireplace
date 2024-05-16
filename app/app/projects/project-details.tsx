@@ -25,7 +25,6 @@ export type ProjectDetailsProps = {
   id: string;
   projectName: string;
   technologyStack: string[];
-  teamName: string;
   teamMembers: string[];
   product: string;
   rolesNeeded: string[];
