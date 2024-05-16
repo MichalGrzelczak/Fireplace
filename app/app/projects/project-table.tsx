@@ -10,10 +10,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useSearchParams } from "next/navigation";
-import { FC } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { FC, useState } from "react";
 
 import {
   Table,
@@ -29,11 +26,13 @@ import { Project } from "./columns";
 interface ReactTableProps {
   project: Project[];
   columns: ColumnDef<Project, any>[];
+  onRowClick: (project: Project | undefined) => void;
 }
 
 export const ProjectTable: FC<ReactTableProps> = ({
   project,
   columns,
+  onRowClick,
 }: ReactTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -52,6 +51,10 @@ export const ProjectTable: FC<ReactTableProps> = ({
       columnFilters,
     },
   });
+
+  const getProjectById = (id: string): Project | undefined => {
+    return project.find((project) => project.uuid === id);
+  };
 
   return (
     <Table>
@@ -84,6 +87,9 @@ export const ProjectTable: FC<ReactTableProps> = ({
               key={row.id}
               data-state={row.getIsSelected() && "selected"}
               className="h-1"
+              onClick={() => {
+                onRowClick(getProjectById(row.id));
+              }}
             >
               {row.getVisibleCells().map((cell) => (
                 <TableCell
