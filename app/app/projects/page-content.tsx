@@ -68,13 +68,11 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
 
   return (
     <div className="h-[calc(100%-20px)]">
-      <Suspense>
-        <ProjectTable
-          columns={columns}
-          projects={projects}
-          onRowClick={handleRowClick}
-        />
-      </Suspense>
+      <ProjectTable
+        columns={columns}
+        projects={projects}
+        onRowClick={handleRowClick}
+      />
 
       {selectedProject && (
         <Drawer direction={"right"} open={!!selectedProject}>
