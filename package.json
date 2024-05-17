@@ -23,6 +23,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-table": "^8.17.3",
+    "@tanstack/react-virtual": "^3.5.0",
     "better-sqlite3": "^10.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

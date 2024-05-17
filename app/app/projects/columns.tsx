@@ -1,6 +1,6 @@
 "use client";
 
-import { createColumnHelper } from "@tanstack/react-table";
+import { Row, createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 
@@ -29,18 +29,25 @@ export type Project = {
 
 const columnHelper = createColumnHelper<Project>();
 
-const toggleFav = (id: string) => {
+const toggleFav = (id: string, row: Row<Project>) => {
   console.log(id);
+
+  row.pin("top");
 };
 
 export const columns = [
   columnHelper.accessor("isFav", {
     header: () => <div className="table__header">Fav</div>,
-    cell: (info) => {
-      const isFav = info.getValue();
-      const id = info.row.id;
+    enablePinning: true,
+    cell: (row) => {
+      const isFav = row.getValue();
+      const id = row.row.id;
+
       return (
-        <div onClick={() => toggleFav(id)}>
+        <div
+          className="flex items-center"
+          onClick={() => toggleFav(id, row.row)}
+        >
           {isFav ? (
             <FaStar className={"text-scale-yellow-200"} />
           ) : (
@@ -85,32 +92,36 @@ export const columns = [
     },
     cell: (info) => {
       const leader = info.getValue();
-      const src = leader.iconUrl
-        ? leader.iconUrl
+      const src = leader?.iconUrl
+        ? leader?.iconUrl
         : "https://github.com/shadcn.png";
       return (
         <div className="truncate flex items-center gap-space-1">
           <Avatar className="h-size-16 w-size-16">
             <AvatarImage src={src}></AvatarImage>
           </Avatar>
-          <div className="truncate">{leader.displayName}</div>
+          <div className="truncate">{leader?.displayName}</div>
         </div>
       );
     },
     size: 150,
   }),
   columnHelper.accessor("hackKey", {
-    header: () => <div className="table__header">Hack Key</div>,
+    header: () => (
+      <div className="table__header flex items-center">
+        <span>Hack Key</span>
+      </div>
+    ),
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {
     header: () => <div className="table__header">Recruitment Status</div>,
     cell: (info) => {
       const status = info.getValue();
-      const classNames = `${RECRUITMENT_STATUS_PROPERTIES[status].bgColor} ${RECRUITMENT_STATUS_PROPERTIES[status].fontColor} uppercase typography--font-heading-xxsmall`;
+      const classNames = `${RECRUITMENT_STATUS_PROPERTIES[status]?.bgColor} ${RECRUITMENT_STATUS_PROPERTIES[status]?.fontColor} uppercase typography--font-heading-xxsmall`;
       return (
         <Badge className={classNames}>
-          {RECRUITMENT_STATUS_PROPERTIES[status].text}
+          {RECRUITMENT_STATUS_PROPERTIES[status]?.text}
         </Badge>
       );
     },
@@ -119,7 +130,7 @@ export const columns = [
   columnHelper.accessor("teamMembers", {
     header: () => <div className="table__header">Team Members</div>,
     cell: (info) => {
-      const teamMembersFormatted = info.getValue().join(", ");
+      const teamMembersFormatted = info.getValue()?.join(", ");
 
       return <span>{teamMembersFormatted}</span>;
     },
@@ -127,6 +138,12 @@ export const columns = [
   }),
   columnHelper.accessor("technologies", {
     header: () => <div className="table__header">Needed Skills</div>,
+    enableGrouping: true,
+    getGroupingValue: (row) => {
+      console.log("joined techno", row.technologies.join());
+
+      return row.technologies.join();
+    },
     cell: (info) => {
       const technologies = info.getValue().map((technology) => (
         <Badge key={technology} variant="basic">
