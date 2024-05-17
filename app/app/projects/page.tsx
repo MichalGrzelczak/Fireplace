@@ -1,6 +1,11 @@
-import { fetchProjects } from "@/app/app/projects/jira-api";
+import {
+  fetchProjects,
+  updateIssueMembers,
+} from "@/app/app/projects/jira-projects-api";
+import { fetchJiraUserDetails } from "@/app/app/projects/jira-users-api";
 import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import { PageContent } from "@/app/app/projects/page-content";
+import { ProjectUser } from "@/app/app/projects/types";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 

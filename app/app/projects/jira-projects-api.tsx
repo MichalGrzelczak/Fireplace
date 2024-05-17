@@ -1,18 +1,13 @@
+import { auth } from "@/app/api/auth/(config)/auth";
+import { BASE_URL, HEADERS } from "@/app/app/projects/api-consts";
 import {
   CUSTOM_FIELDS,
   HackProject,
   JiraClosedRecruitmentLabels,
   createFieldsFromIssueFields,
-} from "@/app/app/projects/jiraApiTypes";
-
-const TOKEN: string = process.env.JIRA_API_TOKEN ?? "";
-const HEADERS = {
-  Authorization: `Basic ${Buffer.from(
-    "michal.grzelczak@appfire.com:" + TOKEN,
-  ).toString("base64")}`,
-  Accept: "application/json",
-};
-const URL: string = "https://appfire.atlassian.net/rest";
+} from "@/app/app/projects/jira-projects-api-types";
+import { fetchJiraUserDetails } from "@/app/app/projects/jira-users-api";
+import { ProjectUser } from "@/app/app/projects/types";
 
 function createFieldsString(): string {
   return [...fieldsToFetch, ...Object.keys(CUSTOM_FIELDS)]
@@ -39,7 +34,7 @@ export async function fetchProjects(): Promise<HackProject[]> {
 
   const fetchIssues = async (startAt: number): Promise<void> => {
     const response = await fetch(
-      `${URL}/api/3/search?jql=project=HACK and status !=REJECTED and issueType = Topic order by id&startAt=${startAt}${fields}`,
+      `${BASE_URL}/search?jql=project=HACK and status !=REJECTED and issueType = Topic order by id&startAt=${startAt}${fields}`,
       {
         method: "GET",
         headers: HEADERS,
@@ -77,4 +72,33 @@ export async function fetchProjects(): Promise<HackProject[]> {
 
 function isProjectOpen(labels: string[]): boolean {
   return !labels.some((label) => label in JiraClosedRecruitmentLabels);
+}
+
+export async function updateIssueMembers(
+  hackKey: string,
+  members: ProjectUser[],
+): Promise<void> {
+  const session = await auth();
+
+  if (!session) return;
+
+  const mailsInProject: string[] = members.map((member) => member.email);
+
+  if (mailsInProject.includes(session!.user!.email!)) return;
+
+  const userDetails = await fetchJiraUserDetails(session.user?.email!);
+
+  const createBody = {
+    fields: {
+      customfield_10788: [...members, userDetails],
+    },
+  };
+
+  await fetch(`${BASE_URL}/issue/${hackKey}`, {
+    method: "PUT",
+    headers: { ...HEADERS, "Content-Type": "application/json" },
+    body: JSON.stringify(createBody),
+  });
+
+  return;
 }

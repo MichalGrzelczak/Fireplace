@@ -1,3 +1,5 @@
+import { JiraUser } from "@/app/app/projects/jira-projects-api-types";
+
 import {
   ApplicationStatus,
   ApplicationStatusProperties,
@@ -41,4 +43,5 @@ export const EMPTY_USER: ProjectUser = {
   email: "noleader@noleader.com",
   displayName: "No Leader Yet",
   iconUrl: "",
+  jiraUser: {} as JiraUser,
 };
