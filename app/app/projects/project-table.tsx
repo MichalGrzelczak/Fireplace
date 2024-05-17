@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { FC, MouseEvent, useRef, useState } from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import {
@@ -70,10 +70,6 @@ export const ProjectTable: FC<ReactTableProps> = ({
     },
   });
 
-  useEffect(() => {
-    console.log("rowPinning:", rowPinning);
-  }, [rowPinning]);
-
   const { rows } = table.getRowModel();
 
   //The virtualizer needs to know the scrollable container element
@@ -110,7 +106,6 @@ export const ProjectTable: FC<ReactTableProps> = ({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className="flex w-full">
               {headerGroup.headers.map((header) => {
-                console.log("header", header);
                 return (
                   <TableHead
                     key={header.id}
@@ -156,7 +151,6 @@ export const ProjectTable: FC<ReactTableProps> = ({
                 }}
               >
                 {row.getVisibleCells().map((cell) => {
-                  console.log("cell: ", cell);
                   return (
                     <TableCell
                       key={cell.id}
