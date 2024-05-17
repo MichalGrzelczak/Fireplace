@@ -9,6 +9,8 @@ import { Project, columns } from "./columns";
 // export async function test() {
 
 // export async function test() {
+
+// export async function test() {
 //   let usersResult = db.select().from(users).get();
 //   console.log(usersResult);
 //   if (!usersResult) {
