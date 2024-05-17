@@ -2,6 +2,7 @@
 
 import { Row, createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 import { SortButton } from "@/components/SortButton";
@@ -39,10 +40,10 @@ export const columns = [
   columnHelper.accessor("isFav", {
     header: () => <div className="table__header">Fav</div>,
     enablePinning: true,
-    cell: (row) => {
+    cell: function Cell(row) {
       const isFav = row.getValue();
+      const [value, setValue] = useState(isFav);
       const id = row.row.id;
-
       return (
         <div
           className="flex items-center"
@@ -72,12 +73,13 @@ export const columns = [
     cell: (info) => {
       const projectName = info.getValue();
       return (
-        <Link href="#" className="text-text-brand">
+        <Link href="#" className="text-text-brand" title={projectName}>
           {projectName}
         </Link>
       );
     },
     size: 250,
+    enableResizing: true,
   }),
   columnHelper.accessor("leader", {
     header: ({ column }) => {
@@ -96,7 +98,10 @@ export const columns = [
         ? leader?.iconUrl
         : "https://github.com/shadcn.png";
       return (
-        <div className="truncate flex items-center gap-space-1">
+        <div
+          className="truncate flex items-center gap-space-1"
+          title={leader.displayName}
+        >
           <Avatar className="h-size-16 w-size-16">
             <AvatarImage src={src}></AvatarImage>
           </Avatar>
@@ -112,6 +117,11 @@ export const columns = [
         <span>Hack Key</span>
       </div>
     ),
+    cell: (info) => {
+      const hackKey = info.getValue();
+
+      return <span title={hackKey}>{hackKey}</span>;
+    },
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {
@@ -132,7 +142,7 @@ export const columns = [
     cell: (info) => {
       const teamMembersFormatted = info.getValue()?.join(", ");
 
-      return <span>{teamMembersFormatted}</span>;
+      return <span title={teamMembersFormatted}>{teamMembersFormatted}</span>;
     },
     size: 200,
   }),
@@ -150,8 +160,9 @@ export const columns = [
           {technology}
         </Badge>
       ));
+      const technologiesFormatted = info.getValue().join(", ");
 
-      return <span>{technologies}</span>;
+      return <span title={technologiesFormatted}>{technologies}</span>;
     },
     size: 200,
   }),

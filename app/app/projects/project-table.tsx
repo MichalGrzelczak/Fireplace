@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import {
@@ -30,7 +30,10 @@ import { cn } from "@/lib/utils";
 interface ReactTableProps {
   project: Project[];
   columns: ColumnDef<Project, any>[];
-  onRowClick: (project: Project | undefined) => void;
+  onRowClick: (
+    e: MouseEvent<HTMLTableRowElement, globalThis.MouseEvent>,
+    project: Project | undefined,
+  ) => void;
 }
 
 export const ProjectTable: FC<ReactTableProps> = ({
@@ -148,8 +151,8 @@ export const ProjectTable: FC<ReactTableProps> = ({
                 style={{
                   transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
                 }}
-                onClick={() => {
-                  onRowClick(getProjectById(row.id));
+                onClick={(e) => {
+                  onRowClick(e, getProjectById(row.id));
                 }}
               >
                 {row.getVisibleCells().map((cell) => {
@@ -188,8 +191,8 @@ export const ProjectTable: FC<ReactTableProps> = ({
     //           key={row.id}
     //           data-state={row.getIsSelected() && "selected"}
     //           className="h-size-1"
-    //           onClick={() => {
-    //             onRowClick(getProjectById(row.id));
+    //           onClick={(e) => {
+    //             onRowClick(e, getProjectById(row.id));
     //           }}
     //         >
     //           {row.getVisibleCells().map((cell) => (
