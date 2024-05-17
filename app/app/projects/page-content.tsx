@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useState } from "react";
+import React, { MouseEvent, Suspense, useState } from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import ProjectDetails from "@/app/app/projects/project-details";
@@ -27,11 +27,13 @@ export function PageContent({ columns, projects }) {
 
   return (
     <div className="h-[calc(100%-20px)]">
-      <ProjectTable
-        columns={columns}
-        project={projects}
-        onRowClick={handleRowClick}
-      />
+      <Suspense>
+        <ProjectTable
+          columns={columns}
+          projects={projects}
+          onRowClick={handleRowClick}
+        />
+      </Suspense>
 
       {selectedProject && (
         <Drawer direction={"right"} open={!!selectedProject}>

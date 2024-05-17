@@ -1,4 +1,7 @@
+import { Suspense } from "react";
+
 import { fetchProjects } from "@/app/app/projects/jira-api";
+import { HackProject } from "@/app/app/projects/jiraApiTypes";
 import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
@@ -30,15 +33,17 @@ export default async function DemoPage({
 }: {
   searchParams?: { query?: string; technologies?: string; status?: string };
 }) {
-  const projects: Project[] = await fetchProjects().then((hackProjects) =>
-    hackProjects.map((hackProject) => mapHackProjectToProject(hackProject)),
+  const hackProjects: HackProject[] = await fetchProjects();
+  const projects: Project[] = hackProjects.map((hackProject) =>
+    mapHackProjectToProject(hackProject),
   );
+
   const selectedTechnologies: Array<string> = safeParse(
     searchParams?.technologies || "",
   );
   const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
-  const technolgies: string[] = [
+  const technologies: string[] = [
     ...new Set(projects.map((tech) => tech.technologies).flat()),
   ];
 
@@ -68,9 +73,15 @@ export default async function DemoPage({
     <>
       <div className="mb-space-4 flex items-center justify-start">
         <SearchBar />
-        <Filters technologies={technolgies} />
+        <Suspense>
+          <Filters technologies={technologies} />
+        </Suspense>
       </div>
-      <PageContent columns={columns} projects={filteredProjects} />
+      <Suspense
+        fallback={<div className="w-screen h-screen bg-pink-400"></div>}
+      >
+        <PageContent columns={columns} projects={filteredProjects} />
+      </Suspense>
     </>
   );
 }
