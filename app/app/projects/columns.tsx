@@ -2,6 +2,7 @@
 
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 import { SortButton } from "@/components/SortButton";
@@ -29,19 +30,16 @@ export type Project = {
 
 const columnHelper = createColumnHelper<Project>();
 
-const toggleFav = (id: string) => {
-  console.log(id);
-};
-
 export const columns = [
   columnHelper.accessor("isFav", {
     header: () => <div className="table__header">Fav</div>,
-    cell: (info) => {
+    cell: function Cell(info) {
       const isFav = info.getValue();
+      const [value, setValue] = useState(isFav);
       const id = info.row.id;
       return (
-        <div onClick={() => toggleFav(id)}>
-          {isFav ? (
+        <div onClick={() => setValue(!value)}>
+          {value ? (
             <FaStar className={"text-scale-yellow-200"} />
           ) : (
             <FaStar className={"text-scale-neutral-400"} />
@@ -65,12 +63,13 @@ export const columns = [
     cell: (info) => {
       const projectName = info.getValue();
       return (
-        <Link href="#" className="text-text-brand">
+        <Link href="#" className="text-text-brand" title={projectName}>
           {projectName}
         </Link>
       );
     },
     size: 250,
+    enableResizing: true,
   }),
   columnHelper.accessor("leader", {
     header: ({ column }) => {
@@ -89,7 +88,10 @@ export const columns = [
         ? leader.iconUrl
         : "https://github.com/shadcn.png";
       return (
-        <div className="truncate flex items-center gap-space-1">
+        <div
+          className="truncate flex items-center gap-space-1"
+          title={leader.displayName}
+        >
           <Avatar className="h-size-16 w-size-16">
             <AvatarImage src={src}></AvatarImage>
           </Avatar>
@@ -101,6 +103,11 @@ export const columns = [
   }),
   columnHelper.accessor("hackKey", {
     header: () => <div className="table__header">Hack Key</div>,
+    cell: (info) => {
+      const hackKey = info.getValue();
+
+      return <span title={hackKey}>{hackKey}</span>;
+    },
     size: 100,
   }),
   columnHelper.accessor("recruitmentStatus", {
@@ -121,7 +128,7 @@ export const columns = [
     cell: (info) => {
       const teamMembersFormatted = info.getValue().join(", ");
 
-      return <span>{teamMembersFormatted}</span>;
+      return <span title={teamMembersFormatted}>{teamMembersFormatted}</span>;
     },
     size: 200,
   }),
@@ -133,8 +140,9 @@ export const columns = [
           {technology}
         </Badge>
       ));
+      const technologiesFormatted = info.getValue().join(", ");
 
-      return <span>{technologies}</span>;
+      return <span title={technologiesFormatted}>{technologies}</span>;
     },
     size: 200,
   }),

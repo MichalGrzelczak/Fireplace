@@ -10,7 +10,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { FC, useState } from "react";
+import { FC, MouseEvent, useState } from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import {
@@ -25,7 +25,10 @@ import {
 interface ReactTableProps {
   project: Project[];
   columns: ColumnDef<Project, any>[];
-  onRowClick: (project: Project | undefined) => void;
+  onRowClick: (
+    e: MouseEvent<HTMLTableRowElement, globalThis.MouseEvent>,
+    project: Project | undefined,
+  ) => void;
 }
 
 export const ProjectTable: FC<ReactTableProps> = ({
@@ -86,8 +89,8 @@ export const ProjectTable: FC<ReactTableProps> = ({
               key={row.id}
               data-state={row.getIsSelected() && "selected"}
               className="h-size-1"
-              onClick={() => {
-                onRowClick(getProjectById(row.id));
+              onClick={(e) => {
+                onRowClick(e, getProjectById(row.id));
               }}
             >
               {row.getVisibleCells().map((cell) => (
