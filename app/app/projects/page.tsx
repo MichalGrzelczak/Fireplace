@@ -76,15 +76,8 @@ export default async function DemoPage({
           <Filters technologies={technologies} />
         </Suspense>
       </div>
-      <Suspense
-        fallback={<div className="w-screen h-screen bg-pink-400"></div>}
-      >
-        <PageContent
-          columns={columns}
-          projects={filteredProjects}
-          user={user}
-        />
-      </Suspense>
+
+      <PageContent columns={columns} projects={filteredProjects} user={user} />
     </>
   );
 }
