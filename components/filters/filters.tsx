@@ -66,14 +66,15 @@ const Filters: FC<FilterProps> = ({ technologies }) => {
   const technologiesToDisplay = prepareTechnologiesFilters(technologies);
 
   return (
-    <div className="flex gap-space-3 items-center pl-space-4">
-      <FiltersSelect
-        selectedOptions={selectedTechnologies}
-        options={technologiesToDisplay}
-        placeholder="Technology"
-        onClickCallback={handleOnSelectTechnologyClick}
-      ></FiltersSelect>
-
+    <div className="flex gap-space-3 pl-space-3">
+      <div className={"w-[300px] shrink-0"}>
+        <FiltersSelect
+          selectedOptions={selectedTechnologies}
+          options={technologiesToDisplay}
+          placeholder="Technology"
+          onClickCallback={handleOnSelectTechnologyClick}
+        ></FiltersSelect>
+      </div>
       <FiltersSelect
         selectedOptions={selectedStatus}
         options={status}

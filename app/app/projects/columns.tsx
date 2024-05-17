@@ -56,7 +56,11 @@ export const columns = [
       return (
         <div className="flex items-center gap-space-1">
           <span className="table__header">Project Name</span>
-          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
+          <SortButton
+            column={"Project Name"}
+            onClick={onClick}
+            isSortedAsc={isSortedAsc}
+          />
         </div>
       );
     },
@@ -78,7 +82,11 @@ export const columns = [
       return (
         <div className="flex items-center gap-space-1">
           <span className="table__header">Leader</span>
-          <SortButton onClick={onClick} isSortedAsc={isSortedAsc} />
+          <SortButton
+            column={"Leader"}
+            onClick={onClick}
+            isSortedAsc={isSortedAsc}
+          />
         </div>
       );
     },

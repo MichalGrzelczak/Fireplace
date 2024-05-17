@@ -81,6 +81,8 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
           </Dialog>
 
           <FaTimes
+            role={"button"}
+            aria-label={"Close project details"}
             className="ml-space-3 text-fontSize-4"
             onClick={props.onCloseDetails}
           />
