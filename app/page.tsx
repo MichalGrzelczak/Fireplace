@@ -22,7 +22,9 @@ export default async function Home() {
         className={"space-y-space-4 justify-center flex flex-col items-center"}
       >
         <Logo width={332} height={78} />
-        <h1 className={"text-4xl block font-light !mb-12"}>
+        <h1
+          className={"text-fontSize-10 block font-fontWeight-light !mb-space-6"}
+        >
           Are you looking for an Ignite project?
         </h1>
         <ButtonLoginWithGoogle />

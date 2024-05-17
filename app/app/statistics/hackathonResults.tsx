@@ -16,7 +16,7 @@ export function HackathonResults(props: { hackathon: Hackathon }) {
   const { categories } = props.hackathon;
 
   return (
-    <div className="flex flex-col gap-space-2 pt-space-3">
+    <div className="flex flex-col gap-space-2 pt-space-3 overflow-y-auto">
       <div className="flex gap-space-2 mb-space-2">
         <h1 className="font-medium my-auto">Winners</h1>
         <Separator className="h-auto" orientation="vertical" />

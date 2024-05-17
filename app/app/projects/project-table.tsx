@@ -60,7 +60,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
 
   return (
     <Table>
-      <TableHeader className="sticky bg-background-information top-0 border-b-2 z-50">
+      <TableHeader className="sticky bg-background top-0 border-b-2 z-50">
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
@@ -97,7 +97,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
                 <TableCell
                   key={cell.id}
                   style={{ maxWidth: cell.column.getSize() + "px" }}
-                  className="truncate p-space-3"
+                  className="truncate"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
