@@ -26,12 +26,12 @@ export function PageContent({ columns, projects }) {
   };
 
   return (
-    <div className="flex h-[calc(100%-20px)]">
-        <ProjectTable
-          columns={columns}
-          project={projects}
-          onRowClick={handleRowClick}
-        />
+    <div className="h-[calc(100%-20px)]">
+      <ProjectTable
+        columns={columns}
+        project={projects}
+        onRowClick={handleRowClick}
+      />
 
       {selectedProject && (
         <Drawer direction={"right"} open={!!selectedProject}>
