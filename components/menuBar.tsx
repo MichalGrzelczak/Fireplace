@@ -5,7 +5,7 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { FaBell, FaChevronDown } from "react-icons/fa";
+import { FaBell, FaChevronDown, FaRegBell } from "react-icons/fa";
 
 import {
   DropdownMenu,
@@ -30,7 +30,26 @@ export const MenuBar: FC<MenuBarProps> = ({ session }) => {
         <Logo width={128} height={30} />
       </Link>
       <div className="flex gap-space-3 items-center">
-        <FaBell width={16} />
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            role={"button"}
+            className={"flex gap-space-2 items-center"}
+            aria-label={"Click, to see notifications"}
+          >
+            <FaBell width={16} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className={"px-space-4 py-space-5 flex flex-col items-center"}
+          >
+            <FaRegBell className={"text-fontSize-10 mb-space-3 -rotate-6"} />
+            <h3 className={"typography--font-heading-small text-text-subtle"}>
+              No notifications yet
+            </h3>
+            <p className={"text-text-subtlest"}>
+              When you get notifications, they-ll show up here
+            </p>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <div className={"w-px h-size-24 bg-border"}></div>
         <DropdownMenu>
           <DropdownMenuTrigger
@@ -51,6 +70,7 @@ export const MenuBar: FC<MenuBarProps> = ({ session }) => {
             <DropdownMenuLabel
               className={"cursor-pointer"}
               title={"Logout"}
+              role={"button"}
               onClick={onLogoutClick}
             >
               Logout
