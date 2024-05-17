@@ -109,7 +109,7 @@ export const columns = [
         </div>
       );
     },
-    size: 150,
+    size: 100,
   }),
   columnHelper.accessor("hackKey", {
     header: () => (
@@ -122,7 +122,7 @@ export const columns = [
 
       return <span title={hackKey}>{hackKey}</span>;
     },
-    size: 100,
+    size: 50,
   }),
   columnHelper.accessor("recruitmentStatus", {
     header: () => <div className="table__header">Recruitment Status</div>,
@@ -135,7 +135,7 @@ export const columns = [
         </Badge>
       );
     },
-    size: 150,
+    size: 50,
   }),
   columnHelper.accessor("teamMembers", {
     header: () => <div className="table__header">Team Members</div>,
@@ -177,6 +177,6 @@ export const columns = [
         </Badge>
       );
     },
-    size: 200,
+    size: 50,
   }),
 ];

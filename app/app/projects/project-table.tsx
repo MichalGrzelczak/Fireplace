@@ -109,9 +109,14 @@ export const ProjectTable: FC<ReactTableProps> = ({
                 return (
                   <TableHead
                     key={header.id}
-                    style={{ width: header.getSize() + "px" }}
+                    style={{
+                      width: header.getSize() + "px",
+                      flex:
+                        header.id === "isFav"
+                          ? `0 1 ${header.getSize()}px`
+                          : `1 1 ${header.getSize()}px`,
+                    }}
                     className={cn(
-                      header.id === "isFav" ? "flex-none !w-[60px]" : "flex-1",
                       "flex items-center px-space-3 py-space-2 h-size-4 text-black text-fontSize-0 whitespace-nowrap",
                     )}
                   >
@@ -154,13 +159,14 @@ export const ProjectTable: FC<ReactTableProps> = ({
                   return (
                     <TableCell
                       key={cell.id}
-                      style={{ width: cell.column.getSize() + "px" }}
-                      className={cn(
-                        cell.column.id === "isFav"
-                          ? "flex-none !w-[60px]"
-                          : "flex-1",
-                        "truncate p-space-3 flex",
-                      )}
+                      style={{
+                        width: cell.column.getSize() + "px",
+                        flex:
+                          cell.column.id === "isFav"
+                            ? `0 1 ${cell.column.getSize()}px`
+                            : `1 1 ${cell.column.getSize()}px`,
+                      }}
+                      className={cn("truncate p-space-3 flex")}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
