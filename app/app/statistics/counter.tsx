@@ -13,7 +13,7 @@ const Counter = () => {
   };
 
   return (
-    <div className="p-space-4 bg-background-information text-fontSize-8 font-fontWeight-light text-center rounded">
+    <div className="p-space-4 bg-background-information text-fontSize-4 lg:text-fontSize-8 font-fontWeight-light text-center rounded">
       <span>
         2nd edition of Ignite 2024 will start{" "}
         <span className="font-bold">in {calculateDateDiffernnce()} days</span>!
