@@ -57,7 +57,7 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
               projectName={selectedProject.projectName}
               technologyStack={selectedProject.technologies}
               teamMembers={selectedProject.teamMembers}
-              typeOfProject={projects.typeOfProject}
+              typeOfProject={selectedProject.typeOfProject}
               rolesNeeded={["FRONTEND", "BACKEND", "QA"]}
               description={selectedProject.description}
               onCloseDetails={() => setSelectedProjects(undefined)}
