@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Knowledge() {
   return (
-    <div className="flex gap-8 overflow-y-auto">
+    <div className="flex flex-col lg:flex-row gap-8 overflow-y-auto">
       <div className="flex-1">
         <p className="text-2xl font-semibold mb-6">Confluence knowledge base</p>
         <div className="p-6 border border-border-input">

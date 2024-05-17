@@ -163,7 +163,7 @@ const MultiSelectFormField = React.forwardRef<
               </div>
             ) : (
               <div className="flex items-center justify-between w-full mx-auto">
-                <span className="mx-2">{placeholder}</span>
+                <span>{placeholder}</span>
                 <FaChevronDown className="h-size-16 cursor-pointer ml-space-2 text-fontSize-1" />
               </div>
             )}
