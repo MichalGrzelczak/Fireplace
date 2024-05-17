@@ -17,12 +17,20 @@ export default function Knowledge() {
               style={{ listStyle: "disc", color: "var(--link)" }}
             >
               <li className="mb-1">
-                <a className="link" href="">
+                <a
+                  className="link"
+                  target="_blank"
+                  href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#Disclaimer"
+                >
                   Disclaimer
                 </a>
               </li>
               <li className="mb-1">
-                <a className="link" href="">
+                <a
+                  className="link"
+                  target="_blank"
+                  href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#Objectives"
+                >
                   Objectives
                 </a>
               </li>
@@ -31,28 +39,48 @@ export default function Knowledge() {
                 style={{ listStyle: "disc", color: "var(--link)" }}
               >
                 <li className="mb-1">
-                  <a className="link" href="">
+                  <a
+                    className="link"
+                    target="_blank"
+                    href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#Ignite-creativity%2C-innovation-and-engagement"
+                  >
                     Iginite creativity, innovation and engagement
                   </a>
                 </li>
                 <li className="mb-1">
-                  <a className="link" href="">
+                  <a
+                    className="link"
+                    target="_blank"
+                    href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#Foster-global-collaboration"
+                  >
                     Foster global collaboration
                   </a>
                 </li>
               </ul>
               <li className="mb-1">
-                <a className="link" href="">
+                <a
+                  className="link"
+                  target="_blank"
+                  href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#High-level-format"
+                >
                   High level format
                 </a>
               </li>
               <li className="mb-1">
-                <a className="link" href="">
+                <a
+                  className="link"
+                  target="_blank"
+                  href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#Event-dates"
+                >
                   Event dates
                 </a>
               </li>
               <li className="mb-1">
-                <a className="link" href="">
+                <a
+                  className="link"
+                  target="_blank"
+                  href="https://appfireteam.atlassian.net/wiki/spaces/CBW/pages/95937921186/Appfire+Ignite#FAQ"
+                >
                   FAQ
                 </a>
               </li>
@@ -153,7 +181,7 @@ export default function Knowledge() {
                 </li>
                 <li className="mb-1">
                   <a className="link" href="">
-                    How long should I wait for my idea's approval?
+                    How long should I wait for my idea&apos;s approval?
                   </a>
                 </li>
                 <li className="mb-1">
