@@ -1,10 +1,18 @@
-import { fetchProjects } from "@/app/app/projects/jira-api";
+import { Suspense } from "react";
+
+import { auth } from "@/app/api/auth/(config)/auth";
+import { fetchProjects } from "@/app/app/projects/jira-projects-api";
+import { HackProject } from "@/app/app/projects/jira-projects-api-types";
 import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
+
+// export async function test() {
+
+// export async function test() {
 
 // export async function test() {
 
@@ -28,47 +36,55 @@ export default async function DemoPage({
 }: {
   searchParams?: { query?: string; technologies?: string; status?: string };
 }) {
-  const projects: Project[] = await fetchProjects().then((hackProjects) =>
-    hackProjects.map((hackProject) => mapHackProjectToProject(hackProject)),
+  const session = await auth();
+  const user = session?.user;
+
+  const hackProjects: HackProject[] = await fetchProjects();
+  const projects: Project[] = hackProjects.map((hackProject) =>
+    mapHackProjectToProject(hackProject),
   );
+
   const selectedTechnologies: Array<string> = safeParse(
     searchParams?.technologies || "",
   );
   const selectedStatus: Array<string> = safeParse(searchParams?.status || "");
 
-  const technolgies: string[] = [
+  const technologies: string[] = [
     ...new Set(projects.map((tech) => tech.technologies).flat()),
   ];
 
-  const filteredProjects = projects
-    .filter(
-      (p) =>
-        !searchParams?.query?.length ||
+  const filteredProjects = projects.filter(
+    (p) =>
+      (!searchParams?.query?.length ||
         p.projectName
           .toLowerCase()
           .trim()
-          .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
-    )
-    .filter(
-      (p) =>
-        !selectedTechnologies ||
+          .includes(searchParams?.query?.toLowerCase().trim() ?? "")) &&
+      (!selectedTechnologies ||
         p.technologies.some((technology) =>
           selectedTechnologies?.includes(technology),
-        ),
-    )
-    .filter(
-      (p) =>
-        !selectedStatus?.length ||
-        selectedStatus.includes(p.recruitmentStatus.toString()),
-    );
+        )) &&
+      (!selectedStatus?.length ||
+        selectedStatus.includes(p.recruitmentStatus.toString())),
+  );
 
   return (
     <>
       <div className="mb-space-4 flex items-center justify-start">
         <SearchBar />
-        <Filters technologies={technolgies} />
+        <Suspense>
+          <Filters technologies={technologies} />
+        </Suspense>
       </div>
-      <PageContent columns={columns} projects={filteredProjects} />
+      <Suspense
+        fallback={<div className="w-screen h-screen bg-pink-400"></div>}
+      >
+        <PageContent
+          columns={columns}
+          projects={filteredProjects}
+          user={user}
+        />
+      </Suspense>
     </>
   );
 }

@@ -1,6 +1,9 @@
 import { Project } from "@/app/app/projects/columns";
 import { EMPTY_USER } from "@/app/app/projects/consts";
-import { HackProject, JiraUser } from "@/app/app/projects/jiraApiTypes";
+import {
+  HackProject,
+  JiraUser,
+} from "@/app/app/projects/jira-projects-api-types";
 import {
   ApplicationStatus,
   ProjectUser,
@@ -17,7 +20,7 @@ export function mapHackProjectToProject(hackProject: HackProject): Project {
     projectName: fields.summary,
     projectType: fields.typeOfProject?.value ?? "",
     leader: mapJiraUserToProjectUser(fields.leader),
-    teamMembers: fields.members?.map((member) => member.displayName) ?? [],
+    teamMembers: fields.members?.map((member: any) => member.displayName) ?? [],
     technologies: fields.technologies,
     description: fields.description,
     typeOfProject: fields.typeOfProject?.value || "",
@@ -35,5 +38,6 @@ export function mapJiraUserToProjectUser(
     email: jiraUser.emailAddress,
     displayName: jiraUser.displayName,
     iconUrl: jiraUser.avatarUrls["16x16"],
+    jiraUser,
   };
 }

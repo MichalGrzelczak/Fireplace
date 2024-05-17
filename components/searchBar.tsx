@@ -50,6 +50,7 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
         value={queryInternalValue}
         type={"search"}
         onChange={(e) => {
+          e.preventDefault();
           setQueryInternalValue(e.target.value);
           handleQuery(e.target.value);
         }}

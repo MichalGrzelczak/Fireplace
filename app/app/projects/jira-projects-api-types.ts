@@ -132,7 +132,7 @@ function createTypeOfProjectFromIssueField(issueField: any): TypeOfProject {
 
 function createStatusFromIssueField(issueField: any): Status {
   return {
-    id: issueField["accountId"],
+    id: issueField["id"],
     name: issueField["name"],
     description: issueField["description"],
     statusCategory: createStatusCategoryFromIssueField(
@@ -159,6 +159,7 @@ function createParentProjectFromIssueField(issueField: any): ParentProject {
 }
 
 function createDescriptionStringFromIssueField(issueField: any): string {
+  if (!issueField) return "";
   let result = "";
 
   const traverseContent = (node: any) => {

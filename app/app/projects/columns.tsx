@@ -42,19 +42,23 @@ export const columns = [
   columnHelper.accessor("isFav", {
     header: () => <div className="table__header">Fav</div>,
     enablePinning: true,
-    cell: function Cell(row) {
-      const isFav = row.getValue();
-      const [value, setValue] = useState(isFav);
-      const id = row.row.id;
+    cell: function Cell(info) {
+      const isFav = info.getValue();
+      const [isFavInternal, setIsFavInternal] = useState(isFav);
+      const id = info.row.id;
+
       return (
         <div
           className="flex items-center"
-          onClick={() => toggleFav(id, row.row)}
+          onClick={() => {
+            toggleFav(id, info.row);
+            setIsFavInternal(!isFavInternal);
+          }}
         >
-          {isFav ? (
-            <FaStar className={"text-scale-yellow-200"} />
+          {isFavInternal ? (
+            <FaStar cursor={"pointer"} className={"text-scale-yellow-200"} />
           ) : (
-            <FaStar className={"text-scale-neutral-400"} />
+            <FaStar cursor={"pointer"} className={"text-scale-neutral-400"} />
           )}
         </div>
       );
@@ -79,7 +83,11 @@ export const columns = [
     cell: (info) => {
       const projectName = info.getValue();
       return (
-        <Link href="#" className="text-text-brand" title={projectName}>
+        <Link
+          href="#"
+          className="text-text-brand w-full truncate"
+          title={projectName}
+        >
           {projectName}
         </Link>
       );
@@ -110,7 +118,7 @@ export const columns = [
       return (
         <div
           className="truncate flex items-center gap-space-1"
-          title={leader.displayName}
+          title={leader?.displayName}
         >
           <Avatar className="h-size-16 w-size-16">
             <AvatarImage src={src}></AvatarImage>
@@ -152,7 +160,11 @@ export const columns = [
     cell: (info) => {
       const teamMembersFormatted = info.getValue()?.join(", ");
 
-      return <span title={teamMembersFormatted}>{teamMembersFormatted}</span>;
+      return (
+        <span className="w-full truncate" title={teamMembersFormatted}>
+          {teamMembersFormatted}
+        </span>
+      );
     },
     size: 200,
   }),
@@ -160,17 +172,15 @@ export const columns = [
     header: () => <div className="table__header">Needed Skills</div>,
     enableGrouping: true,
     getGroupingValue: (row) => {
-      console.log("joined techno", row.technologies.join());
-
       return row.technologies.join();
     },
     cell: (info) => {
-      const technologies = info.getValue().map((technology) => (
+      const technologies = info.getValue()?.map((technology) => (
         <Badge key={technology} variant="basic">
           {technology}
         </Badge>
       ));
-      const technologiesFormatted = info.getValue().join(", ");
+      const technologiesFormatted = info.getValue()?.join(", ");
 
       return <span title={technologiesFormatted}>{technologies}</span>;
     },
@@ -180,10 +190,10 @@ export const columns = [
     header: () => <div className="table__header">Application Status</div>,
     cell: (info) => {
       const status = info.getValue();
-      const classNames = `${APPLICATION_STATUS_PROPERTIES[status].bgColor} ${APPLICATION_STATUS_PROPERTIES[status].fontColor} uppercase typography--font-heading-xxsmall`;
+      const classNames = `${APPLICATION_STATUS_PROPERTIES[status]?.bgColor} ${APPLICATION_STATUS_PROPERTIES[status]?.fontColor} uppercase typography--font-heading-xxsmall`;
       return (
         <Badge className={classNames}>
-          {APPLICATION_STATUS_PROPERTIES[status].text}
+          {APPLICATION_STATUS_PROPERTIES[status]?.text}
         </Badge>
       );
     },

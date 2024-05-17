@@ -1,18 +1,59 @@
 "use client";
 
-import { MouseEvent, useState } from "react";
+import React, {
+  MouseEvent,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import ProjectDetails from "@/app/app/projects/project-details";
 import { ProjectTable } from "@/app/app/projects/project-table";
+import { SessionUser } from "@/app/types/types";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 
+interface PageContentProps {
+  columns: any;
+  projects: Project[];
+  user: SessionUser;
+}
+
 // @ts-ignore
-export function PageContent({ columns, projects }) {
+export function PageContent({ columns, projects, user }: PageContentProps) {
   const [selectedProject, setSelectedProjects] = useState<
     Project | undefined
   >();
 
+  const escFunction = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !!selectedProject) {
+        setSelectedProjects(undefined);
+      }
+    },
+    [selectedProject],
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
+
+  const allUsers = useMemo(() => {
+    const allLeaders = projects.map((project) => project.leader);
+    const uniqueLeaders = [
+      ...new Map(
+        allLeaders.map((item) => [item["displayName"], item]),
+      ).values(),
+    ];
+
+    return uniqueLeaders;
+  }, [projects]);
   const handleRowClick = (
     e: MouseEvent<HTMLTableRowElement, globalThis.MouseEvent>,
     project: Project | undefined,
@@ -27,11 +68,13 @@ export function PageContent({ columns, projects }) {
 
   return (
     <div className="h-[calc(100%-20px)]">
-      <ProjectTable
-        columns={columns}
-        project={projects}
-        onRowClick={handleRowClick}
-      />
+      <Suspense>
+        <ProjectTable
+          columns={columns}
+          projects={projects}
+          onRowClick={handleRowClick}
+        />
+      </Suspense>
 
       {selectedProject && (
         <Drawer direction={"right"} open={!!selectedProject}>
@@ -41,10 +84,13 @@ export function PageContent({ columns, projects }) {
               projectName={selectedProject.projectName}
               technologyStack={selectedProject.technologies}
               teamMembers={selectedProject.teamMembers}
-              typeOfProject={projects.typeOfProject}
+              typeOfProject={selectedProject.typeOfProject}
               rolesNeeded={["FRONTEND", "BACKEND", "QA"]}
               description={selectedProject.description}
               onCloseDetails={() => setSelectedProjects(undefined)}
+              isUserLeader={selectedProject.leader.email === user?.email}
+              allUsers={allUsers}
+              leader={selectedProject.leader}
             />
           </DrawerContent>
         </Drawer>
