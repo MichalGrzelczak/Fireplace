@@ -134,14 +134,14 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
       </section>
 
       <section className="mt-space-3 flex">
-        <div className="w-1/4 pr-space-2">
-          <span className="font-fontWeight-bold">TYPE OF PROJECT</span>
-          <div className="mt-space-2">
-            <Tag className="mr-space-2">{props.typeOfProject}</Tag>
-          </div>
-        </div>
+        {/*<div className="w-1/4 pr-space-2">*/}
+        {/*  <span className="font-fontWeight-bold">TYPE OF PROJECT</span>*/}
+        {/*  <div className="mt-space-2">*/}
+        {/*    <Tag className="mr-space-2">{props.typeOfProject}</Tag>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
-        <div className="w-3/4">
+        <div className="w-full">
           <span className="font-fontWeight-bold">ROLES NEEDED</span>
           <div className="mt-space-2">
             {props.rolesNeeded.map((role: string, index: number) => (

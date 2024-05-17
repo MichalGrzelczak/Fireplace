@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import ProjectDetails from "@/app/app/projects/project-details";
@@ -12,6 +12,23 @@ export function PageContent({ columns, projects }) {
   const [selectedProject, setSelectedProjects] = useState<
     Project | undefined
   >();
+
+  const escFunction = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !!selectedProject) {
+        setSelectedProjects(undefined);
+      }
+    },
+    [selectedProject],
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
 
   const handleRowClick = (
     e: MouseEvent<HTMLTableRowElement, globalThis.MouseEvent>,
