@@ -42,27 +42,20 @@ export default async function DemoPage({
     ...new Set(projects.map((tech) => tech.technologies).flat()),
   ];
 
-  const filteredProjects = projects
-    .filter(
-      (p) =>
-        !searchParams?.query?.length ||
+  const filteredProjects = projects.filter(
+    (p) =>
+      (!searchParams?.query?.length ||
         p.projectName
           .toLowerCase()
           .trim()
-          .includes(searchParams?.query?.toLowerCase().trim() ?? ""),
-    )
-    .filter(
-      (p) =>
-        !selectedTechnologies ||
+          .includes(searchParams?.query?.toLowerCase().trim() ?? "")) &&
+      (!selectedTechnologies ||
         p.technologies.some((technology) =>
           selectedTechnologies?.includes(technology),
-        ),
-    )
-    .filter(
-      (p) =>
-        !selectedStatus?.length ||
-        selectedStatus.includes(p.recruitmentStatus.toString()),
-    );
+        )) &&
+      (!selectedStatus?.length ||
+        selectedStatus.includes(p.recruitmentStatus.toString())),
+  );
 
   return (
     <>
