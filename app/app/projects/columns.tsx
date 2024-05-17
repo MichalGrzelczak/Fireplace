@@ -26,6 +26,8 @@ export type Project = {
   hackKey: string;
   recruitmentStatus: RecruitmentStatus;
   applicationStatus: ApplicationStatus;
+  description: string;
+  typeOfProject: string;
 };
 
 const columnHelper = createColumnHelper<Project>();
