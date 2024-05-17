@@ -1,3 +1,5 @@
+import { JiraUser } from "@/app/app/projects/jira-projects-api-types";
+
 export enum RecruitmentStatus {
   "Closed",
   "Open",
@@ -27,4 +29,5 @@ export type ProjectUser = {
   email: string;
   iconUrl: string;
   displayName: string;
+  jiraUser: JiraUser;
 };

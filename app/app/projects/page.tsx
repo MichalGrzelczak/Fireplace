@@ -1,5 +1,5 @@
 import { auth } from "@/app/api/auth/(config)/auth";
-import { fetchProjects } from "@/app/app/projects/jira-api";
+import { fetchProjects } from "@/app/app/projects/jira-projects-api";
 import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
