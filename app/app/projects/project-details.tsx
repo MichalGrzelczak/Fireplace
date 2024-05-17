@@ -11,15 +11,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Tag } from "@/components/ui/tag";
-import { Textarea } from "@/components/ui/textarea";
+
+import {
+  DialogContentLeader,
+  DialogContentMember,
+} from "./project-details-dialog-content";
+import { ProjectUser } from "./types";
+
+const requestMemberMock: ProjectUser[] = [
+  {
+    email: "1",
+    displayName: "Jacek Jacek",
+    iconUrl: "",
+  },
+  {
+    email: "2",
+    displayName: "Jaro Kaczo",
+    iconUrl: "",
+  },
+  {
+    email: "3",
+    displayName: "Donek Ma Domek",
+    iconUrl: "",
+  },
+];
 
 export type ProjectDetailsProps = {
   id: string;
@@ -29,10 +45,30 @@ export type ProjectDetailsProps = {
   typeOfProject: string;
   rolesNeeded: string[];
   description: string;
+  isUserLeader: boolean;
+  allUsers: ProjectUser[];
   onCloseDetails: () => void;
+  leader: ProjectUser;
 };
 
-export default function ProjectDetails(props: ProjectDetailsProps) {
+export default function ProjectDetails({
+  isUserLeader,
+  rolesNeeded,
+  onCloseDetails,
+  projectName,
+  teamMembers,
+  description,
+  technologyStack,
+  allUsers,
+  leader,
+  typeOfProject,
+}: ProjectDetailsProps) {
+  const dialogButtonLabel = isUserLeader ? "Manage members" : "Send a request";
+  const dialogTitle = isUserLeader
+    ? "Manage team members"
+    : "Send a request to join the team";
+  const dialogButtonFooterLabel = isUserLeader ? "Save" : "Send";
+
   return (
     <div className="px-space-3 ml-space-3 pt-space-2">
       <div className="flex items-center justify-between py-space-2 overflow-y-auto">
@@ -42,30 +78,23 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
           <Dialog>
             <DialogTrigger asChild>
               <Button size="default" variant="default">
-                Send a request
+                {dialogButtonLabel}
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Send a request to join the team</DialogTitle>
+                <DialogTitle>{dialogTitle}</DialogTitle>
               </DialogHeader>
-
-              <Textarea placeholder="Enter message..." className="mt-space-2" />
-              <div className="mt-space-2">
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {props.rolesNeeded.map((role, index) => (
-                      <SelectItem key={index} value={role}>
-                        {role}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
+              {isUserLeader ? (
+                <DialogContentLeader
+                  currentTeamMembers={teamMembers}
+                  userRequests={requestMemberMock}
+                  allUsers={allUsers}
+                  leader={leader}
+                />
+              ) : (
+                <DialogContentMember rolesNeeded={rolesNeeded} />
+              )}
               <DialogFooter className="sm:justify-end">
                 <DialogClose asChild>
                   <Button type="button" size="default" variant="secondary">
@@ -74,7 +103,7 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
                 </DialogClose>
 
                 <Button type="submit" size="default" className="px-space-2">
-                  Send
+                  {dialogButtonFooterLabel}
                 </Button>
               </DialogFooter>
             </DialogContent>
@@ -84,7 +113,7 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
             role={"button"}
             aria-label={"Close project details"}
             className="ml-space-3 text-fontSize-4"
-            onClick={props.onCloseDetails}
+            onClick={onCloseDetails}
           />
         </div>
       </div>
@@ -102,13 +131,13 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
         <div className="ml-space-4">
           <section>
             <span className="font-fontWeight-bold">NAME</span>
-            <p>{props.projectName}</p>
+            <p>{projectName}</p>
           </section>
 
           <section className="mt-space-4">
             <span className="font-fontWeight-bold">TEAM MEMBERS</span>
             <p>
-              {props.teamMembers.map((member: string, index: number) => (
+              {teamMembers.map((member: string, index: number) => (
                 <Tag key={index} className="mr-space-2">
                   {member}
                 </Tag>
@@ -121,10 +150,10 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
       <section className="mt-space-4">
         <span className="font-fontWeight-bold">TECHNOLOGY STACK</span>
         <div className="mt-space-2">
-          {!props.technologyStack.length ? (
+          {!technologyStack.length ? (
             <span className="italic">Technology stack not defined yet</span>
           ) : (
-            props.technologyStack.map((technology: string, index: number) => (
+            technologyStack.map((technology: string, index: number) => (
               <Tag key={index} className="mr-space-2">
                 {technology}
               </Tag>
@@ -137,14 +166,14 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
         <div className="w-1/4 pr-space-2">
           <span className="font-fontWeight-bold">TYPE OF PROJECT</span>
           <div className="mt-space-2">
-            <Tag className="mr-space-2">{props.typeOfProject}</Tag>
+            <Tag className="mr-space-2">{typeOfProject}</Tag>
           </div>
         </div>
 
         <div className="w-3/4">
           <span className="font-fontWeight-bold">ROLES NEEDED</span>
           <div className="mt-space-2">
-            {props.rolesNeeded.map((role: string, index: number) => (
+            {rolesNeeded.map((role: string, index: number) => (
               <Tag key={index} className="mr-space-2">
                 {role}
               </Tag>
@@ -155,7 +184,7 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
 
       <section className="mt-space-4">
         <span className="font-fontWeight-bold">DESCRIPTION</span>
-        <p className="mt-space-2">{props.description}</p>
+        <p className="mt-space-2">{description}</p>
       </section>
     </div>
   );
