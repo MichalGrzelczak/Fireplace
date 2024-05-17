@@ -42,7 +42,7 @@ export type ProjectDetailsProps = {
   projectName: string;
   technologyStack: string[];
   teamMembers: string[];
-  product: string;
+  typeOfProject: string;
   rolesNeeded: string[];
   description: string;
   isUserLeader: boolean;
@@ -59,9 +59,9 @@ export default function ProjectDetails({
   teamMembers,
   description,
   technologyStack,
-  product,
   allUsers,
   leader,
+  typeOfProject,
 }: ProjectDetailsProps) {
   const dialogButtonLabel = isUserLeader ? "Manage members" : "Send a request";
   const dialogTitle = isUserLeader
@@ -70,7 +70,7 @@ export default function ProjectDetails({
   const dialogButtonFooterLabel = isUserLeader ? "Save" : "Send";
 
   return (
-    <div className="pl-space-3 border-l ml-space-3">
+    <div className="px-space-3 ml-space-3 pt-space-2">
       <div className="flex items-center justify-between py-space-2 overflow-y-auto">
         <h2 className="typography--font-heading-large">Project details</h2>
 
@@ -110,6 +110,8 @@ export default function ProjectDetails({
           </Dialog>
 
           <FaTimes
+            role={"button"}
+            aria-label={"Close project details"}
             className="ml-space-3 text-fontSize-4"
             onClick={onCloseDetails}
           />
@@ -148,19 +150,23 @@ export default function ProjectDetails({
       <section className="mt-space-4">
         <span className="font-fontWeight-bold">TECHNOLOGY STACK</span>
         <div className="mt-space-2">
-          {technologyStack.map((technology: string, index: number) => (
-            <Tag key={index} className="mr-space-2">
-              {technology}
-            </Tag>
-          ))}
+          {!technologyStack.length ? (
+            <span className="italic">Technology stack not defined yet</span>
+          ) : (
+            technologyStack.map((technology: string, index: number) => (
+              <Tag key={index} className="mr-space-2">
+                {technology}
+              </Tag>
+            ))
+          )}
         </div>
       </section>
 
       <section className="mt-space-3 flex">
         <div className="w-1/4 pr-space-2">
-          <span className="font-fontWeight-bold">PRODUCT</span>
+          <span className="font-fontWeight-bold">TYPE OF PROJECT</span>
           <div className="mt-space-2">
-            <Tag className="mr-space-2">{product}</Tag>
+            <Tag className="mr-space-2">{typeOfProject}</Tag>
           </div>
         </div>
 

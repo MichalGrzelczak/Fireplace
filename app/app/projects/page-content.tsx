@@ -1,19 +1,18 @@
 "use client";
 
-import { User } from "next-auth";
-import { useMemo, useState } from "react";
+import { MouseEvent, useMemo, useState } from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import ProjectDetails from "@/app/app/projects/project-details";
 import { ProjectTable } from "@/app/app/projects/project-table";
 import { SessionUser } from "@/app/types/types";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 
 interface PageContentProps {
   columns: any;
   projects: Project[];
   user: SessionUser;
 }
-
 // @ts-ignore
 export function PageContent({ columns, projects, user }: PageContentProps) {
   const [selectedProject, setSelectedProjects] = useState<
@@ -30,33 +29,44 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
 
     return uniqueLeaders;
   }, [projects]);
+  const handleRowClick = (
+    e: MouseEvent<HTMLTableRowElement, globalThis.MouseEvent>,
+    project: Project | undefined,
+  ) => {
+    const target = e.target as HTMLElement;
+    const closestTD = target.closest("td");
+    if (closestTD === closestTD?.parentElement?.firstChild) {
+      return;
+    }
+    setSelectedProjects(project);
+  };
 
   return (
-    <div className="flex h-full">
-      <div className={`${!!selectedProject ? "w-3/5" : "w-full"}`}>
-        <ProjectTable
-          columns={columns}
-          project={projects}
-          onRowClick={(project) => setSelectedProjects(project)}
-        />
-      </div>
+    <div className="h-[calc(100%-20px)]">
+      <ProjectTable
+        columns={columns}
+        project={projects}
+        onRowClick={handleRowClick}
+      />
 
       {selectedProject && (
-        <div className="w-2/5 shrink-0">
-          <ProjectDetails
-            id={selectedProject.uuid}
-            projectName={selectedProject.projectName}
-            technologyStack={selectedProject.technologies}
-            teamMembers={selectedProject.teamMembers}
-            product="Unknown"
-            rolesNeeded={["FRONTEND", "BACKEND", "QA"]}
-            description="Test"
-            isUserLeader={selectedProject.leader.email === user?.email}
-            onCloseDetails={() => setSelectedProjects(undefined)}
-            allUsers={allUsers}
-            leader={selectedProject.leader}
-          />
-        </div>
+        <Drawer direction={"right"} open={!!selectedProject}>
+          <DrawerContent>
+            <ProjectDetails
+              id={selectedProject.uuid}
+              projectName={selectedProject.projectName}
+              technologyStack={selectedProject.technologies}
+              teamMembers={selectedProject.teamMembers}
+              typeOfProject={projects.typeOfProject}
+              rolesNeeded={["FRONTEND", "BACKEND", "QA"]}
+              description={selectedProject.description}
+              onCloseDetails={() => setSelectedProjects(undefined)}
+              isUserLeader={selectedProject.leader.email === user?.email}
+              allUsers={allUsers}
+              leader={selectedProject.leader}
+            />
+          </DrawerContent>
+        </Drawer>
       )}
     </div>
   );

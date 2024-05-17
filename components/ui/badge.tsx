@@ -11,7 +11,7 @@ const badgeVariants = cva(
         default:
           "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
         basic:
-          "border-transparent bg-background-accent-gray-subtlest font-fontSizes-3 rounded-full font-fontWeight-normal truncate",
+          "border-transparent bg-background-accent-gray-subtlest font-fontSizes-3 rounded-full font-fontWeight-normal truncate py-2 px-2",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:

@@ -7,13 +7,20 @@ import { Button } from "./ui/button";
 export interface SortButtonProps {
   onClick: () => void;
   isSortedAsc: boolean;
+  column: string;
 }
 
-export const SortButton: FC<SortButtonProps> = ({ onClick, isSortedAsc }) => (
+export const SortButton: FC<SortButtonProps> = ({
+  column,
+  onClick,
+  isSortedAsc,
+}) => (
   <Button
     variant="link"
     type={"button"}
-    aria-label={"Sort column"}
+    title={`Sort by ${column}`}
+    aria-label={`Sort by ${column}`}
+    aria-sort={isSortedAsc ? "ascending" : "descending"}
     onClick={onClick}
   >
     {isSortedAsc ? (

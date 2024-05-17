@@ -39,7 +39,7 @@ export default async function Statistics() {
         }
       >
         <Counter />
-        <div className="flex text-fontSize-3 justify-between gap-space-4 mb-space-1 mx-space-3">
+        <div className="flex flex-col lg:flex-row text-fontSize-3 justify-between gap-space-4 mb-space-1 mx-space-3">
           <HackathonCard
             icon={<FaRocket width={30} />}
             title={`${data.statistics.projects} awesome projects`}
