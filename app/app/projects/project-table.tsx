@@ -102,7 +102,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
       }}
     >
       <Table style={{ display: "grid" }}>
-        <TableHeader className="grid sticky top-0 z-50 bg-background">
+        <TableHeader className="grid sticky top-0 z-50 bg-background border-b-2 ">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className="flex w-full">
               {headerGroup.headers.map((header) => {
