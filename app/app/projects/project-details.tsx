@@ -26,7 +26,7 @@ export type ProjectDetailsProps = {
   projectName: string;
   technologyStack: string[];
   teamMembers: string[];
-  product: string;
+  typeOfProject: string;
   rolesNeeded: string[];
   description: string;
   onCloseDetails: () => void;
@@ -34,7 +34,7 @@ export type ProjectDetailsProps = {
 
 export default function ProjectDetails(props: ProjectDetailsProps) {
   return (
-    <div className="pl-space-3 border-l ml-space-3">
+    <div className="px-space-3 ml-space-3 pt-space-2">
       <div className="flex items-center justify-between py-space-2 overflow-y-auto">
         <h2 className="typography--font-heading-large">Project details</h2>
 
@@ -121,19 +121,23 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
       <section className="mt-space-4">
         <span className="font-fontWeight-bold">TECHNOLOGY STACK</span>
         <div className="mt-space-2">
-          {props.technologyStack.map((technology: string, index: number) => (
-            <Tag key={index} className="mr-space-2">
-              {technology}
-            </Tag>
-          ))}
+          {!props.technologyStack.length ? (
+            <span className="italic">Technology stack not defined yet</span>
+          ) : (
+            props.technologyStack.map((technology: string, index: number) => (
+              <Tag key={index} className="mr-space-2">
+                {technology}
+              </Tag>
+            ))
+          )}
         </div>
       </section>
 
       <section className="mt-space-3 flex">
         <div className="w-1/4 pr-space-2">
-          <span className="font-fontWeight-bold">PRODUCT</span>
+          <span className="font-fontWeight-bold">TYPE OF PROJECT</span>
           <div className="mt-space-2">
-            <Tag className="mr-space-2">{props.product}</Tag>
+            <Tag className="mr-space-2">{props.typeOfProject}</Tag>
           </div>
         </div>
 
