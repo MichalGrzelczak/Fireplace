@@ -42,19 +42,23 @@ export const columns = [
   columnHelper.accessor("isFav", {
     header: () => <div className="table__header">Fav</div>,
     enablePinning: true,
-    cell: function Cell(row) {
-      const isFav = row.getValue();
-      const [value, setValue] = useState(isFav);
-      const id = row.row.id;
+    cell: function Cell(info) {
+      const isFav = info.getValue();
+      const [isFavInternal, setIsFavInternal] = useState(isFav);
+      const id = info.row.id;
+
       return (
         <div
           className="flex items-center"
-          onClick={() => toggleFav(id, row.row)}
+          onClick={() => {
+            toggleFav(id, info.row);
+            setIsFavInternal(!isFavInternal);
+          }}
         >
-          {isFav ? (
-            <FaStar className={"text-scale-yellow-200"} />
+          {isFavInternal ? (
+            <FaStar cursor={"pointer"} className={"text-scale-yellow-200"} />
           ) : (
-            <FaStar className={"text-scale-neutral-400"} />
+            <FaStar cursor={"pointer"} className={"text-scale-neutral-400"} />
           )}
         </div>
       );
