@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -20,15 +20,18 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
 
   const [queryInternalValue, setQueryInternalValue] = useState(queryParam);
 
-  const handleQuery = useDebouncedCallback((term: string) => {
-    const urlSearchParams = new URLSearchParams(searchParams);
-    if (term) {
-      urlSearchParams.set("query", term);
-    } else {
-      urlSearchParams.delete("query");
-    }
-    replace(`${pathname}?${urlSearchParams.toString()}`);
-  }, debounceMs);
+  const handleQuery = useCallback(
+    (term: string) => {
+      const urlSearchParams = new URLSearchParams(searchParams);
+      if (term) {
+        urlSearchParams.set("query", term);
+      } else {
+        urlSearchParams.delete("query");
+      }
+      replace(`${pathname}?${urlSearchParams.toString()}`);
+    },
+    [pathname, replace, searchParams],
+  );
 
   useEffect(() => {
     setQueryInternalValue(queryParam);

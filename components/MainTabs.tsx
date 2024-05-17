@@ -10,9 +10,10 @@ const MainTabs = ({
   links: { title: string; href: string; icon?: React.ReactNode }[];
 }) => {
   return (
-    <div className={"flex flex-col h-full overflow-hidden"}>
+    <section className={"flex flex-col h-full overflow-hidden"}>
       <div className={"px-space-3"}>
-        <div
+        <nav
+          aria-label="Main"
           className={
             "h-size-40 w-full border-b border-b-border flex items-center"
           }
@@ -31,14 +32,14 @@ const MainTabs = ({
               {item.title}
             </NavLink>
           ))}
-        </div>
+        </nav>
       </div>
-      <div
+      <section
         className={"h-full flex flex-col bg-surface p-space-3 overflow-hidden"}
       >
         {children}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 

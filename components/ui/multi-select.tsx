@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
 import { FaCheck, FaChevronDown } from "react-icons/fa";
-import { FaWandSparkles } from "react-icons/fa6";
+import { FaWandSparkles, FaX } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -122,23 +122,37 @@ const MultiSelectFormField = React.forwardRef<
             ref={ref}
             {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="min-h-size-24 h-auto items-center justify-between"
+            className="min-h-size-24 h-auto w-full items-center justify-between"
           >
             {selectedValues.length > 0 ? (
-              <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center gap-space-3">
+              <div
+                className="flex justify-between items-center w-full"
+                aria-label={"Scroll for more"}
+              >
+                <div className="flex items-center gap-space-2 whitespace-nowrap overflow-x-auto overflow-y-hidden scroll-hide overscroll-x-contain">
                   {selectedValues.map((value) => {
                     const option = options.find((o) => o.value === value);
                     const IconComponent = option?.icon;
                     return (
                       <span
                         key={value}
-                        className={cn("flex items-center gap-space-1")}
+                        className={cn(
+                          "bg-background-neutral rounded-radii-2 pl-space-1 pr-space-3 relative ",
+                        )}
                       >
                         {IconComponent && (
-                          <IconComponent className="h-size-16 w-size-16" />
+                          <IconComponent className="h-size-12 w-size-12 mr-space-1 inline-block" />
                         )}
-                        {option?.label}
+                        <span className={"truncate"}>{option?.label}</span>
+                        <FaX
+                          role={"button"}
+                          aria-label={`Remove filter by ${option?.label}`}
+                          className="h-size-8 w-size-8 cursor-pointer absolute right-space-1 top-1/2 -translate-y-1/2 bg-background-neutral"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            toggleOption(value);
+                          }}
+                        />
                       </span>
                     );
                   })}
@@ -149,7 +163,7 @@ const MultiSelectFormField = React.forwardRef<
               </div>
             ) : (
               <div className="flex items-center justify-between w-full mx-auto">
-                <span className="mx-2">{placeholder}</span>
+                <span>{placeholder}</span>
                 <FaChevronDown className="h-size-16 cursor-pointer ml-space-2 text-fontSize-1" />
               </div>
             )}
@@ -164,6 +178,7 @@ const MultiSelectFormField = React.forwardRef<
             <CommandInput
               placeholder="Search..."
               onKeyDown={handleInputKeyDown}
+              aria-label={"Search"}
             />
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
@@ -182,7 +197,9 @@ const MultiSelectFormField = React.forwardRef<
                       }}
                       className="cursor-pointer"
                     >
-                      <div
+                      <span
+                        role="checkbox"
+                        aria-checked={isSelected ? "true" : "false"}
                         className={cn(
                           "mr-space-2 flex h-size-12 w-size-12 items-center justify-center border-2 rounded-sm",
                           isSelected
@@ -191,7 +208,7 @@ const MultiSelectFormField = React.forwardRef<
                         )}
                       >
                         <FaCheck className="h-size-16 w-size-16 text-fontSize-1" />
-                      </div>
+                      </span>
                       {option.icon && (
                         <option.icon className="mr-space-1 h-size-16 w-size-16" />
                       )}
