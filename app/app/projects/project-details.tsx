@@ -19,23 +19,24 @@ import {
 } from "./project-details-dialog-content";
 import { ProjectUser } from "./types";
 
-const requestMemberMock: ProjectUser[] = [
-  {
-    email: "1",
-    displayName: "Jacek Jacek",
-    iconUrl: "",
-  },
-  {
-    email: "2",
-    displayName: "Jaro Kaczo",
-    iconUrl: "",
-  },
-  {
-    email: "3",
-    displayName: "Donek Ma Domek",
-    iconUrl: "",
-  },
-];
+// const requestMemberMock: ProjectUser[] = [
+//   {
+//     email: "1",
+//     displayName: "Jacek Jacek",
+//     jiraUser: null,
+//     iconUrl: "",
+//   },
+//   {
+//     email: "2",
+//     displayName: "Jaro Kaczo",
+//     iconUrl: "",
+//   },
+//   {
+//     email: "3",
+//     displayName: "Donek Ma Domek",
+//     iconUrl: "",
+//   },
+// ];
 
 export type ProjectDetailsProps = {
   id: string;
@@ -88,7 +89,7 @@ export default function ProjectDetails({
               {isUserLeader ? (
                 <DialogContentLeader
                   currentTeamMembers={teamMembers}
-                  userRequests={requestMemberMock}
+                  userRequests={undefined}
                   allUsers={allUsers}
                   leader={leader}
                 />
