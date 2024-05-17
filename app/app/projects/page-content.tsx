@@ -1,6 +1,13 @@
 "use client";
 
-import { MouseEvent, useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  MouseEvent,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { Project } from "@/app/app/projects/columns";
 import ProjectDetails from "@/app/app/projects/project-details";
@@ -13,6 +20,7 @@ interface PageContentProps {
   projects: Project[];
   user: SessionUser;
 }
+
 // @ts-ignore
 export function PageContent({ columns, projects, user }: PageContentProps) {
   const [selectedProject, setSelectedProjects] = useState<
@@ -60,11 +68,13 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
 
   return (
     <div className="h-[calc(100%-20px)]">
-      <ProjectTable
-        columns={columns}
-        project={projects}
-        onRowClick={handleRowClick}
-      />
+      <Suspense>
+        <ProjectTable
+          columns={columns}
+          projects={projects}
+          onRowClick={handleRowClick}
+        />
+      </Suspense>
 
       {selectedProject && (
         <Drawer direction={"right"} open={!!selectedProject}>

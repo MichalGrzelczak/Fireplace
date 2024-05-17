@@ -1,11 +1,16 @@
+import { Suspense } from "react";
+
 import { auth } from "@/app/api/auth/(config)/auth";
 import { fetchProjects } from "@/app/app/projects/jira-projects-api";
+import { HackProject } from "@/app/app/projects/jira-projects-api-types";
 import { mapHackProjectToProject } from "@/app/app/projects/map-jira-fields.helper";
 import { PageContent } from "@/app/app/projects/page-content";
 import Filters from "@/components/filters/filters";
 import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
+
+// export async function test() {
 
 // export async function test() {
 
@@ -34,9 +39,11 @@ export default async function DemoPage({
   const session = await auth();
   const user = session?.user;
 
-  const projects: Project[] = await fetchProjects().then((hackProjects) =>
-    hackProjects.map((hackProject) => mapHackProjectToProject(hackProject)),
+  const hackProjects: HackProject[] = await fetchProjects();
+  const projects: Project[] = hackProjects.map((hackProject) =>
+    mapHackProjectToProject(hackProject),
   );
+
   const selectedTechnologies: Array<string> = safeParse(
     searchParams?.technologies || "",
   );
@@ -65,9 +72,19 @@ export default async function DemoPage({
     <>
       <div className="mb-space-4 flex items-center justify-start">
         <SearchBar />
-        <Filters technologies={technologies} />
+        <Suspense>
+          <Filters technologies={technologies} />
+        </Suspense>
       </div>
-      <PageContent columns={columns} projects={filteredProjects} user={user} />
+      <Suspense
+        fallback={<div className="w-screen h-screen bg-pink-400"></div>}
+      >
+        <PageContent
+          columns={columns}
+          projects={filteredProjects}
+          user={user}
+        />
+      </Suspense>
     </>
   );
 }
