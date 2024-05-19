@@ -74,7 +74,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
     data: tableData,
     columns: tableColumns as any,
     getCoreRowModel: getCoreRowModel(),
-    getRowId: (row) => row.uuid,
+    getRowId: (row) => row.id,
     onSortingChange: setSorting,
     onRowPinningChange: setRowPinning,
     getSortedRowModel: getSortedRowModel(),
@@ -109,7 +109,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
   });
 
   const getProjectById = (id: string): Project | undefined => {
-    return projects.find((project) => project.uuid === id);
+    return projects.find((project) => project.id === id);
   };
 
   return (
