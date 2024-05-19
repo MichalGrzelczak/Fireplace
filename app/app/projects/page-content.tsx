@@ -78,7 +78,10 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
         <Drawer direction={"right"} open={!!selectedProject}>
           <DrawerContent>
             <ProjectDetails
-              id={selectedProject.uuid}
+              id={selectedProject.id}
+              isCurrentUserProjectLeader={
+                selectedProject.currentUserIsProjectLeader
+              }
               projectName={selectedProject.projectName}
               technologyStack={selectedProject.technologies}
               teamMembers={selectedProject.teamMembers}
