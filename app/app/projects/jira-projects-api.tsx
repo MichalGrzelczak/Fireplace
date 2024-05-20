@@ -38,6 +38,9 @@ export async function fetchProjects(): Promise<HackProject[]> {
       {
         method: "GET",
         headers: HEADERS,
+        next: {
+          revalidate: 900,
+        },
       },
     );
 
