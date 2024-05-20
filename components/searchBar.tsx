@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -20,25 +20,32 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
 
   const [queryInternalValue, setQueryInternalValue] = useState(queryParam);
 
+  const addQueryParam = useDebouncedCallback((term: string) => {
+    const urlSearchParams = new URLSearchParams(searchParams);
+    if (term) {
+      urlSearchParams.set("query", term);
+    } else {
+      urlSearchParams.delete("query");
+    }
+
+    replace(`${pathname}?${urlSearchParams.toString()}`);
+  }, 100);
+
   const handleQuery = useCallback(
     (term: string) => {
-      const urlSearchParams = new URLSearchParams(searchParams);
-      if (term) {
-        urlSearchParams.set("query", term);
-      } else {
-        urlSearchParams.delete("query");
-      }
-      replace(`${pathname}?${urlSearchParams.toString()}`);
+      setQueryInternalValue(term);
+      addQueryParam(term);
     },
-    [pathname, replace, searchParams],
+    [addQueryParam],
   );
 
-  useEffect(() => {
-    setQueryInternalValue(queryParam);
-  }, [queryParam]);
+  const onFormSubmit = useCallback((event: FormEvent) => {
+    event.preventDefault();
+  }, []);
 
   return (
     <form
+      onSubmit={onFormSubmit}
       role="search"
       aria-label="Search project"
       className="relative max-w-[720px] w-full"
@@ -50,8 +57,7 @@ export function SearchBar({ debounceMs = 300 }: SearchBarProps) {
         value={queryInternalValue}
         type={"search"}
         onChange={(e) => {
-          e.preventDefault();
-          setQueryInternalValue(e.target.value);
+          // e.preventDefault();
           handleQuery(e.target.value);
         }}
       />

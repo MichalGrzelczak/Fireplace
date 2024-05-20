@@ -72,12 +72,12 @@ export function useNotifications() {
   const pathname = usePathname();
 
   const refreshNotifications = async () => {
-    const notifications = await getNotifications();
-    setNotificationsData(notifications);
+    // const notifications = await getNotifications();
+    // setNotificationsData(notifications);
   };
 
   useEffect(() => {
-    refreshNotifications();
+    // refreshNotifications();
   }, [pathname]); // refresh notifications on route changes
 
   return [notificationsData, refreshNotifications] as const;
