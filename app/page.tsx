@@ -4,6 +4,8 @@ import { auth } from "@/app/api/auth/(config)/auth";
 import { ButtonLoginWithGoogle } from "@/components/buttonLoginWithGoogle";
 import Logo from "@/components/ui/logo";
 
+console.log("Hello from the client side!");
+
 export default async function Home() {
   const session = await auth();
 

@@ -3,6 +3,7 @@ import "@fuegokit/tokens/dist/css/atlassian/colors/light.css";
 import type { Metadata } from "next";
 
 import { Theme } from "@/app/theme";
+import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
 
@@ -20,6 +21,7 @@ export default async function RootLayout({
     <html lang="en" data-color-mode="light">
       <body>
         <Theme>{children}</Theme>
+        <Toaster />
       </body>
     </html>
   );

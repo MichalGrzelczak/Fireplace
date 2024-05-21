@@ -32,7 +32,7 @@ export default async function Statistics() {
   const data = await loadStatisticsData();
 
   return (
-    <>
+    <div className="overflow-y-auto">
       <div
         className={
           "grid gap-space-3 -mt-space-3 -mx-space-3 py-space-3 bg-scale-neutral-100"
@@ -59,6 +59,6 @@ export default async function Statistics() {
         </div>
       </div>
       <HackathonResults hackathon={data.hackathon} />
-    </>
+    </div>
   );
 }

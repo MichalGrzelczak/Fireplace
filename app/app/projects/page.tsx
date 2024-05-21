@@ -10,27 +10,6 @@ import { SearchBar } from "@/components/searchBar";
 
 import { Project, columns } from "./columns";
 
-// export async function test() {
-
-// export async function test() {
-
-// export async function test() {
-
-// export async function test() {
-//   let usersResult = db.select().from(users).get();
-//   console.log(usersResult);
-//   if (!usersResult) {
-//     db.insert(users)
-//       .values({
-//         id: "test",
-//         firstName: "test",
-//         lastName: "test",
-//         email: "test",
-//       })
-//       .run();
-//   }
-// }
-
 export default async function DemoPage({
   searchParams,
 }: {
@@ -41,7 +20,7 @@ export default async function DemoPage({
 
   const hackProjects: HackProject[] = await fetchProjects();
   const projects: Project[] = hackProjects.map((hackProject) =>
-    mapHackProjectToProject(hackProject),
+    mapHackProjectToProject(hackProject, user?.email ?? ""),
   );
 
   const selectedTechnologies: Array<string> = safeParse(
@@ -76,15 +55,8 @@ export default async function DemoPage({
           <Filters technologies={technologies} />
         </Suspense>
       </div>
-      <Suspense
-        fallback={<div className="w-screen h-screen bg-pink-400"></div>}
-      >
-        <PageContent
-          columns={columns}
-          projects={filteredProjects}
-          user={user}
-        />
-      </Suspense>
+
+      <PageContent columns={columns} projects={filteredProjects} user={user} />
     </>
   );
 }

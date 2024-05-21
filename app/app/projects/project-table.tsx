@@ -2,9 +2,6 @@
 
 import {
   ColumnDef,
-  ColumnFiltersState,
-  GroupingState,
-  RowPinningState,
   SortingState,
   flexRender,
   getCoreRowModel,
@@ -45,13 +42,6 @@ export const ProjectTable: FC<ReactTableProps> = ({
   onRowClick,
 }: ReactTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [grouping, setGrouping] = useState<GroupingState>([]);
-  const [rowPinning, setRowPinning] = useState<RowPinningState>({
-    top: [],
-    bottom: [],
-  });
-  const [keepPinnedRows, setKeepPinnedRows] = useState(true);
 
   const tableData = useMemo(
     () => (loading ? Array(30).fill({}) : projects),
@@ -74,19 +64,13 @@ export const ProjectTable: FC<ReactTableProps> = ({
     data: tableData,
     columns: tableColumns as any,
     getCoreRowModel: getCoreRowModel(),
-    getRowId: (row) => row.uuid,
+    getRowId: (row) => row.id,
     onSortingChange: setSorting,
-    onRowPinningChange: setRowPinning,
     getSortedRowModel: getSortedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    keepPinnedRows,
     state: {
       sorting,
-      grouping,
-      columnFilters,
-      rowPinning,
     },
   });
 
@@ -109,7 +93,7 @@ export const ProjectTable: FC<ReactTableProps> = ({
   });
 
   const getProjectById = (id: string): Project | undefined => {
-    return projects.find((project) => project.uuid === id);
+    return projects.find((project) => project.id === id);
   };
 
   return (

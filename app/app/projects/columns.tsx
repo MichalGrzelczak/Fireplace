@@ -16,7 +16,7 @@ import {
 import { ApplicationStatus, ProjectUser, RecruitmentStatus } from "./types";
 
 export type Project = {
-  uuid: string;
+  id: string;
   projectName: string;
   leader: ProjectUser;
   isFav: boolean;
@@ -28,6 +28,8 @@ export type Project = {
   applicationStatus: ApplicationStatus;
   description: string;
   typeOfProject: string;
+  currentUserIsProjectLeader: boolean;
+  currentUserCanApplyToTeam: boolean;
 };
 
 const columnHelper = createColumnHelper<Project>();

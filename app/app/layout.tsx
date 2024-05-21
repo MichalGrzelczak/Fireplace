@@ -18,6 +18,8 @@ const navLinks = [
   { title: "Knowledge base", href: "/app/knowledge", icon: <FaBook /> },
 ];
 
+export const revalidate = 900;
+
 export default async function Layout({
   children,
 }: {
