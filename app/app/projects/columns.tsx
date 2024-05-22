@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
+import { JiraUser } from "@/app/app/projects/jira-projects-api-types";
 import { SortButton } from "@/components/SortButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -30,6 +31,7 @@ export type Project = {
   typeOfProject: string;
   currentUserIsProjectLeader: boolean;
   currentUserCanApplyToTeam: boolean;
+  projectMembers: JiraUser[];
 };
 
 const columnHelper = createColumnHelper<Project>();

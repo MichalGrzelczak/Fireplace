@@ -2,7 +2,6 @@
 
 import React, {
   MouseEvent,
-  Suspense,
   useCallback,
   useEffect,
   useMemo,
@@ -82,6 +81,7 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
               isCurrentUserProjectLeader={
                 selectedProject.currentUserIsProjectLeader
               }
+              hackKey={selectedProject.hackKey}
               projectName={selectedProject.projectName}
               technologyStack={selectedProject.technologies}
               teamMembers={selectedProject.teamMembers}
@@ -92,6 +92,7 @@ export function PageContent({ columns, projects, user }: PageContentProps) {
               isUserLeader={selectedProject.leader.email === user?.email}
               allUsers={allUsers}
               leader={selectedProject.leader}
+              projectMembers={selectedProject.projectMembers}
             />
           </DrawerContent>
         </Drawer>

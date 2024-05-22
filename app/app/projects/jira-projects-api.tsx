@@ -4,10 +4,10 @@ import {
   CUSTOM_FIELDS,
   HackProject,
   JiraClosedRecruitmentLabels,
+  JiraUser,
   createFieldsFromIssueFields,
 } from "@/app/app/projects/jira-projects-api-types";
 import { fetchJiraUserDetails } from "@/app/app/projects/jira-users-api";
-import { ProjectUser } from "@/app/app/projects/types";
 
 function createFieldsString(): string {
   return [...fieldsToFetch, ...Object.keys(CUSTOM_FIELDS)]
@@ -79,17 +79,16 @@ function isProjectOpen(labels: string[]): boolean {
 
 export async function updateIssueMembers(
   hackKey: string,
-  members: ProjectUser[],
+  members: JiraUser[],
+  requestedUserEmail: string,
 ): Promise<void> {
-  const session = await auth();
+  // const mailsInProject: string[] = members.map((member) => member.email);
 
-  if (!session) return;
+  // if (mailsInProject.includes(requestedUserEmail)) return;
 
-  const mailsInProject: string[] = members.map((member) => member.email);
+  const userDetails = await fetchJiraUserDetails(requestedUserEmail);
 
-  if (mailsInProject.includes(session!.user!.email!)) return;
-
-  const userDetails = await fetchJiraUserDetails(session.user?.email!);
+  console.log([...members, userDetails]);
 
   const createBody = {
     fields: {

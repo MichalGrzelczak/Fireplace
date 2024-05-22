@@ -8,6 +8,8 @@ import {
   getCurrentUser,
   getCurrentUserId,
 } from "@/app/api/utils/getCurrentUserId";
+import { updateIssueMembers } from "@/app/app/projects/jira-projects-api";
+import { JiraUser } from "@/app/app/projects/jira-projects-api-types";
 import { ProjectUser } from "@/app/app/projects/types";
 
 export async function requestParticipation(data: {
@@ -53,13 +55,19 @@ export async function acceptParticipationRequest(data: {
   // requestId: number,
   projectId: string;
   projectName: string;
+  hackKey: string;
+  projectMembers: JiraUser[];
 }) {
   await new ParticipationRequestService().acceptRequest(
     data.requestingUserId,
     data.projectId,
   );
 
-  // TODO add update Jira issue users
+  await updateIssueMembers(
+    data.hackKey,
+    data.projectMembers,
+    data.requestingUserId,
+  );
 
   const approver = await getCurrentUser();
   await new NotificationRequestService().sendNotification({

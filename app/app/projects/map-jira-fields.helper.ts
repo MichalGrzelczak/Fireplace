@@ -25,6 +25,7 @@ export function mapHackProjectToProject(
     projectType: fields.typeOfProject?.value ?? "",
     leader: mapJiraUserToProjectUser(fields.leader),
     teamMembers: fields.members?.map((member: any) => member.displayName) ?? [],
+    projectMembers: fields.members ?? [],
     technologies: fields.technologies,
     typeOfProject: fields.typeOfProject?.value || "",
     recruitmentStatus: hackProject.isOpen

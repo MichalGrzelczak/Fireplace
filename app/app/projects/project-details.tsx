@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaTimes } from "react-icons/fa";
 
+import { JiraUser } from "@/app/app/projects/jira-projects-api-types";
 import { ProjectDetailsJoinTeamRequestDialog } from "@/app/app/projects/project-details-join-team-request-dialog";
 import { ProjectUser } from "@/app/app/projects/types";
 import { Tag } from "@/components/ui/tag";
@@ -10,6 +11,8 @@ import { ProjectDetailsTeamLeaderDialog } from "./project-details-team-leader-di
 export type ProjectDetailsProps = {
   id: string;
   projectName: string;
+  hackKey: string;
+  projectMembers: JiraUser[];
   technologyStack: string[];
   teamMembers: string[];
   typeOfProject: string;
@@ -32,16 +35,18 @@ export default function ProjectDetails(props: ProjectDetailsProps) {
           {props.isUserLeader && (
             <ProjectDetailsTeamLeaderDialog
               projectId={props.id}
+              hackKey={props.hackKey}
               projectName={props.projectName}
               leader={props.leader}
               teamMembers={props.teamMembers}
               allUsers={props.allUsers}
+              projectMembers={props.projectMembers}
             />
           )}
 
-          {!props.isUserLeader && (
-            <ProjectDetailsJoinTeamRequestDialog {...props} />
-          )}
+          {/*{!props.isUserLeader && (*/}
+          <ProjectDetailsJoinTeamRequestDialog {...props} />
+          {/*)}*/}
 
           <FaTimes
             role={"button"}

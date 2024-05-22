@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { FaCheck, FaCrown, FaTimes, FaTrash } from "react-icons/fa";
 
 import * as actions from "@/app/api/requests/project-participation.actions";
-import { updateIssueMembers } from "@/app/app/projects/jira-projects-api";
+import { JiraUser } from "@/app/app/projects/jira-projects-api-types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,9 +31,11 @@ enum MemberType {
 
 interface ProjectDetailsTeamLeaderDialogProps {
   projectId: string;
+  hackKey: string;
   projectName: string;
   teamMembers: string[];
   allUsers: ProjectUser[];
+  projectMembers: JiraUser[];
   userRequests?: ProjectUser[];
   leader: ProjectUser;
 }
@@ -58,10 +60,9 @@ export const ProjectDetailsTeamLeaderDialog: FC<
       requestingUserId: userId,
       projectName: props.projectName,
       projectId: props.projectId,
+      hackKey: props.hackKey,
+      projectMembers: props.projectMembers,
     });
-
-    // TODO
-    // await updateIssueMembers(props.projectId, [userId],)
 
     const teamMemberRequests = internalTeamMemberRequests.filter(
       (internalUserId) => internalUserId !== userId,
