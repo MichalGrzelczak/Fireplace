@@ -45,13 +45,15 @@ export type StatusCategory = {
 };
 
 export type JiraUser = {
+  self: string;
   accountId: string;
+  accountType: string;
   emailAddress: string;
   avatarUrls: AvatarUrls;
   displayName: string;
   active: boolean;
   timeZone: string;
-  accountType: string;
+  locale: string;
 };
 
 export type AvatarUrls = {
@@ -113,13 +115,15 @@ function createJiraUserFromIssueField(issueField: any): JiraUser | null {
   if (!issueField) return null;
 
   return {
+    self: issueField["self"],
     accountId: issueField["accountId"],
+    accountType: issueField["accountType"],
     emailAddress: issueField["emailAddress"],
     avatarUrls: issueField["avatarUrls"],
     displayName: issueField["displayName"],
     active: issueField["active"],
     timeZone: issueField["timeZone"],
-    accountType: issueField["accountType"],
+    locale: issueField["locale"],
   };
 }
 
